@@ -53,6 +53,12 @@ const courseParts = [
     ['39','SEO·AEO·GEO와 SNS 공유 연결하기','사람과 AI에게 읽히는 답을 만든다','검색·질문형 콘텐츠·SNS 공유 구조를 점검한다','검색·공유 기준'],
     ['40','홈페이지를 상담·영업과 연결하기','문의 수보다 처리 경험을 설계한다','상담 폼·담당자·상태·후속 처리를 설계한다','상담 처리표'],
     ['41','오픈 후 30일 운영하기','첫 달에는 운영 리듬을 만든다','1~4주 콘텐츠·통계·개선 계획을 세운다','30일 운영계획']
+  ]},
+  {id:'part8',no:'08',title:'무료 ChatGPT로 홈페이지 공개하기',short:'무료 오픈',desc:'대화에서 기획·코드·GitHub Pages 공개까지',accent:'#2563eb',chapters:[
+    ['42','Chat에서 홈페이지 기획안 확정하기','무료 ChatGPT 대화만으로 목적·방문자·화면 구성을 확정했음','업종과 목표를 입력하고 한 페이지 기획안을 표로 정리했음','홈페이지 기획안'],
+    ['43','기획안을 HTML·CSS·JS 코드로 만들기','확정한 기획안을 세 파일로 나누어 실행 가능한 코드로 만들었음','index.html·styles.css·app.js를 순서대로 생성하고 누락을 검수했음','웹사이트 코드 3종'],
+    ['44','코드 파일을 다운로드하고 실행 확인하기','생성된 코드를 같은 폴더에 저장하고 브라우저에서 직접 확인했음','파일명과 연결 경로를 확인한 뒤 ZIP 파일로 정리했음','배포용 ZIP 파일'],
+    ['45','GitHub에 올리고 Pages로 공개하기','저장소에 파일을 업로드하고 GitHub Pages 주소를 발급했음','main 브랜치의 루트 폴더를 배포 원본으로 지정하고 공개 URL을 검수했음','공개 홈페이지 URL']
   ]}
 ];
 
@@ -69,6 +75,21 @@ const doneKey = 'mentor-k-lecture-done-v1';
 let completed = JSON.parse(localStorage.getItem(doneKey) || '{}');
 
 function chapterById(id){ return chapterMap.get(id); }
+function lessonDetail(c){
+  const common={
+    process:[`기준 확인 → ${c.practice}`,`${c.output} 작성 → 화면 검수 → 다음 단계 자료로 저장`],
+    prompt:`내 홈페이지의 ‘${c.title}’ 작업을 진행해 줘. 확인된 자료만 사용하고, 방문자와 운영자 관점의 실행 순서를 개조식으로 작성해 줘. 미결정 사항은 추정하지 말고 질문으로 남겨 줘. 최종 산출물은 ‘${c.output}’ 형식으로 정리해 줘.`,
+    guide:[`강사가 ${c.message} 기준을 사례로 설명했음`,`수강생이 자신의 업종에 맞게 ${c.practice}`,`${c.output}을 저장하고 다음 장의 입력자료로 연결했음`],
+    caution:'사실·연락처·가격·권한 정보는 공개 전에 원본과 대조했음. 개인정보와 비공개 자료는 입력하거나 업로드하지 않았음.'
+  };
+  const special={
+    '42':{process:['업종·방문자·목표 입력','페이지 구성표 요청','CTA와 제외 범위 확정','기획안 v1.0 저장'],prompt:'나는 [업종/서비스] 홈페이지를 무료 ChatGPT로 만들려고 해. 주요 방문자는 [대상]이고, 방문자가 하길 바라는 행동은 [문의/예약/구매]이야. 한 페이지 홈페이지 기획안을 ①핵심 메시지 ②섹션 순서 ③섹션별 제목·본문·CTA ④필요 이미지 ⑤모바일 유의사항 표로 작성해 줘. 모르는 정보는 만들지 말고 [확인 필요]로 표시해 줘.',guide:['대화 첫 문장에 업종·방문자·목표를 함께 입력했음','결과표에서 불필요한 섹션을 삭제했음','최종 기획안을 다음 코드 생성 요청에 그대로 붙였음'],caution:'무료 대화의 사용 한도와 맥락 길이를 고려해 기획안부터 확정했음. 사업자번호·고객명단 등 민감정보는 입력하지 않았음.'},
+    '43':{process:['기획안 고정','index.html 생성','styles.css 생성','app.js 생성·오류 점검'],prompt:'아래 확정 기획안을 기준으로 초보자도 저장할 수 있게 index.html, styles.css, app.js를 각각 완성 코드로 작성해 줘. 외부 빌드 도구 없이 파일을 더블클릭해 실행되게 하고, 모바일 반응형·버튼 동작·접근성 라벨을 포함해 줘. 각 코드 블록 위에 저장할 파일명을 표시하고, 임의의 회사 정보나 링크는 만들지 말아 줘. [기획안 붙여넣기]',guide:['코드 블록을 파일별로 한 번씩 복사했음','HTML의 CSS·JS 파일명이 실제 파일명과 같은지 확인했음','수정 요청은 오류 화면과 재현 순서를 함께 전달했음'],caution:'코드를 한 파일에 섞지 않았음. API 키·비밀번호·개인정보는 코드에 넣지 않았음. 외부 링크는 새 창과 보안 속성을 확인했음.'},
+    '44':{process:['폴더 만들기','세 파일 저장','브라우저로 index.html 실행','ZIP 압축'],prompt:'내가 저장한 index.html, styles.css, app.js의 연결 오류를 점검하는 체크리스트를 만들어 줘. ①파일명 ②상대경로 ③모바일 화면 ④메뉴·버튼 ⑤콘솔 오류 ⑥깨진 링크 순서로, 초보자가 직접 확인할 수 있게 한 단계씩 안내해 줘.',guide:['새 폴더 안에 세 파일을 같은 위치에 저장했음','index.html을 열어 문구·이미지·버튼을 확인했음','정상 폴더 전체를 ZIP으로 압축해 원본을 보관했음'],caution:'확장자가 .txt로 저장되지 않았는지 확인했음. 이미지가 있으면 assets 폴더까지 함께 압축했음. ZIP 안에 상위 폴더가 중복되지 않게 정리했음.'},
+    '45':{process:['새 저장소 생성','파일 업로드·커밋','Pages 설정','공개 URL 재검수'],prompt:'GitHub 무료 계정에서 정적 홈페이지를 공개하려고 해. 새 저장소 생성 → index.html·styles.css·app.js 업로드 → 커밋 → Settings의 Pages에서 main / root 선택 → 공개 주소 확인 순서를 초보자용 체크리스트로 안내해 줘. 각 단계의 완료 신호와 자주 발생하는 오류도 함께 적어 줘.',guide:['Public 저장소를 만들고 배포 파일만 업로드했음','Add file → Upload files에서 커밋까지 완료했음','Settings → Pages에서 main / root를 선택했음','발급된 주소를 시크릿 창과 모바일에서 재검수했음'],caution:'저장소를 공개하기 전에 개인정보·API 키·원본자료가 없는지 확인했음. 배포에는 수 분이 걸릴 수 있으므로 반복 업로드보다 Actions 상태를 먼저 확인했음.'}
+  };
+  return special[c.no]||common;
+}
 function currentIndex(){ return currentId==='start' ? -1 : (chapterById(currentId)?.index ?? 0); }
 function setCurrent(id){ currentId=id; renderAll(); document.getElementById('workspace')?.scrollIntoView({behavior:'smooth',block:'start'}); }
 function getChapterIds(){ return allChapters.map(c=>c.id); }
@@ -88,21 +109,26 @@ function renderSlide(){
   const el=document.getElementById('slideView'); if(!el)return;
   if(currentId==='start'){
     document.getElementById('stagePart').textContent='시작하기';document.getElementById('stageTime').textContent='약 10분';
-    el.innerHTML=`<div class="slide-header"><div class="slide-kicker">ORIENTATION · 00</div><h2>내 홈페이지를 만드는<br /><span style="color:var(--blue)">첫 번째 프로젝트</span>를 시작합니다</h2><p>강의 화면을 넘기는 것보다 중요한 것은, 매 장의 결과를 내 프로젝트에 남기는 것입니다.</p></div><div class="slide-body"><div class="content-panel lecture"><div class="panel-label"><strong>강의 핵심 · 30%</strong><span>먼저 이해하기</span></div><h3>프로젝트에서 준비하고,<br />Work에서 만들고,<br />Sites에서 검수합니다</h3><p>이 강의는 도구 설명을 길게 하지 않습니다. 지금 화면에서 질문을 확인하고 바로 Project·Work·Sites로 이동해 내 홈페이지를 완성합니다.</p></div><div class="content-panel practice"><div class="panel-label"><strong>실전 시작 · 70%</strong><span>바로 실행하기</span></div><h3>홈페이지 유형을 고르고<br />첫 목표를 한 문장으로 적습니다</h3><p>기업·전문서비스·로컬·교육·콘텐츠·쇼핑몰 중 하나를 선택하고, 방문자가 홈페이지에서 가장 먼저 하길 바라는 행동을 정하세요.</p></div></div><div class="slide-bottom"><div class="prompt-card"><label>START PROMPT</label><p>나는 [업종]을 운영하고 주요 방문자는 [대상]이다. 홈페이지에서 방문자가 반드시 하길 바라는 행동은 [행동]이다. 프로젝트 시작을 위해 필요한 질문 5개를 만들어라.</p></div><div class="output-card"><label>첫 산출물</label><p>홈페이지 유형 · 주요 방문자 · 핵심 행동 · 프로젝트 목표</p></div></div>`;
+    el.innerHTML=`<div class="slide-header"><div class="slide-kicker">ORIENTATION · 00</div><h2>홈페이지 제작 목표와<br /><span style="color:var(--blue)">완료 기준을 먼저 확정했음</span></h2><p>각 장에서 결정·실행·검수·저장까지 마쳐 다음 단계의 입력자료를 남기도록 구성했음.</p></div><div class="slide-body"><div class="content-panel lecture"><div class="panel-label"><strong>핵심 정리</strong><span>개조식 교안</span></div><h3>Project에서 기준을 만들고<br />Work에서 제작했음</h3><p>Sites와 GitHub Pages에서 실제 화면을 검수하고 공개했음. 설명보다 완료 기준과 결과물을 중심으로 진행했음.</p></div><div class="content-panel practice"><div class="panel-label"><strong>첫 실습</strong><span>바로 실행</span></div><h3>홈페이지 유형과<br />핵심 행동을 정했음</h3><p>기업·전문서비스·로컬·교육·콘텐츠·쇼핑몰 중 하나를 선택했음. 방문자가 가장 먼저 하길 바라는 행동을 한 문장으로 기록했음.</p></div></div><div class="slide-bottom"><div class="prompt-card"><label>실습 프롬프트</label><p>나는 [업종]을 운영하고 주요 방문자는 [대상]이다. 홈페이지에서 방문자가 반드시 하길 바라는 행동은 [행동]이다. 프로젝트 시작에 필요한 확인 질문 5개를 만들어 줘.</p></div><div class="output-card"><label>완료 산출물</label><p>홈페이지 유형 · 주요 방문자 · 핵심 행동 · 프로젝트 목표</p></div></div>`;
   } else {
     const c=chapterById(currentId); document.getElementById('stagePart').textContent=`${c.part.no}부 · ${c.part.title}`;document.getElementById('stageTime').textContent=`강의 8분 · 실습 20분`;
-    const done=!!completed[currentId];
-    el.innerHTML=`<div class="slide-header" style="--slide-accent:${c.part.accent}"><div class="slide-kicker" style="color:${c.part.accent}">${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</div><h2>${c.title}</h2><p>${c.message}</p></div><div class="slide-body"><div class="content-panel lecture"><div class="panel-label"><strong>강의 핵심 · 30%</strong><span>판단 기준</span></div><h3>${c.message}</h3><p>화면을 예쁘게 만드는 것보다 먼저, 누가 어떤 상황에서 무엇을 확인한 뒤 어떤 행동을 하는지 결정합니다. 이번 장의 기준을 내 업종과 방문자에게 대입하세요.</p></div><div class="content-panel practice"><div class="panel-label"><strong>실전 작업 · 70%</strong><span>지금 실행</span></div><h3>${c.practice}</h3><p>Project·Work·Sites 중 안내된 작업 공간에서 직접 입력하고, 결과 화면 또는 문서를 다음 장의 입력자료로 저장합니다.</p></div></div><div class="slide-bottom"><div class="prompt-card"><label>WORK PROMPT</label><p>내 홈페이지의 [${c.title}]을(를) 설계한다. 기준자료만 사용하고 추정하지 말라. 방문자·운영자 관점의 결과와 미결정사항을 함께 정리하라. 완료 기준: ${c.output}.</p></div><div class="output-card"><label>이번 장의 산출물</label><p>${c.output}</p></div></div>`;
+    const done=!!completed[currentId];const d=lessonDetail(c);const visual=c.part.id==='part8'?`<img class="lesson-visual" src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT 대화에서 코드 다운로드와 홈페이지 공개까지의 4단계 흐름" />`:'';
+    el.innerHTML=`<div class="slide-header" style="--slide-accent:${c.part.accent}"><div class="slide-kicker" style="color:${c.part.accent}">${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</div><h2>${c.title}</h2><p>${c.message}</p></div>${visual}<div class="slide-body lesson-detail"><div class="content-panel lecture"><div class="panel-label"><strong>진행 프로세스</strong><span>단계별 실행</span></div><ol>${d.process.map(x=>`<li>${x}</li>`).join('')}</ol></div><div class="content-panel practice"><div class="panel-label"><strong>강사 진행 안내</strong><span>완료 기준</span></div><ul>${d.guide.map(x=>`<li>${x}</li>`).join('')}</ul></div></div><div class="slide-bottom"><div class="prompt-card"><label>상세 실습 프롬프트</label><p>${d.prompt}</p></div><div class="output-card"><label>유의사항 · 산출물</label><p>${d.caution}</p><strong>${c.output}</strong></div></div>`;
     const cb=document.getElementById('completeLesson');cb.textContent=done?'완료됨 · 다시 표시':'이 장 완료 표시';cb.classList.toggle('done',done);
   }
 }
 function renderProgress(){const pct=Math.round(Object.keys(completed).filter(k=>completed[k]).length/allChapters.length*100);const t=document.getElementById('progressText');const b=document.getElementById('progressBar');if(t)t.textContent=`${pct}%`;if(b)b.style.width=`${pct}%`}
-function renderAll(){renderMap();renderNav();renderSlide();renderProgress();const i=currentIndex();document.getElementById('prevLesson').disabled=i<0;document.getElementById('nextLesson').textContent=i>=allChapters.length-1?'처음으로 →':'다음 →';}
+function renderAll(){renderMap();renderNav();renderSlide();renderProgress();const i=currentIndex();const prev=document.getElementById('prevLesson');const next=document.getElementById('nextLesson');if(prev)prev.disabled=i<0;if(next)next.textContent=i>=allChapters.length-1?'처음으로 →':'다음 →';}
 function navigate(delta){const i=currentIndex();if(i+delta<0){setCurrent('start');return}if(i+delta>=allChapters.length){setCurrent('start');return}setCurrent(allChapters[i+delta].id)}
 function showTool(name){const m=document.getElementById('toolModal');const info=toolInfo[name];if(!m||!info)return;document.getElementById('toolModalTitle').textContent=name;document.getElementById('toolModalText').textContent=info.text;document.getElementById('toolModalSteps').innerHTML=info.steps.map((s,i)=>`<div class="modal-step"><i>${i+1}</i><span>${s}</span></div>`).join('');m.hidden=false}
 function closeToolModal(){const m=document.getElementById('toolModal');if(m)m.hidden=true}
 function openSlides(){window.open('slides.html?autoprint=1','_blank','noopener,noreferrer')}
-function renderPrintDeck(){const deck=document.getElementById('printDeck');if(!deck)return;deck.innerHTML=`<section class="print-slide print-cover"><div class="print-top"><b>실전 홈페이지 프로젝트북</b><span>강의 30% · 실습 70%</span></div><div><p class="eyebrow" style="color:#8baeff">CHATGPT SITES · PROJECT · WORK · SITES</p><h2>ChatGPT Sites로<br />누구나 쉽게 홈페이지 만들기</h2><p class="print-message">프로젝트에서 준비하고, Work에서 기획·개발하고, Sites에서 검수·수정·오픈한다.</p><div class="print-grid"><div class="print-box"><label>강사</label><p>엠아이넥스트 김용한</p></div><div class="print-box"><label>구성</label><p>7개 부 · 41개 실전 장</p></div></div></div><div class="print-footer"><strong>실전 강의용 슬라이드</strong><span>엠아이넥스트 김용한</span></div></section>${allChapters.map(c=>`<section class="print-slide" style="--slide-accent:${c.part.accent}"><div class="print-top"><b>${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</b><span>강사 · 엠아이넥스트 김용한</span></div><div><h2>${c.title}</h2><p class="print-message">${c.message}</p><div class="print-grid"><div class="print-box"><label>강의 30% · 핵심 개념</label><p>${c.message} 화면을 예쁘게 만드는 것보다 방문자·운영자·공개 기준을 먼저 결정합니다.</p></div><div class="print-box practice"><label>실습 70% · 바로 실행</label><p>${c.practice}</p></div></div></div><div class="print-footer"><strong>산출물 · ${c.output}</strong><span>Project → Work → Sites</span></div></section>`).join('')}`}
+function renderPrintDeck(){
+  const deck=document.getElementById('printDeck');if(!deck)return;
+  const cover=`<section class="print-slide print-cover"><div class="print-top"><b>실전 홈페이지 프로젝트북</b><span>강사 · 엠아이넥스트 김용한</span></div><div class="cover-layout"><div><p class="eyebrow" style="color:#8baeff">CHATGPT · PROJECT · WORK · SITES · GITHUB PAGES</p><h2>대화에서 시작해<br />공개 홈페이지로 완성했음</h2><p class="print-message">기획·코드·검수·배포 과정을 8개 부, 45개 실전 장으로 구성했음.</p></div><img src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT 대화에서 홈페이지 공개까지의 과정" /></div><div class="print-footer"><strong>전체 46페이지 · 표지 1 + 강의 45</strong><span>2026 실전 강의 교안</span></div></section>`;
+  const pages=allChapters.map((c,i)=>{const d=lessonDetail(c);const visual=c.part.id==='part8'?`<img class="print-visual" src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT에서 GitHub Pages까지 4단계 과정" />`:'';return `<section class="print-slide" style="--slide-accent:${c.part.accent}"><div class="print-top"><b>${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</b><span>${i+2} / ${allChapters.length+1}</span></div><div class="print-heading"><h2>${c.title}</h2><p class="print-message">${c.message}</p></div>${visual}<div class="print-process">${d.process.map((x,n)=>`<div><b>${String(n+1).padStart(2,'0')}</b><span>${x}</span></div>`).join('')}</div><div class="print-content"><div class="print-prompt"><label>상세 실습 프롬프트</label><p>${d.prompt}</p></div><div class="print-guide"><label>강사 진행 안내</label><ul>${d.guide.map(x=>`<li>${x}</li>`).join('')}</ul><label>유의사항</label><p>${d.caution}</p></div></div><div class="print-footer"><strong>완료 산출물 · ${c.output}</strong><span>${c.part.title}</span></div></section>`}).join('');
+  deck.innerHTML=cover+pages;
+}
 
 document.addEventListener('DOMContentLoaded',()=>{
   renderMap();renderAll();renderPrintDeck();
