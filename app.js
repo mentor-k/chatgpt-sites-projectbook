@@ -62,7 +62,17 @@ const courseParts = [
   ]}
 ];
 
-const allChapters = courseParts.flatMap(part => part.chapters.map(c => ({part, id:`${part.id}-${c[0]}`, no:c[0], title:c[1], message:c[2], practice:c[3], output:c[4]})));
+const partPractice = {
+  part2:{title:'실습 · 내 홈페이지 프로젝트 작업환경 완성',goal:'프로젝트명·기준자료·지침·작업 경계를 한 번에 설정했음',steps:['프로젝트명과 목표 입력','기준자료·공개등급 분류','프로젝트 지침 등록','Work·Sites 작업 경계 저장'],prompt:'[업종] 홈페이지 프로젝트를 시작한다. 프로젝트명은 [이름], 주요 방문자는 [대상], 핵심 행동은 [행동]이다. ①프로젝트 소개 ②필수 기준자료 ③문체·사실확인·보안·승인 지침 ④Work와 Sites의 작업 경계를 표로 작성해 줘. 모르는 정보는 [확인 필요]로 표시해 줘.',caution:'고객명단·비밀번호·API 키는 올리지 않았음. 최신 기준본과 공개 가능한 파일만 사용했음.',output:'프로젝트 설정표 + 프로젝트 지침'},
+  part3:{title:'실습 · 한 페이지 홈페이지 PRD 완성',goal:'방문자 여정에서 사이트맵·콘텐츠·기능까지 하나의 PRD로 연결했음',steps:['목적·방문자 정의','인지→행동 여정 작성','사이트맵·CTA 연결','기능·콘텐츠·비기능 요구 통합'],prompt:'아래 사업정보를 기준으로 한 페이지 홈페이지 PRD를 작성해 줘. ①목적과 핵심 방문자 ②방문자 질문 ③인지→이해→신뢰→비교→행동 여정 ④섹션 순서와 CTA ⑤필수 기능 ⑥모바일·개인정보·검색 기준 ⑦제외 범위를 표로 정리해 줘. [사업정보 붙여넣기]',caution:'페이지 수를 늘리기 전에 방문자 질문과 CTA가 연결되는지 확인했음. 추정한 가격·성과·후기는 사용하지 않았음.',output:'홈페이지 PRD v1.0'},
+  part4:{title:'실습 · 디자인 기준과 핵심 화면 제작',goal:'참조·컬러·타이포·와이어프레임을 확정하고 공통 요소부터 구현했음',steps:['벤치마킹 판단 수집','컬러·타입 역할 확정','와이어프레임 승인','공통 요소→핵심 화면 구현'],prompt:'이 PRD를 기준으로 홈페이지 디자인·개발 작업지시서를 작성해 줘. ①참조할 판단과 배제할 요소 ②컬러 역할 ③PC·모바일 글자 크기 ④공통 컴포넌트 ⑤메인 화면 우선순위 ⑥완료 조건을 포함해 줘. [PRD 붙여넣기]',caution:'참조 사이트를 그대로 복제하지 않았음. 와이어프레임 승인 전에 세부 디자인과 기능 개발을 시작하지 않았음.',output:'디자인 기준 + 핵심 화면'},
+  part5:{title:'실습 · 방문자·운영자 시나리오 검수',goal:'화면 감상이 아니라 실제 행동 시나리오로 오류를 재현했음',steps:['공개 URL 접속','방문자 핵심 행동 수행','운영자 처리 흐름 확인','오류 기록→수정→재검수'],prompt:'아래 홈페이지를 검수할 시나리오 표를 만들어 줘. 방문자·운영자·모바일·개인정보 관점별로 ①사전조건 ②행동순서 ③기대결과 ④실제결과 ⑤오류등급 ⑥재검수 결과 열을 포함해 줘. [URL/기능 목록]',caution:'오류는 “안 됨”이 아니라 환경·순서·기대·실제 결과로 기록했음. 수정 후 같은 조건으로 다시 확인했음.',output:'검수표 + 오류 수정 요청서'},
+  part6:{title:'실습 · 도메인·검색·통계 오픈 체크',goal:'주소 연결부터 검색 등록과 측정 기준까지 공개 조건을 확인했음',steps:['도메인·DNS 현재값 기록','HTTPS·공개범위 확인','검색 소유권·사이트맵 제출','핵심 지표 기준 저장'],prompt:'홈페이지 오픈 체크리스트를 작성해 줘. 도메인·DNS·HTTPS·Google/네이버 검색 등록·사이트맵·접속통계·복구 기준을 포함하고, 각 항목에 담당자·현재 상태·완료 증거·문제 발생 시 되돌리기 방법을 넣어 줘.',caution:'DNS 변경 전 기존 값을 캡처했음. 검색 등록과 즉시 노출을 같은 의미로 보지 않았음.',output:'오픈 승인 체크리스트'},
+  part7:{title:'실습 · 오픈 후 30일 운영계획 수립',goal:'콘텐츠·상담·통계를 주 단위 운영 루틴으로 바꿨음',steps:['고객 질문 수집','주간 콘텐츠 계획','문의 처리 상태 정의','지표 확인→개선 결정'],prompt:'내 홈페이지의 오픈 후 30일 운영계획을 만들어 줘. 1~4주별로 콘텐츠 발행·기존 정보 갱신·문의 후속 처리·접속/CTA 지표 확인·개선 실험을 배치하고, 담당자와 완료 기준을 표로 작성해 줘.',caution:'조회수만 보지 않고 CTA·문의·후속 처리까지 연결했음. 오래된 콘텐츠의 갱신일을 기록했음.',output:'30일 운영 캘린더'},
+  part8:{title:'실습 · 무료 도구로 코드부터 Pages 공개까지',goal:'Chat 기획안·코드 생성·파일 저장·GitHub Pages 공개를 한 흐름으로 완료했음',steps:['기획안 확정','HTML·CSS·JS 생성','폴더 저장·로컬 확인','GitHub 업로드·Pages 공개'],prompt:'나는 [업종]의 한 페이지 홈페이지를 무료 도구로 공개하려고 해. ①방문자·목표·섹션 기획안 ②index.html·styles.css·app.js 코드 ③파일 저장·로컬 검수 ④GitHub 새 저장소 업로드 ⑤Settings → Pages → Deploy from a branch → main / root 설정 ⑥공개 URL 검수 순서로 안내해 줘. 모르는 사업정보는 만들지 말고 [확인 필요]로 남겨 줘.',caution:'공개 저장소에 개인정보·API 키·비공개 원본을 올리지 않았음. 배포가 지연되면 반복 업로드보다 Actions 상태를 먼저 확인했음.',output:'공개 홈페이지 URL'}
+};
+const partSlides = new Map(courseParts.map(part=>[part.id,[...part.chapters.map(c=>({part,kind:'lecture',id:`${part.id}-${c[0]}`,no:c[0],title:c[1],message:c[2],example:c[3],output:c[4]})),...(part.id==='part1'?[]:[{part,kind:'practice',id:`${part.id}-practice`,no:'실습',...partPractice[part.id]}])]]));
+const allChapters = courseParts.flatMap(part=>partSlides.get(part.id));
 const chapterMap = new Map(allChapters.map((c,i) => [c.id,{...c,index:i}]));
 const toolInfo = {
   Project:{text:'자료와 결정사항을 모아 AI가 계속 참고할 기준점을 만드는 공간입니다.',steps:['홈페이지 목적과 유형을 정합니다.','최신 기준자료와 공개 금지 자료를 나눕니다.','문체·사실확인·보안·승인 규칙을 고정합니다.']},
@@ -75,32 +85,30 @@ const doneKey = 'mentor-k-lecture-done-v1';
 let completed = JSON.parse(localStorage.getItem(doneKey) || '{}');
 
 function chapterById(id){ return chapterMap.get(id); }
-function lessonDetail(c){
-  const common={
-    process:[`기준 확인 → ${c.practice}`,`${c.output} 작성 → 화면 검수 → 다음 단계 자료로 저장`],
-    prompt:`내 홈페이지의 ‘${c.title}’ 작업을 진행해 줘. 확인된 자료만 사용하고, 방문자와 운영자 관점의 실행 순서를 개조식으로 작성해 줘. 미결정 사항은 추정하지 말고 질문으로 남겨 줘. 최종 산출물은 ‘${c.output}’ 형식으로 정리해 줘.`,
-    guide:[`강사가 ${c.message} 기준을 사례로 설명했음`,`수강생이 자신의 업종에 맞게 ${c.practice}`,`${c.output}을 저장하고 다음 장의 입력자료로 연결했음`],
-    caution:'사실·연락처·가격·권한 정보는 공개 전에 원본과 대조했음. 개인정보와 비공개 자료는 입력하거나 업로드하지 않았음.'
+function studentContent(c){
+  const examples={
+    '6':['프로젝트명 · 봄빛정원 상담형 홈페이지','목표 · 방문자가 3분 안에 서비스를 이해하고 상담을 신청함','완료 기준 · 모바일 문의 버튼과 공개 URL 확인'],
+    '7':['문체 · 짧고 쉬운 존댓말 사용','사실 · 제공 자료에 없는 수치·후기는 만들지 않음','승인 · 가격·연락처·정책 변경은 공개 전 확인','보안 · 개인정보와 API 키를 코드에 넣지 않음'],
+    '8':['기준본 · 회사소개·서비스 가격·연락처','콘텐츠 · 소개문·사례·FAQ','브랜드 · 로고·컬러·사진','운영자료 · 문의 처리·게시판 규칙'],
+    '9':['Project · 자료와 결정사항을 기억함','Work · 기획·디자인·코드를 만들고 수정함','Sites · 실제 화면을 확인하고 공개함']
   };
-  const special={
-    '42':{process:['업종·방문자·목표 입력','페이지 구성표 요청','CTA와 제외 범위 확정','기획안 v1.0 저장'],prompt:'나는 [업종/서비스] 홈페이지를 무료 ChatGPT로 만들려고 해. 주요 방문자는 [대상]이고, 방문자가 하길 바라는 행동은 [문의/예약/구매]이야. 한 페이지 홈페이지 기획안을 ①핵심 메시지 ②섹션 순서 ③섹션별 제목·본문·CTA ④필요 이미지 ⑤모바일 유의사항 표로 작성해 줘. 모르는 정보는 만들지 말고 [확인 필요]로 표시해 줘.',guide:['대화 첫 문장에 업종·방문자·목표를 함께 입력했음','결과표에서 불필요한 섹션을 삭제했음','최종 기획안을 다음 코드 생성 요청에 그대로 붙였음'],caution:'무료 대화의 사용 한도와 맥락 길이를 고려해 기획안부터 확정했음. 사업자번호·고객명단 등 민감정보는 입력하지 않았음.'},
-    '43':{process:['기획안 고정','index.html 생성','styles.css 생성','app.js 생성·오류 점검'],prompt:'아래 확정 기획안을 기준으로 초보자도 저장할 수 있게 index.html, styles.css, app.js를 각각 완성 코드로 작성해 줘. 외부 빌드 도구 없이 파일을 더블클릭해 실행되게 하고, 모바일 반응형·버튼 동작·접근성 라벨을 포함해 줘. 각 코드 블록 위에 저장할 파일명을 표시하고, 임의의 회사 정보나 링크는 만들지 말아 줘. [기획안 붙여넣기]',guide:['코드 블록을 파일별로 한 번씩 복사했음','HTML의 CSS·JS 파일명이 실제 파일명과 같은지 확인했음','수정 요청은 오류 화면과 재현 순서를 함께 전달했음'],caution:'코드를 한 파일에 섞지 않았음. API 키·비밀번호·개인정보는 코드에 넣지 않았음. 외부 링크는 새 창과 보안 속성을 확인했음.'},
-    '44':{process:['폴더 만들기','세 파일 저장','브라우저로 index.html 실행','ZIP 압축'],prompt:'내가 저장한 index.html, styles.css, app.js의 연결 오류를 점검하는 체크리스트를 만들어 줘. ①파일명 ②상대경로 ③모바일 화면 ④메뉴·버튼 ⑤콘솔 오류 ⑥깨진 링크 순서로, 초보자가 직접 확인할 수 있게 한 단계씩 안내해 줘.',guide:['새 폴더 안에 세 파일을 같은 위치에 저장했음','index.html을 열어 문구·이미지·버튼을 확인했음','정상 폴더 전체를 ZIP으로 압축해 원본을 보관했음'],caution:'확장자가 .txt로 저장되지 않았는지 확인했음. 이미지가 있으면 assets 폴더까지 함께 압축했음. ZIP 안에 상위 폴더가 중복되지 않게 정리했음.'},
-    '45':{process:['새 저장소 생성','파일 업로드·커밋','Pages 설정','공개 URL 재검수'],prompt:'GitHub 무료 계정에서 정적 홈페이지를 공개하려고 해. 새 저장소 생성 → index.html·styles.css·app.js 업로드 → 커밋 → Settings의 Pages에서 main / root 선택 → 공개 주소 확인 순서를 초보자용 체크리스트로 안내해 줘. 각 단계의 완료 신호와 자주 발생하는 오류도 함께 적어 줘.',guide:['Public 저장소를 만들고 배포 파일만 업로드했음','Add file → Upload files에서 커밋까지 완료했음','Settings → Pages에서 main / root를 선택했음','발급된 주소를 시크릿 창과 모바일에서 재검수했음'],caution:'저장소를 공개하기 전에 개인정보·API 키·원본자료가 없는지 확인했음. 배포에는 수 분이 걸릴 수 있으므로 반복 업로드보다 Actions 상태를 먼저 확인했음.'}
-  };
-  return special[c.no]||common;
+  const points=examples[c.no]||[c.message,`현장 적용 · ${c.example}`,`확인 결과 · ${c.output}`];
+  const compare=[['좋은 기준','방문자·행동·완료 조건이 구체적임'],['놓치기 쉬운 기준','예쁘게·적당히·알아서처럼 판단 근거가 없음']];
+  const flow=['질문을 확인함','기준을 결정함','화면·문서로 확인함'];
+  const imageMap={'1':'assets/website-visitor-journey.png','10':'assets/website-planning-blueprint.png','28':'assets/website-launch-qa.png','42':'assets/chatgpt-to-pages-workflow.png'};
+  return {points,compare,flow,image:imageMap[c.no]||''};
 }
 function currentIndex(){ return currentId==='start' ? -1 : (chapterById(currentId)?.index ?? 0); }
 function setCurrent(id){ currentId=id; renderAll(); document.getElementById('workspace')?.scrollIntoView({behavior:'smooth',block:'start'}); }
 function getChapterIds(){ return allChapters.map(c=>c.id); }
 function renderMap(){
   const el=document.getElementById('mapTrack'); if(!el)return;
-  el.innerHTML=courseParts.map(p=>`<button class="map-card ${currentId.startsWith(p.id)?'active':''}" data-part="${p.id}" style="--accent:${p.accent}"><span class="map-no">${p.no}</span><strong>${p.short}</strong><small>${p.chapters.length}개 장<br />${p.desc}</small></button>`).join('');
+  el.innerHTML=courseParts.map(p=>`<button class="map-card ${currentId.startsWith(p.id)?'active':''}" data-part="${p.id}" style="--accent:${p.accent}"><span class="map-no">${p.no}</span><strong>${p.short}</strong><small>${partSlides.get(p.id).length}개 슬라이드<br />${p.desc}</small></button>`).join('');
   el.querySelectorAll('.map-card').forEach(btn=>btn.addEventListener('click',()=>setCurrent(`${btn.dataset.part}-${courseParts.find(p=>p.id===btn.dataset.part).chapters[0][0]}`)));
 }
 function renderNav(){
   const nav=document.getElementById('courseNav'); if(!nav)return;
-  nav.innerHTML=`<div class="course-nav"><div class="course-nav-part open"><button class="part-toggle" data-start="1"><span class="part-no">00</span><strong>시작하기</strong><small>▶</small></button><div class="chapter-list" style="display:block"><button class="chapter-link ${currentId==='start'?'active':''}" data-id="start">실전 강의 시작 안내</button></div></div>${courseParts.map(p=>`<div class="course-nav-part ${currentId.startsWith(p.id)?'open':''}"><button class="part-toggle" data-part="${p.id}"><span class="part-no">${p.no}</span><strong>${p.title}</strong><small>${p.chapters.length}장</small></button><div class="chapter-list">${p.chapters.map(c=>{const id=`${p.id}-${c[0]}`;return `<button class="chapter-link ${currentId===id?'active':''} ${completed[id]?'completed':''}" data-id="${id}">${c[0]}장 · ${c[1]}</button>`}).join('')}</div></div>`).join('')}</div>`;
+  nav.innerHTML=`<div class="course-nav"><div class="course-nav-part open"><button class="part-toggle" data-start="1"><span class="part-no">00</span><strong>시작하기</strong><small>▶</small></button><div class="chapter-list" style="display:block"><button class="chapter-link ${currentId==='start'?'active':''}" data-id="start">강의 전체 흐름</button></div></div>${courseParts.map(p=>{const slides=partSlides.get(p.id);return `<div class="course-nav-part ${currentId.startsWith(p.id)?'open':''}"><button class="part-toggle" data-part="${p.id}"><span class="part-no">${p.no}</span><strong>${p.title}</strong><small>${slides.length}장</small></button><div class="chapter-list">${slides.map(c=>`<button class="chapter-link ${currentId===c.id?'active':''} ${completed[c.id]?'completed':''} ${c.kind==='practice'?'practice-link':''}" data-id="${c.id}">${c.kind==='practice'?'실습 · ':`${c.no}장 · `}${c.title}</button>`).join('')}</div></div>`}).join('')}</div>`;
   nav.querySelectorAll('[data-id]').forEach(btn=>btn.addEventListener('click',()=>setCurrent(btn.dataset.id)));
   nav.querySelectorAll('[data-part]').forEach(btn=>btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open')));
   nav.querySelector('[data-start]')?.addEventListener('click',()=>setCurrent('start'));
@@ -108,12 +116,18 @@ function renderNav(){
 function renderSlide(){
   const el=document.getElementById('slideView'); if(!el)return;
   if(currentId==='start'){
-    document.getElementById('stagePart').textContent='시작하기';document.getElementById('stageTime').textContent='약 10분';
-    el.innerHTML=`<div class="slide-header"><div class="slide-kicker">ORIENTATION · 00</div><h2>홈페이지 제작 목표와<br /><span style="color:var(--blue)">완료 기준을 먼저 확정했음</span></h2><p>각 장에서 결정·실행·검수·저장까지 마쳐 다음 단계의 입력자료를 남기도록 구성했음.</p></div><div class="slide-body"><div class="content-panel lecture"><div class="panel-label"><strong>핵심 정리</strong><span>개조식 교안</span></div><h3>Project에서 기준을 만들고<br />Work에서 제작했음</h3><p>Sites와 GitHub Pages에서 실제 화면을 검수하고 공개했음. 설명보다 완료 기준과 결과물을 중심으로 진행했음.</p></div><div class="content-panel practice"><div class="panel-label"><strong>첫 실습</strong><span>바로 실행</span></div><h3>홈페이지 유형과<br />핵심 행동을 정했음</h3><p>기업·전문서비스·로컬·교육·콘텐츠·쇼핑몰 중 하나를 선택했음. 방문자가 가장 먼저 하길 바라는 행동을 한 문장으로 기록했음.</p></div></div><div class="slide-bottom"><div class="prompt-card"><label>실습 프롬프트</label><p>나는 [업종]을 운영하고 주요 방문자는 [대상]이다. 홈페이지에서 방문자가 반드시 하길 바라는 행동은 [행동]이다. 프로젝트 시작에 필요한 확인 질문 5개를 만들어 줘.</p></div><div class="output-card"><label>완료 산출물</label><p>홈페이지 유형 · 주요 방문자 · 핵심 행동 · 프로젝트 목표</p></div></div>`;
+    document.getElementById('stagePart').textContent='전체 흐름';document.getElementById('stageTime').textContent='수강생용 슬라이드';
+    el.innerHTML=`<div class="slide-header"><div class="slide-kicker">COURSE MAP · 00</div><h2>질문에서 시작해<br /><span style="color:var(--blue)">공개 홈페이지까지 연결함</span></h2><p>이해 → 준비 → 기획 → 제작 → 검수 → 오픈 → 운영 → 무료 공개 순서로 진행함.</p></div><div class="student-flow">${courseParts.map(p=>`<div style="--accent:${p.accent}"><b>${p.no}</b><strong>${p.short}</strong><span>${p.desc}</span></div>`).join('')}</div><div class="student-takeaway"><strong>강의자료 사용법</strong><span>각 장에서는 개념과 사례를 이해하고, 02부부터는 파트 마지막 실습 장에서 결과물을 완성함.</span></div>`;
   } else {
-    const c=chapterById(currentId); document.getElementById('stagePart').textContent=`${c.part.no}부 · ${c.part.title}`;document.getElementById('stageTime').textContent=`강의 8분 · 실습 20분`;
-    const done=!!completed[currentId];const d=lessonDetail(c);const visual=c.part.id==='part8'?`<img class="lesson-visual" src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT 대화에서 코드 다운로드와 홈페이지 공개까지의 4단계 흐름" />`:'';
-    el.innerHTML=`<div class="slide-header" style="--slide-accent:${c.part.accent}"><div class="slide-kicker" style="color:${c.part.accent}">${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</div><h2>${c.title}</h2><p>${c.message}</p></div>${visual}<div class="slide-body lesson-detail"><div class="content-panel lecture"><div class="panel-label"><strong>진행 프로세스</strong><span>단계별 실행</span></div><ol>${d.process.map(x=>`<li>${x}</li>`).join('')}</ol></div><div class="content-panel practice"><div class="panel-label"><strong>강사 진행 안내</strong><span>완료 기준</span></div><ul>${d.guide.map(x=>`<li>${x}</li>`).join('')}</ul></div></div><div class="slide-bottom"><div class="prompt-card"><label>상세 실습 프롬프트</label><p>${d.prompt}</p></div><div class="output-card"><label>유의사항 · 산출물</label><p>${d.caution}</p><strong>${c.output}</strong></div></div>`;
+    const c=chapterById(currentId); document.getElementById('stagePart').textContent=`${c.part.no}부 · ${c.part.title}`;document.getElementById('stageTime').textContent=c.kind==='practice'?'파트 통합 실습':'개념 · 사례';
+    const done=!!completed[currentId];
+    if(c.kind==='practice'){
+      el.innerHTML=`<div class="slide-header practice-head" style="--slide-accent:${c.part.accent}"><div class="slide-kicker" style="color:${c.part.accent}">${c.part.no} · PART PRACTICE</div><h2>${c.title}</h2><p>${c.goal}</p></div><div class="practice-flow">${c.steps.map((x,i)=>`<div><b>${i+1}</b><span>${x}</span></div>`).join('')}</div><div class="practice-main"><div class="prompt-card"><label>복사해서 사용하는 프롬프트</label><p>${c.prompt}</p></div><div class="practice-check"><label>유의사항</label><p>${c.caution}</p><label>완료 결과</label><strong>${c.output}</strong></div></div>`;
+    }else{
+      const d=studentContent(c);const visual=d.image?`<img class="student-image" src="${d.image}" alt="${c.title} 이해를 돕는 장면" />`:'';const layout=Number(c.no)%3;
+      const body=layout===0?`<div class="student-compare"><div><b>${d.compare[0][0]}</b><p>${d.compare[0][1]}</p></div><div><b>${d.compare[1][0]}</b><p>${d.compare[1][1]}</p></div></div>`:layout===1?`<div class="student-flow compact">${d.flow.map((x,i)=>`<div><b>${i+1}</b><strong>${x}</strong></div>`).join('')}</div>`:`<div class="student-example"><b>현장 예시</b>${d.points.map(x=>`<p>${x}</p>`).join('')}</div>`;
+      el.innerHTML=`<div class="slide-header" style="--slide-accent:${c.part.accent}"><div class="slide-kicker" style="color:${c.part.accent}">${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</div><h2>${c.title}</h2><p>${c.message}</p></div><div class="student-lesson ${visual?'with-image':''}"><div><div class="student-points">${d.points.map((x,i)=>`<div><b>${String(i+1).padStart(2,'0')}</b><span>${x}</span></div>`).join('')}</div>${body}</div>${visual}</div><div class="student-takeaway"><strong>이 장에서 기억할 한 가지</strong><span>${c.message}</span></div>`;
+    }
     const cb=document.getElementById('completeLesson');cb.textContent=done?'완료됨 · 다시 표시':'이 장 완료 표시';cb.classList.toggle('done',done);
   }
 }
@@ -125,8 +139,9 @@ function closeToolModal(){const m=document.getElementById('toolModal');if(m)m.hi
 function openSlides(){window.open('slides.html?autoprint=1','_blank','noopener,noreferrer')}
 function renderPrintDeck(){
   const deck=document.getElementById('printDeck');if(!deck)return;
-  const cover=`<section class="print-slide print-cover"><div class="print-top"><b>실전 홈페이지 프로젝트북</b><span>강사 · 엠아이넥스트 김용한</span></div><div class="cover-layout"><div><p class="eyebrow" style="color:#8baeff">CHATGPT · PROJECT · WORK · SITES · GITHUB PAGES</p><h2>대화에서 시작해<br />공개 홈페이지로 완성했음</h2><p class="print-message">기획·코드·검수·배포 과정을 8개 부, 45개 실전 장으로 구성했음.</p></div><img src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT 대화에서 홈페이지 공개까지의 과정" /></div><div class="print-footer"><strong>전체 46페이지 · 표지 1 + 강의 45</strong><span>2026 실전 강의 교안</span></div></section>`;
-  const pages=allChapters.map((c,i)=>{const d=lessonDetail(c);const visual=c.part.id==='part8'?`<img class="print-visual" src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT에서 GitHub Pages까지 4단계 과정" />`:'';return `<section class="print-slide" style="--slide-accent:${c.part.accent}"><div class="print-top"><b>${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</b><span>${i+2} / ${allChapters.length+1}</span></div><div class="print-heading"><h2>${c.title}</h2><p class="print-message">${c.message}</p></div>${visual}<div class="print-process">${d.process.map((x,n)=>`<div><b>${String(n+1).padStart(2,'0')}</b><span>${x}</span></div>`).join('')}</div><div class="print-content"><div class="print-prompt"><label>상세 실습 프롬프트</label><p>${d.prompt}</p></div><div class="print-guide"><label>강사 진행 안내</label><ul>${d.guide.map(x=>`<li>${x}</li>`).join('')}</ul><label>유의사항</label><p>${d.caution}</p></div></div><div class="print-footer"><strong>완료 산출물 · ${c.output}</strong><span>${c.part.title}</span></div></section>`}).join('');
+  const total=allChapters.length+1;
+  const cover=`<section class="print-slide print-cover"><div class="print-top"><b>홈페이지 만들기 프로젝트 WEB</b><span>수강생용</span></div><div class="cover-layout"><div><p class="eyebrow" style="color:#8baeff">UNDERSTAND · PLAN · BUILD · LAUNCH</p><h2>질문에서 시작해<br />공개 홈페이지까지</h2><p class="print-message">8개 파트의 개념·사례를 이해하고, 파트 마지막 실습에서 결과물을 완성함.</p></div><img src="assets/chatgpt-to-pages-workflow.png" alt="ChatGPT 대화에서 홈페이지 공개까지의 과정" /></div><div class="print-footer"><strong>전체 ${total}페이지</strong><span>수강생용 강의 슬라이드</span></div></section>`;
+  const pages=allChapters.map((c,i)=>{if(c.kind==='practice')return `<section class="print-slide print-practice" style="--slide-accent:${c.part.accent}"><div class="print-top"><b>${c.part.no} · PART PRACTICE</b><span>${i+2} / ${total}</span></div><div class="print-heading"><h2>${c.title}</h2><p class="print-message">${c.goal}</p></div><div class="practice-flow print-flow">${c.steps.map((x,n)=>`<div><b>${n+1}</b><span>${x}</span></div>`).join('')}</div><div class="print-content"><div class="print-prompt"><label>복사해서 사용하는 프롬프트</label><p>${c.prompt}</p></div><div class="print-guide"><label>유의사항</label><p>${c.caution}</p><label>완료 결과</label><strong>${c.output}</strong></div></div><div class="print-footer"><strong>${c.part.title}</strong><span>통합 실습</span></div></section>`;const d=studentContent(c);const visual=d.image?`<img class="print-student-image" src="${d.image}" alt="${c.title} 이해를 돕는 장면" />`:'';return `<section class="print-slide" style="--slide-accent:${c.part.accent}"><div class="print-top"><b>${c.part.no} · ${c.part.short.toUpperCase()} / ${c.no}장</b><span>${i+2} / ${total}</span></div><div class="print-heading"><h2>${c.title}</h2><p class="print-message">${c.message}</p></div><div class="print-student-body ${visual?'with-image':''}"><div><div class="student-points print-points">${d.points.map((x,n)=>`<div><b>${String(n+1).padStart(2,'0')}</b><span>${x}</span></div>`).join('')}</div><div class="student-compare print-compare"><div><b>${d.compare[0][0]}</b><p>${d.compare[0][1]}</p></div><div><b>${d.compare[1][0]}</b><p>${d.compare[1][1]}</p></div></div></div>${visual}</div><div class="print-footer"><strong>핵심 · ${c.message}</strong><span>${c.part.title}</span></div></section>`}).join('');
   deck.innerHTML=cover+pages;
 }
 
