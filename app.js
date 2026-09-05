@@ -1,37 +1,140 @@
-const TOTAL_SLIDES = 70;
-const PDF_PATH = 'assets/AI_홈페이지_웹서비스_강의안_최종70장.pdf';
-const DONE_KEY = 'mentor-k-ai-lecture-done-v2';
+const TOTAL_SLIDES = 69;
+const PDF_PATH = 'assets/0917_homepage_webservice_lecture.pdf';
+const PDF_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const DONE_KEY = 'mentor-k-ai-lecture-done-v3';
 
 const courseSections = [
-  {key:'intro',no:'00',start:1,end:4,short:'시작',title:'과정 목표와 4시간 제작 흐름',desc:'강의 30% · 실습 70%',accent:'#2563eb',objective:'오늘 만들 결과물과 완료 기준을 먼저 공유함',cue:'수강생의 아이디어를 목적 문장 한 줄로 말하게 함',output:'목적 문장 · 사이트맵 · 작동 화면 · 공개 후보'},
-  {key:'part1',no:'01',start:5,end:12,short:'이해',title:'홈페이지·웹서비스 개발환경의 변화',desc:'AI와 사람의 역할 이해',accent:'#173b78',objective:'홈페이지와 웹서비스의 구조 및 AI 협업 원리를 이해함',cue:'코드를 외우기보다 질문·판단·검수 역량에 초점을 맞춤',output:'제작 방식 선택 기준'},
-  {key:'part2',no:'02',start:13,end:20,short:'기획',title:'홈페이지·웹서비스 기획 핵심',desc:'방문자 질문에서 구조로',accent:'#1876c9',objective:'목적·방문자·상황·정보·행동을 한 흐름으로 설계함',cue:'페이지 수보다 방문자의 질문과 다음 행동을 먼저 확인함',output:'목적 문장 · 방문자 여정 · 사이트맵'},
-  {key:'part3',no:'03',start:21,end:29,short:'선택',title:'AI 도구와 제작환경 선택',desc:'Project·Work·Sites 역할',accent:'#1aa39b',objective:'도구별 역할과 작업 경계를 나누어 반복 제작 기준을 세움',cue:'한 도구에 모든 일을 맡기지 않고 자료·제작·검수를 분리함',output:'도구 역할표 · Project 지침'},
-  {key:'part4',no:'04',start:30,end:46,short:'개발',title:'Project와 Work 실전 제작',desc:'기획안에서 MVP까지',accent:'#0c8895',objective:'자료와 지침을 모으고 PRD를 거쳐 작동하는 MVP를 제작함',cue:'짧은 개발→검토→수정 사이클과 승인 질문을 반복함',output:'Project · PRD · MVP · 관리자 화면'},
-  {key:'part5',no:'05',start:47,end:56,short:'검수',title:'Sites에서 검수하고 수정',desc:'방문자처럼 실제 테스트',accent:'#f08070',objective:'첫 화면·모바일·기능·데이터·권한을 실제 사용자처럼 검수함',cue:'오류를 위치·재현 경로·기대 결과·실제 결과로 기록하게 함',output:'검수표 · 수정 요청서 · 공개 후보'},
-  {key:'part6',no:'06',start:57,end:69,short:'공개',title:'공개·접속·검색·운영 연결',desc:'실제 서비스로 전환',accent:'#1461a8',objective:'공개 설정부터 도메인·HTTPS·검색·운영까지 연결함',cue:'공개 버튼보다 실제 접속·권한·모바일·검색 상태를 확인함',output:'공개 URL · 도메인 · 검색 등록 · 운영 기준'},
-  {key:'closing',no:'07',start:70,end:70,short:'마무리',title:'제작 흐름을 내 프로젝트에 적용',desc:'Project → Work → Sites',accent:'#1aa39b',objective:'오늘 경험한 한 사이클을 각자의 홈페이지에 적용함',cue:'수강생별 다음 행동 한 가지와 공개 목표일을 확인함',output:'개인별 다음 실행 항목'}
+  {key:'intro',no:'00',start:1,end:3,short:'시작',title:'과정 목표와 강의 진행 안내',desc:'핵심지식 1시간 · 실습 3시간',accent:'#2563eb',objective:'오늘 강의에서 만들 결과물과 전체 작업 순서를 이해함',cue:'4시간 뒤 완성할 결과물을 수강생의 아이디어와 연결함',output:'제작 주제 · 목표 · 실습 흐름'},
+  {key:'part1',no:'01',start:4,end:10,short:'변화',title:'홈페이지·웹서비스 개발환경 변화',desc:'코드에서 프롬프트·에이전트로',accent:'#173b78',objective:'홈페이지·웹서비스의 범위와 AI 시대 제작 방식 변화를 이해함',cue:'코딩이 사라진 것이 아니라 지시하고 검수하는 방식으로 바뀌었음을 강조함',output:'만들 결과물과 제작 방식 선택'},
+  {key:'part2',no:'02',start:11,end:20,short:'도구',title:'AI 도구의 활용',desc:'Project → Work → Sites → Open',accent:'#1aa39b',objective:'Project·Work·Sites의 역할과 AI 도구 활용 흐름을 이해함',cue:'Project가 기준을 기억하고 Work가 만들며 Sites가 실제 결과를 보여준다고 설명함',output:'도구 역할표 · Project 운영 기준'},
+  {key:'part3',no:'03',start:21,end:32,short:'기획',title:'Work에서 홈페이지 기획',desc:'목적 → 방문자 → 사이트맵 → PRD',accent:'#1876c9',objective:'페이지보다 먼저 방문자의 질문과 다음 행동을 설계함',cue:'인천 아일랜드 투어 예시를 기준으로 목적·방문자·사이트맵·PRD를 연결함',output:'목적 문장 · 방문자 · 사이트맵 · PRD 초안'},
+  {key:'part4',no:'04',start:33,end:44,short:'개발',title:'Work에서 개발',desc:'기획·디자인·개발 기준 확정',accent:'#0c8895',objective:'기획안과 기준을 개발 가능한 구조·화면·기능으로 바꿈',cue:'벤치마킹부터 컬러·폰트·와이어프레임·관리자까지 순서대로 확정함',output:'사이트 구조 · 와이어프레임 · MVP 개발 요청'},
+  {key:'part5',no:'05',start:45,end:58,short:'검수',title:'Sites에서 검수·수정·배포',desc:'실화면 → 시나리오 → 모바일 → 보안 → 재검수',accent:'#f08070',objective:'실제 화면을 방문자처럼 검수하고 배포·호스팅·도메인까지 연결함',cue:'문제를 재현 가능한 수정 요청으로 바꾸고 반드시 재검수함',output:'검수표 · 수정목록 · 공개 버전 · 도메인 계획'},
+  {key:'part6',no:'06',start:59,end:68,short:'실습',title:'홈페이지 만들기 실습',desc:'프로젝트 개설 → 기획 → 개발 → 오픈',accent:'#1461a8',objective:'Project·Work·Codex·GitHub를 사용해 홈페이지를 실제로 오픈함',cue:'중간 결과를 저장하고 체크한 뒤 다음 단계로 이동함',output:'기획안 · MVP · 검수 결과 · 공개 URL'},
+  {key:'closing',no:'07',start:69,end:69,short:'마무리',title:'실습 결과를 실제 서비스로 연결',desc:'오늘의 제작 사이클 정리',accent:'#1aa39b',objective:'오늘 배운 제작 사이클을 자신의 프로젝트에 적용할 다음 행동을 정함',cue:'공개 목표일과 가장 먼저 할 한 가지를 말하게 함',output:'개인별 다음 실행 항목'}
 ];
 
 const namedSlides = {
-  1:'코딩 없이 만드는 홈페이지·웹서비스',2:'4시간 뒤 완성할 결과물',3:'강의 30% · 실습 70% 운영 방식',4:'이해에서 공개까지 한 사이클',
-  5:'PART 1 · 개발환경의 변화',6:'코딩 중심에서 대화·검수 중심으로',7:'홈페이지·웹사이트·웹서비스·웹앱 구분',8:'웹서비스를 이루는 여섯 영역',9:'AI와 사람이 나누는 제작 역할',10:'AI의 생성·탐색·운영 역할',11:'바이브 코딩 반복 제작 루프',12:'제작 방식 선택 매트릭스',
-  13:'PART 2 · 기획 핵심',14:'목적·방문자·상황·정보·행동',15:'홈페이지 목적 문장 공식',16:'방문자와 사용 상황 정의',17:'방문자 여정 설계',18:'사이트맵과 페이지 역할',19:'콘텐츠·이미지·신뢰·CTA',20:'완료 조건과 승인 기준',
-  21:'ChatGPT·Gemini·Claude 작업환경 비교',22:'Project는 반복 제작의 운영 기준',23:'AI 도구별 역할 분담',24:'Project→Work→Sites 핵심 흐름',29:'Project 지침 작성 예시',
-  30:'PART 4 · Project와 Work 실전 제작',37:'회사 홈페이지 기획 프롬프트',38:'AI에게 묻는 기획 핵심 질문',39:'PRD 작성 핵심 고려사항',40:'관리자 대시보드 설계',45:'MVP 개발·검토·수정 사이클',46:'수정·보완·추가 개발 분리',
-  47:'PART 5 · Sites 검수와 수정',49:'첫 화면 3초 테스트',50:'콘텐츠·이미지·디자인 수정 요청',51:'모바일·UI·UX 검수',52:'기능·데이터·관리자 테스트',53:'오류 재현·수정·재테스트',54:'완성 결과 사용자 테스트',55:'개발·공개 전 최종 확인 질문',56:'버전 저장과 공개 후보 확정',
-  57:'PART 6 · 실제 서비스로 전환',58:'Sites 공개 프로세스',59:'공개 전 최종 체크리스트',60:'방문자 기능과 관리자 운영',61:'배포와 접근 권한',62:'도메인·DNS·호스팅 연결',63:'도메인 등록과 DNS 관리',64:'호스팅 유형 선택',65:'무료 AI→GitHub Pages 공개',66:'보유 도메인·HTTPS·www 확인',67:'검색·SNS·AI가 읽는 정보 구조',68:'SEO·AEO·GEO 반영',69:'검색포털 등록과 공개 후 루틴',70:'감사합니다'
+  1:'코딩 없이 반나절 만에 만드는 홈페이지와 웹서비스',
+  2:'강의 진행 안내',
+  3:'목차',
+  4:'PART 1 · 홈페이지·웹서비스 개발환경 변화',
+  5:'홈페이지 제작 환경의 변화',
+  6:'참고 · 홈페이지 제작 방식 비교',
+  7:'무엇을 만들 것인가?',
+  8:'홈페이지·웹서비스의 구조',
+  9:'에이전트 시대의 웹사이트',
+  10:'바이브코딩과 웹사이트',
+  11:'PART 2 · AI 도구의 활용',
+  12:'Project를 잘 만들어야 Work의 결과도 안정적',
+  13:'Project 기준을 분명히 해야 Work의 결과물을 만족',
+  14:'ChatGPT Chat vs GPTs vs Project 비교',
+  15:'Project 지침에 역할·품질·승인 기준을 넣는다',
+  16:'좋은 결과는 좋은 기준에서 시작된다',
+  17:'ChatGPT 주요 활용 도구',
+  18:'AI를 업무에 넣을 때 결과품질과 검수',
+  19:'사이트 기획 프로세스',
+  20:'ChatGPT Sites 활용 사이트 구축',
+  21:'PART 3 · Work에서 홈페이지 기획',
+  22:'Work에서 홈페이지를 기획하다',
+  23:'목적·방문자·사이트맵·PRD 연결',
+  24:'Work에서 질문을 구조화하는 법',
+  25:'PRD(Project Request Document) 초안 만들기',
+  26:'웹사이트 기획 예시 · 목적과 방문자',
+  27:'웹사이트 기획 예시 · 방문자 여정',
+  28:'웹사이트 기획 예시 · 사이트맵',
+  29:'웹사이트 기획 예시 · 페이지 구조',
+  30:'웹사이트 기획 예시 · 콘텐츠 구성',
+  31:'웹사이트 기획 예시 · 기능과 운영',
+  32:'웹사이트 기획 예시 · 기획안 완성',
+  33:'PART 4 · Work에서 개발',
+  34:'벤치마킹 포인트',
+  35:'Work/Codex로 개발',
+  36:'사이트 구조',
+  37:'와이어프레임',
+  38:'공통 레이아웃과 컴포넌트',
+  39:'컬러·폰트·글자 사이즈',
+  40:'페이지 콘텐츠',
+  41:'상세페이지',
+  42:'UI·UX',
+  43:'프론트엔드',
+  44:'관리자 대시보드',
+  45:'PART 5 · Sites에서 검수·수정·배포',
+  46:'사이트 검수와 수정 프로세스',
+  47:'사이트 검수의 내용',
+  48:'타겟·역할 시나리오로 검수',
+  49:'모바일 최적화 검수',
+  50:'개인정보·보안·관리자 기능 검수',
+  51:'오류 수정',
+  52:'저장과 배포',
+  53:'도메인·호스팅',
+  54:'참고 · 호스팅 방식의 비교',
+  55:'도메인·호스팅 실전 확인',
+  56:'공개 후 개선 반복',
+  57:'웹사이트의 완성 · 운영 가능한 서비스로',
+  58:'웹사이트의 완성 · 지속 개선의 기준',
+  59:'PART 6 · 홈페이지 만들기 실습',
+  60:'프로젝트 개설 및 지침 설정',
+  61:'Work로 기획안 만들기',
+  62:'Work로 기획안 검토하기',
+  63:'WORK/Codex에 PRD 기준으로 개발 요청',
+  64:'MVP 보완·수정',
+  65:'Work로 개발 사이트 검수',
+  66:'도메인과 호스팅으로 오픈',
+  67:'참고 · GitHub로 호스팅 ①',
+  68:'참고 · GitHub로 호스팅 ②',
+  69:'감사합니다 · 실습 결과를 실제 서비스로 연결'
 };
 
 let currentSlide = 1;
 let completed = {};
 try { completed = JSON.parse(localStorage.getItem(DONE_KEY) || '{}'); } catch (error) { completed = {}; }
+let pdfDocument = null;
+let pdfLoadPromise = null;
+let pdfRenderToken = 0;
+
+function loadPdfDocument(){
+  if (pdfDocument) return Promise.resolve(pdfDocument);
+  if (typeof window.pdfjsLib === 'undefined') return Promise.reject(new Error('PDF.js unavailable'));
+  if (!pdfLoadPromise) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+    pdfLoadPromise = window.pdfjsLib.getDocument(PDF_PATH).promise.then(function(pdf){ pdfDocument = pdf; return pdf; });
+  }
+  return pdfLoadPromise;
+}
+async function renderPdfSlide(number){
+  const token = ++pdfRenderToken;
+  const canvas = document.getElementById('slideCanvas');
+  const frame = document.getElementById('pdfSlideFrame');
+  const status = document.getElementById('pdfSlideStatus');
+  if (!canvas || !frame) return;
+  if (status) { status.hidden = false; status.textContent = '슬라이드 불러오는 중…'; }
+  try {
+    const pdf = await loadPdfDocument();
+    const page = await pdf.getPage(number);
+    if (token !== pdfRenderToken || currentSlide !== number) return;
+    const baseViewport = page.getViewport({scale:1});
+    const cssWidth = Math.min(frame.clientWidth || 900, 1500);
+    const scale = cssWidth / baseViewport.width;
+    const outputScale = Math.min(window.devicePixelRatio || 1, 2);
+    const renderViewport = page.getViewport({scale:scale * outputScale});
+    canvas.width = Math.ceil(renderViewport.width);
+    canvas.height = Math.ceil(renderViewport.height);
+    canvas.style.width = cssWidth + 'px';
+    canvas.style.height = (baseViewport.height * scale) + 'px';
+    await page.render({canvasContext:canvas.getContext('2d'),viewport:renderViewport}).promise;
+    canvas.setAttribute('aria-label', slideTitle(number));
+    if (status) status.hidden = true;
+  } catch (error) {
+    if (status) status.textContent = 'PDF 뷰어를 불러오지 못했습니다. 아래 원본 PDF를 열어 확인해 주세요.';
+    console.error(error);
+  }
+}
 
 function sectionForSlide(number) {
   return courseSections.find(function(section){ return number >= section.start && number <= section.end; }) || courseSections[0];
 }
 function slideId(number) { return 'slide-' + String(number).padStart(3,'0'); }
-function slideImage(number) { return 'assets/slides/' + slideId(number) + '.jpg'; }
 function slideTitle(number) {
   const section = sectionForSlide(number);
   return namedSlides[number] || (section.short + ' 실전 · 슬라이드 ' + number);
@@ -42,11 +145,7 @@ function jumpToSlide(number, shouldScroll) {
   preloadSlide(currentSlide + 1);
   if (shouldScroll !== false) document.getElementById('workspace')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function preloadSlide(number) {
-  if (number < 1 || number > TOTAL_SLIDES) return;
-  const image = new Image();
-  image.src = slideImage(number);
-}
+function preloadSlide(number){ return number >= 1 && number <= TOTAL_SLIDES; }
 
 function renderMap() {
   const track = document.getElementById('mapTrack');
@@ -84,7 +183,8 @@ function renderSlide() {
   const partLabel = section.key === 'intro' || section.key === 'closing' ? section.title : 'PART ' + section.no + ' · ' + section.title;
   document.getElementById('stagePart').textContent = partLabel;
   document.getElementById('stageTime').textContent = '슬라이드 ' + currentSlide + ' / ' + TOTAL_SLIDES;
-  view.innerHTML = '<figure class="source-slide-shell"><img class="source-slide" src="' + slideImage(currentSlide) + '" alt="' + title + '" width="1500" height="1000"><figcaption><strong>' + String(currentSlide).padStart(2,'0') + '</strong><span>' + title + '</span><em>가로 6 : 세로 4</em></figcaption></figure><div class="instructor-support" aria-label="강의 진행 지원 정보"><div><span>학습 목표</span><strong>' + section.objective + '</strong></div><div><span>강사 진행 포인트</span><strong>' + section.cue + '</strong></div><div><span>수강생 산출물</span><strong>' + section.output + '</strong></div></div>';
+  view.innerHTML = '<figure class="source-slide-shell"><div class="pdf-slide-frame" id="pdfSlideFrame"><canvas class="source-slide pdf-slide-canvas" id="slideCanvas" width="1500" height="1000"></canvas><div class="pdf-slide-status" id="pdfSlideStatus" role="status">슬라이드 불러오는 중…</div></div><figcaption><strong>' + String(currentSlide).padStart(2,'0') + '</strong><span>' + title + '</span><em>가로 6 : 세로 4</em></figcaption></figure><div class="instructor-support" aria-label="강의 진행 지원 정보"><div><span>학습 목표</span><strong>' + section.objective + '</strong></div><div><span>강사 진행 포인트</span><strong>' + section.cue + '</strong></div><div><span>수강생 산출물</span><strong>' + section.output + '</strong></div></div>';
+  renderPdfSlide(currentSlide);
   const complete = document.getElementById('completeLesson');
   complete.textContent = completed[id] ? '완료됨 · 취소' : '이 슬라이드 완료';
   complete.classList.toggle('done',Boolean(completed[id]));
@@ -119,7 +219,7 @@ function toggleComplete(){
 function downloadPdf(){
   const anchor = document.createElement('a');
   anchor.href = PDF_PATH;
-  anchor.download = 'AI_홈페이지_웹서비스_강의안_최종70장_엠아이넥스트_김용한.pdf';
+  anchor.download = '0917_홈페이지_웹서비스_강의안_엠아이넥스트_김용한.pdf';
   document.body.appendChild(anchor);
   anchor.click();
   anchor.remove();
@@ -148,19 +248,10 @@ function showTool(name){
 }
 function closeToolModal(){ const modal = document.getElementById('toolModal'); if (modal) modal.hidden = true; }
 
-function renderPrintDeck(){
-  const deck = document.getElementById('printDeck');
-  if (!deck) return;
-  const slides = [];
-  for (let number=1; number<=TOTAL_SLIDES; number+=1) {
-    slides.push('<section class="print-slide source-print-slide" data-slide="' + number + '"><img src="' + slideImage(number) + '" alt="' + slideTitle(number) + '" width="1500" height="1000" loading="' + (number<5?'eager':'lazy') + '"></section>');
-  }
-  deck.innerHTML = slides.join('');
-}
+function renderPrintDeck(){}
 
 document.addEventListener('DOMContentLoaded',function(){
   renderAll();
-  renderPrintDeck();
   preloadSlide(2);
   document.getElementById('startCourse')?.addEventListener('click',function(){ jumpToSlide(1); });
   document.getElementById('openSlides')?.addEventListener('click',downloadPdf);
@@ -174,8 +265,10 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('closeToolModal')?.addEventListener('click',closeToolModal);
   document.getElementById('toolModal')?.addEventListener('click',function(event){ if (event.target === event.currentTarget) closeToolModal(); });
   document.getElementById('openResources')?.addEventListener('click',function(){ document.getElementById('resources')?.scrollIntoView({behavior:'smooth'}); });
-  document.getElementById('downloadChecklist')?.addEventListener('click',function(){ jumpToSlide(59); });
+  document.getElementById('downloadChecklist')?.addEventListener('click',function(){ jumpToSlide(52); });
   document.getElementById('collapseNav')?.addEventListener('click',function(){ document.querySelector('.course-sidebar')?.classList.toggle('collapsed'); });
+  let resizeTimer;
+  window.addEventListener('resize',function(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(function(){ if (pdfDocument) renderPdfSlide(currentSlide); },150); });
   document.addEventListener('fullscreenchange',function(){ document.getElementById('lessonStage')?.classList.toggle('presenting',Boolean(document.fullscreenElement)); });
   document.addEventListener('keydown',function(event){
     const tag = event.target && event.target.tagName;

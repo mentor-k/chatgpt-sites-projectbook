@@ -4,9 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0b1220" />
-  <meta name="description" content="코딩 없이 만드는 AI 홈페이지·웹서비스 실전 과정 - Project, Work, Sites로 기획부터 공개까지" />
+  <meta name="description" content="코딩 없이 반나절 만에 만드는 홈페이지·웹서비스 실전 과정 - Project, Work, Sites로 기획부터 공개까지" />
   <title>AI 홈페이지·웹서비스 실전 과정 | 엠아이넥스트 김용한</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <style>
+    .pdf-slide-frame{position:relative;display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:6/4;overflow:hidden;background:#fff}
+    .pdf-slide-canvas{display:block;max-width:100%;width:100%;height:auto!important;aspect-ratio:auto!important;background:#fff}
+    .pdf-slide-status{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:#617087;font-size:12px;background:linear-gradient(135deg,#f7fafc,#eef4fb);pointer-events:none}
+    .pdf-slide-status[hidden]{display:none}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -25,13 +32,13 @@
         <div class="hero-copy">
           <p class="eyebrow">AI HOMEPAGE · WEB SERVICE · PROJECT · WORK · SITES</p>
           <h1>코딩 없이 기획하고,<br /><em>접속 가능한 결과물</em>로 완성한다</h1>
-          <p class="hero-lead">강의 30%, 실습 70%의 4시간 과정입니다. AI 기초를 이해하고 Project에서 기준을 만들며, Work에서 기획·개발하고, Sites에서 검수한 뒤 실제 공개·운영까지 한 사이클을 완성합니다.</p>
+          <p class="hero-lead">핵심지식 1시간과 실습 3시간으로 구성된 4시간 과정입니다. Project에서 기준을 만들고, Work에서 기획·개발하며, Sites에서 검수·수정한 뒤 실제 공개·도메인 연결까지 한 사이클을 완성합니다.</p>
           <div class="hero-actions">
             <button class="primary-button" id="startCourse">실전 강의 시작하기 <span>→</span></button>
             <button class="ghost-button" id="openSlides">전체 슬라이드 PDF 저장</button>
           </div>
           <div class="hero-proof">
-            <div><strong>70</strong><span>학습 슬라이드</span></div>
+            <div><strong>69</strong><span>학습 슬라이드</span></div>
             <div><strong>6</strong><span>제작 단계</span></div>
             <div><strong>4h</strong><span>실전 워크숍</span></div>
           </div>
@@ -61,7 +68,7 @@
           <nav id="courseNav"></nav>
         </aside>
         <section class="lesson-stage" id="lessonStage">
-          <div class="stage-topline"><span id="stagePart">오리엔테이션</span><div class="presenter-tools"><span id="stageTime">슬라이드 1 / 70</span><button id="toggleOverview" type="button">전체 보기</button><button id="toggleFullscreen" type="button">발표 화면</button></div></div>
+          <div class="stage-topline"><span id="stagePart">오리엔테이션</span><div class="presenter-tools"><span id="stageTime">슬라이드 1 / 69</span><button id="toggleOverview" type="button">전체 보기</button><button id="toggleFullscreen" type="button">발표 화면</button></div></div>
           <div class="slide-view" id="slideView"></div>
           <div class="stage-controls"><button id="prevLesson" class="control-button">← 이전</button><button id="completeLesson" class="complete-button">이 장 완료 표시</button><button id="nextLesson" class="control-button">다음 →</button></div>
         </section>
@@ -78,7 +85,7 @@
 
       <section class="resource-section" id="resources">
         <div class="resource-card">
-          <div><p class="eyebrow">RESOURCE LIBRARY</p><h2>수강생이 바로 보는<br /><span>전체 70장 슬라이드</span></h2><p>첨부 강의안의 가로 6 : 세로 4 디자인과 내용을 그대로 확인하고, 원본 PDF를 한 번에 내려받을 수 있습니다.</p></div>
+          <div><p class="eyebrow">RESOURCE LIBRARY</p><h2>수강생이 바로 보는<br /><span>전체 69장 슬라이드</span></h2><p>첨부 강의안의 가로 6 : 세로 4 디자인과 내용을 그대로 확인하고, 원본 PDF를 한 번에 내려받을 수 있습니다.</p></div>
           <div class="resource-actions"><button class="primary-button" id="resourceSlides">전체 슬라이드 PDF 다운로드 <span>↓</span></button><button class="text-button" id="downloadChecklist">공개 전 체크리스트 위치 보기</button><small>강사 · 엠아이넥스트 김용한</small></div>
         </div>
       </section>
@@ -87,6 +94,6 @@
     <footer class="footer"><span>AI 홈페이지·웹서비스 실전 과정</span><span>강사 · 엠아이넥스트 김용한</span><span>Project · Work · Sites · 공개·운영</span></footer>
   </div>
   <div class="modal-backdrop" id="toolModal" hidden><div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="toolModalTitle"><button type="button" class="modal-close" id="closeToolModal" aria-label="닫기">×</button><p class="eyebrow">NEXT ACTION</p><h2 id="toolModalTitle">Project</h2><p id="toolModalText"></p><div class="modal-steps" id="toolModalSteps"></div><a class="primary-button modal-link" href="https://chatgpt.com/" target="_blank" rel="noreferrer">ChatGPT 열기 <span>↗</span></a></div></div>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
