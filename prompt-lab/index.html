@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="이미지 치트키 100개와 검색·글쓰기·책쓰기·보고서·강의자료·기획서·이미지·영상·인포그래픽 프롬프트를 검색하고 복사하는 실전 도구">
+  <title>ChatGPT 프롬프트 랩</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="mark">P</span><div><strong>ChatGPT 프롬프트 랩</strong><small>Prompt Lab · 한국어 실전판</small></div></div>
+    <nav><button class="nav active" data-view="commands">이미지 치트키</button><button class="nav" data-view="work">업무 프롬프트</button><button class="nav" data-view="recipes">이미지 활용</button><button class="nav" data-view="astra">Astra 활용</button><button class="nav" data-view="builder">프롬프트 설계</button><button class="nav" data-view="guide">초보자 가이드</button><a class="nav excel-download" href="prompt-lab.xlsx" download>엑셀 다운로드</a></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">SEARCH · COMBINE · COPY</p><h1>필요한 프롬프트를<br><em>찾고, 조합하고, 바로 사용하세요.</em></h1></div>
+      <div class="stats"><span><b>100</b> 이미지 치트키</span><span><b>96</b> 업무 템플릿</span><span><b>18</b> Astra 유형</span></div>
+    </section>
+
+    <section class="workspace" id="commandsView">
+      <div class="section-head"><div><p class="eyebrow">IMAGE CHEAT KEYS</p><h2>이미지 치트키 100</h2><p>영문 명령어와 한국어 효과를 함께 확인하고 여러 개를 조합할 수 있습니다.</p></div><button id="copyCombo" class="primary">선택 조합 복사 <span id="comboCount">0</span></button></div>
+      <div class="controls"><label class="search"><span>⌕</span><input id="commandSearch" placeholder="명령어·한국어 효과 검색 (예: 노을, 필름, closeup)"></label><div id="categoryFilters" class="chips"></div></div>
+      <div id="comboBar" class="combo empty"><span>선택한 치트키가 없습니다.</span><button id="clearCombo">모두 지우기</button></div>
+      <div id="commandGrid" class="card-grid"></div><p id="commandEmpty" class="empty-state">검색 결과가 없습니다.</p>
+    </section>
+
+    <section class="workspace hidden" id="workView">
+      <div class="section-head"><div><p class="eyebrow">WORK PROMPTS</p><h2>주요 업무·콘텐츠 프롬프트</h2><p>대괄호 [ ] 안의 내용만 내 상황에 맞게 바꾸면 됩니다.</p></div></div>
+      <div class="controls"><label class="search"><span>⌕</span><input id="workSearch" placeholder="검색, 책쓰기, 강의, 영상 등 검색"></label><div id="workFilters" class="chips"></div></div>
+      <div id="workGrid" class="prompt-grid"></div><p id="workEmpty" class="empty-state">검색 결과가 없습니다.</p>
+    </section>
+
+    <section class="workspace hidden" id="recipesView">
+      <div class="section-head"><div><p class="eyebrow">IMAGE RECIPES</p><h2>상황·유형·용도별 이미지 프롬프트</h2><p>SNS, 블로그, 쇼핑몰, 브랜딩, 교육, 지역·관광 등 실제 제작 상황에 맞춰 골라 쓰세요.</p></div></div>
+      <div class="controls"><label class="search"><span>⌕</span><input id="recipeSearch" placeholder="SNS, 썸네일, 제품, 전통시장 등 검색"></label><div id="recipeFilters" class="chips"></div></div>
+      <div id="recipeGrid" class="prompt-grid"></div><p id="recipeEmpty" class="empty-state">검색 결과가 없습니다.</p>
+    </section>
+
+    <section class="workspace hidden" id="astraView">
+      <div class="section-head"><div><p class="eyebrow">GPT-6 ASTRA</p><h2>Astra 강점 활용 프롬프트</h2><p>복잡한 추론, 웹·파일 조사, 코딩, 컴퓨터 작업, 전문 문서와 다단계 업무에 맞춘 유형입니다.</p></div></div>
+      <div class="prompt-grid">
+        <article class="prompt-card"><span class="badge">복합 업무</span><h3>조사부터 최종 산출물까지</h3><div class="text">다음 목표를 최종 산출물까지 완수해 주세요: [목표]. 필요한 자료는 [파일/연결 소스/웹]에서 확인하고, 조사→분석→초안→검증→최종본 순서로 진행하세요. 결과를 크게 바꾸는 정보만 질문하고, 사실·추정·제안을 구분해 [문서/표/슬라이드] 형식으로 완성하세요.</div><button class="copy" data-copy="다음 목표를 최종 산출물까지 완수해 주세요: [목표]. 필요한 자료는 [파일/연결 소스/웹]에서 확인하고, 조사→분석→초안→검증→최종본 순서로 진행하세요. 결과를 크게 바꾸는 정보만 질문하고, 사실·추정·제안을 구분해 [문서/표/슬라이드] 형식으로 완성하세요.">복사</button></article>
+        <article class="prompt-card"><span class="badge">심층 리서치</span><h3>상충 근거까지 종합</h3><div class="text">[주제]를 [의사결정 목적] 관점에서 심층 조사하세요. 최신 공식자료와 1차 출처를 우선하고 상충하는 자료는 기준·시점·정의 차이를 비교하세요. 핵심 발견, 반대 근거, 불확실성, 시사점과 권고안을 작성하고 핵심 주장마다 출처를 연결하세요.</div><button class="copy" data-copy="[주제]를 [의사결정 목적] 관점에서 심층 조사하세요. 최신 공식자료와 1차 출처를 우선하고 상충하는 자료는 기준·시점·정의 차이를 비교하세요. 핵심 발견, 반대 근거, 불확실성, 시사점과 권고안을 작성하고 핵심 주장마다 출처를 연결하세요.">복사</button></article>
+        <article class="prompt-card"><span class="badge">대용량 문서</span><h3>여러 파일 통합 분석</h3><div class="text">첨부한 자료를 모두 읽고 [비교 기준]을 축으로 공통점, 차이, 충돌, 누락을 통합 분석하세요. 파일별 요약 나열은 피하고 근거 위치, 가장 방어 가능한 결론, 추가 확인사항을 제시하세요.</div><button class="copy" data-copy="첨부한 자료를 모두 읽고 [비교 기준]을 축으로 공통점, 차이, 충돌, 누락을 통합 분석하세요. 파일별 요약 나열은 피하고 근거 위치, 가장 방어 가능한 결론, 추가 확인사항을 제시하세요.">복사</button></article>
+        <article class="prompt-card"><span class="badge">전략</span><h3>시나리오와 전환 기준</h3><div class="text">[전략 안건]에 대해 기준·낙관·비관 시나리오를 설계하세요. 시나리오별 가정, 선행지표, 예상결과, 실패조건과 대응책을 비교하고 모든 상황에서 후회가 적은 행동과 전환 기준을 제시하세요.</div><button class="copy" data-copy="[전략 안건]에 대해 기준·낙관·비관 시나리오를 설계하세요. 시나리오별 가정, 선행지표, 예상결과, 실패조건과 대응책을 비교하고 모든 상황에서 후회가 적은 행동과 전환 기준을 제시하세요.">복사</button></article>
+        <article class="prompt-card"><span class="badge">전문 문서</span><h3>템플릿 준수 제작</h3><div class="text">첨부 템플릿의 구조·문체·표·시각적 위계를 유지하면서 [주제] 문서를 작성하세요. 기존 사실은 새 자료로 교체하고, 누락·중복·숫자·출처·페이지 흐름을 검수해 최종 파일로 제공하세요.</div><button class="copy" data-copy="첨부 템플릿의 구조·문체·표·시각적 위계를 유지하면서 [주제] 문서를 작성하세요. 기존 사실은 새 자료로 교체하고, 누락·중복·숫자·출처·페이지 흐름을 검수해 최종 파일로 제공하세요.">복사</button></article>
+        <article class="prompt-card"><span class="badge">웹·앱</span><h3>작동 서비스 구현</h3><div class="text">[서비스 아이디어]를 실제 작동하는 웹서비스로 구현하세요. 첫 화면에서 [핵심 행동]을 할 수 있게 하고 모바일·접근성·빈 상태·오류 상태를 포함하세요. 기존 변경을 보존하고 핵심 흐름을 검증해 배포 가능한 상태로 만드세요.</div><button class="copy" data-copy="[서비스 아이디어]를 실제 작동하는 웹서비스로 구현하세요. 첫 화면에서 [핵심 행동]을 할 수 있게 하고 모바일·접근성·빈 상태·오류 상태를 포함하세요. 기존 변경을 보존하고 핵심 흐름을 검증해 배포 가능한 상태로 만드세요.">복사</button></article>
+      </div>
+    </section>
+    <section class="workspace hidden" id="builderView">
+      <div class="section-head"><div><p class="eyebrow">PROMPT ENGINEER</p><h2>실전 프롬프트 설계기</h2><p>간단한 요구를 전문가형 프롬프트 구조로 바꿉니다.</p></div></div>
+      <div class="prompt-grid">
+        <label>업무 목표<textarea id="bGoal" placeholder="예: 전통시장 활성화 컨설팅 보고서 작성"></textarea></label><label>대상·상황<textarea id="bContext" placeholder="예: 지자체 담당자와 상인회가 읽는 보고서"></textarea></label><label>입력자료<textarea id="bInput" placeholder="예: 현황자료, 인터뷰, 매출자료"></textarea></label><label>원하는 결과<textarea id="bOutput" placeholder="예: 핵심문제, 전략과제, 90일 실행계획"></textarea></label><label>반드시 지킬 조건<textarea id="bRules" placeholder="예: 사실과 추정 구분, 근거 표시"></textarea></label><label>수준<select id="bLevel"><option>초급</option><option selected>중급</option><option>고급</option><option>Astra 전문가</option></select></label>
+      </div><br><button class="primary" id="buildPrompt">상세 프롬프트 만들기</button>
+      <div class="formula" style="margin-top:18px"><b>생성된 프롬프트</b><p id="builtPrompt" style="white-space:pre-wrap;font-size:16px">항목을 입력한 뒤 버튼을 누르세요.</p><button class="copy" id="copyBuilt">결과 복사</button></div>
+    </section>
+    <section class="workspace guide hidden" id="guideView">
+      <div class="section-head"><div><p class="eyebrow">START HERE</p><h2>초보자 실전 가이드</h2><p>좋은 결과는 긴 프롬프트보다 빠지지 않은 조건에서 나옵니다.</p></div></div>
+      <div class="formula"><b>프롬프트 기본 공식</b><p><span>[무엇을]</span> + <span>[어떤 상황]</span> + <span>[구도]</span> + <span>[빛·색감]</span> + <span>[스타일]</span> + <span>[화면비]</span> + <span>[제외 요소]</span></p><button class="copy" data-copy="[무엇을] + [어떤 상황] + [구도] + [빛·색감] + [스타일] + [화면비] + [제외 요소]">공식 복사</button></div>
+      <div class="guide-grid">
+        <article><i>01</i><h3>먼저 목적을 정합니다</h3><p>누가 어디에 사용할 결과인지, 원하는 행동이 무엇인지 한 문장으로 적습니다.</p></article>
+        <article><i>02</i><h3>자료와 조건을 줍니다</h3><p>대상, 분량, 형식, 출처, 비율, 브랜드 컬러처럼 결과를 바꾸는 조건을 제공합니다.</p></article>
+        <article><i>03</i><h3>출력 형식을 지정합니다</h3><p>표, 목차, 슬라이드 장별 구성, 타임코드 등 바로 쓸 수 있는 형태를 요청합니다.</p></article>
+        <article><i>04</i><h3>검증 기준을 넣습니다</h3><p>사실과 추정 구분, 최신 출처, 중복 제거, 철자 확인 등 품질 기준을 명시합니다.</p></article>
+        <article><i>05</i><h3>한 번에 조금씩 수정합니다</h3><p>유지할 요소와 바꿀 요소를 분리하고 한 번에 1~3개 항목만 수정합니다.</p></article>
+        <article><i>06</i><h3>최종 결과는 사람이 확인합니다</h3><p>한글, 숫자, 인용, 로고, 손과 얼굴, 제품 형태, 저작권 요소를 최종 점검합니다.</p></article>
+      </div>
+      <div class="checklist"><h3>이미지·텍스트 공통 최종 점검</h3><div><label><input type="checkbox"> 목적과 대상이 명확한가</label><label><input type="checkbox"> 사실·숫자·출처를 확인했는가</label><label><input type="checkbox"> 원하는 형식과 분량을 지켰는가</label><label><input type="checkbox"> 한글과 고유명사가 정확한가</label><label><input type="checkbox"> 개인정보·저작권 문제가 없는가</label><label><input type="checkbox"> 모바일에서도 잘 보이는가</label></div></div>
+    </section>
+  </main>
+  <div id="toast" role="status">복사했습니다.</div>
+  <footer><span>ChatGPT Prompt Lab</span><span>원문 이미지 치트키: fieldby Notion · 활용 템플릿은 실무용으로 확장 구성</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
