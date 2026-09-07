@@ -97,7 +97,56 @@ const commandText=`📐 앵글·시점|/droneview|드론 항공샷
 ✨ 특수효과|/mirror|거울 구도
 ✨ 특수효과|/smoke|연기 효과 (담배 연기로 그려질 수 있음)
 ✨ 특수효과|/glitch|디지털 글리치
-✨ 특수효과|/dreamcore|몽환적 초현실`;
+✨ 특수효과|/dreamcore|몽환적 초현실
+📐 앵글·시점|/dutchangle|기울어진 역동적 구도
+📐 앵글·시점|/pointofview|1인칭 시점
+📐 앵글·시점|/symmetrical|좌우 대칭 중심 구도
+📐 앵글·시점|/ruleofthirds|삼분할 법칙 구도
+📐 앵글·시점|/leadinglines|시선을 이끄는 선형 구도
+📐 앵글·시점|/negative-space|문구를 넣기 좋은 넓은 여백
+📐 앵글·시점|/macro|미세 질감이 보이는 접사
+📸 카메라·렌즈·필터|/telephoto|망원 렌즈의 압축감
+📸 카메라·렌즈·필터|/tiltshift|미니어처 같은 틸트시프트
+📸 카메라·렌즈·필터|/hdr|명암 영역의 세부 묘사 강화
+📸 카메라·렌즈·필터|/kodakportra|따뜻하고 자연스러운 필름 색감
+📸 카메라·렌즈·필터|/cinestill800t|네온이 강조된 야간 필름룩
+💡 시간대·조명|/studio-lighting|정교한 스튜디오 조명
+💡 시간대·조명|/rembrandt-lighting|얼굴 입체감을 살리는 조명
+💡 시간대·조명|/chiaroscuro|회화적인 강한 명암
+💡 시간대·조명|/natural-light|부드러운 자연광
+💡 시간대·조명|/highkey|밝고 깨끗한 저대비 조명
+💡 시간대·조명|/lowkey|어둡고 극적인 고대비 조명
+🎨 아트 스타일|/gouache|선명한 과슈화
+🎨 아트 스타일|/charcoal|거친 목탄 드로잉
+🎨 아트 스타일|/inkwash|먹의 농담을 살린 수묵화
+🎨 아트 스타일|/risograph|제한색 리소그래프
+🎨 아트 스타일|/woodcut|강한 선의 목판화
+🎨 아트 스타일|/3drender|정교한 3D 렌더링
+🎨 아트 스타일|/productrender|재질이 정확한 상업 제품 렌더
+🧱 재질·질감|/matte|차분한 무광 재질
+🧱 재질·질감|/glossy|선명한 유광 재질
+🧱 재질·질감|/metallic|금속 반사와 표면 질감
+🧱 재질·질감|/translucent|빛이 통과하는 반투명 재질
+🧱 재질·질감|/iridescent|각도에 따라 변하는 오팔광
+🧱 재질·질감|/papertexture|종이결이 살아 있는 표면
+👤 인물·표현|/candid|연출하지 않은 자연스러운 순간
+👤 인물·표현|/portrait|얼굴과 표정 중심 인물사진
+👤 인물·표현|/fullbody|머리부터 발끝까지 전신 구도
+👤 인물·표현|/dynamicpose|움직임이 느껴지는 자세
+👤 인물·표현|/subtleexpression|과장되지 않은 섬세한 표정
+👤 인물·표현|/diversegroup|연령과 배경이 다양한 사람들
+🧩 구성·출력|/triptych|세 장으로 이어지는 3분할
+🧩 구성·출력|/flatlay|오브젝트를 정돈한 탑뷰
+🧩 구성·출력|/seamlesspattern|경계 없이 반복되는 패턴
+🧩 구성·출력|/transparentbackground|투명 배경의 독립 오브젝트
+🧩 구성·출력|/text-safe-area|제목을 넣을 빈 공간
+🧩 구성·출력|/ultradetailed|작은 요소까지 선명한 묘사
+🧩 구성·출력|/photorealistic|사진 같은 빛·재질·비례
+🧩 구성·출력|/consistent-character|장면마다 동일 인물 유지
+🧩 구성·출력|/brand-consistent|브랜드 색과 분위기 유지
+✨ 특수효과|/particles|공기 중 미세 입자
+✨ 특수효과|/lensflare|자연스러운 렌즈 광선
+✨ 특수효과|/lightleak|필름 빛샘 효과`;
 const commands=commandText.split('\n').map((x,i)=>{const [category,command,ko]=x.split('|');return{id:i+1,category,command,ko}});
 
 const works=[
@@ -142,6 +191,9 @@ const works=[
 const extraGroups={
 '전략기획':['중장기 전략','신사업 발굴','의사결정 안건','실행 로드맵'],'마케팅':['STP 전략','고객여정','퍼널 설계','콘텐츠 캘린더'],'브랜딩':['브랜드 전략','네이밍','슬로건','메시지 체계'],'컨설팅':['기업진단','인터뷰 분석','문제구조화','최종 제언'],'창업·BM':['사업모델','MVP 설계','수익모델','투자 피치'],'영업':['제안 영업','상담 스크립트','제안서 구조','실적 분석'],'정책·행정':['정책개발','국비공모','보도자료','민원 분석'],'교육·워크숍':['교육과정','워크숍','강사 스크립트','평가도구'],'연구·R&D':['연구기획','기술동향','사업계획서','성과활용'],'데이터·분석':['데이터 탐색','설문 분석','KPI 대시보드','예측 시나리오'],'조직·HR':['직무설계','채용공고','면접질문','성과면담'],'재무·사업성':['손익구조','예산편성','투자타당성','가격전략'],'운영·PM':['프로젝트 계획','회의 운영','업무 프로세스','리스크 관리'],'AI·AX':['업무 자동화','AI 활용 진단','에이전트 설계','AI 거버넌스'],'로컬·관광':['상권진단','관광상품','생활인구','전통시장 콘텐츠']};
 Object.entries(extraGroups).forEach(([category,titles])=>titles.forEach(title=>works.push({id:works.length+1,category,title,prompt:`당신은 ${category} 분야의 실전 전문가이자 컨설턴트입니다.\n\n[목표]\n${title} 과제를 대상 조직의 상황에 맞게 완성해 주세요.\n\n[입력자료]\n- 대상/조직: [입력]\n- 현재 상황과 문제: [입력]\n- 목표와 기간: [입력]\n- 예산·인력·보유자료: [입력]\n- 반드시 반영할 조건: [입력]\n\n[수행 원칙]\n1. 확인된 사실과 추가 확인이 필요한 가정을 구분합니다.\n2. 현상→원인→대안→우선순위→실행을 연결합니다.\n3. 효과·실행가능성·긴급성으로 대안을 평가합니다.\n4. 일반론보다 이 대상에 맞는 구체적인 사례와 행동을 제시합니다.\n\n[산출물]\n핵심 진단, 세부 분석, 대안 비교, 권고안, 단계별 실행계획, KPI, 리스크를 표와 함께 작성하세요. 마지막에 즉시 실행할 3가지와 추가 확인 질문 5개를 제시하세요.`,tip:'[입력]을 채우고 관련 파일·데이터를 첨부하면 정확도가 높아짐'})));
+
+const practicalPrompts=[["검색·조사","경쟁사 디지털 채널 감사","[우리 회사/제품]과 경쟁사 [3곳]의 홈페이지·블로그·SNS·쇼핑몰을 최근 [기간] 기준으로 조사하세요. 채널별 타깃, 핵심 메시지, 콘텐츠 유형, 게시 빈도, 전환 장치, 고객 반응, 검색 노출을 동일 기준으로 비교하고 강점·빈틈·모방 금지 요소를 구분하세요. 마지막에 30일 실행 콘텐츠 10개와 KPI를 제시하고 사실에는 출처와 확인일을 표시하세요.","경쟁사 URL과 우리 고객·제품 정보를 함께 입력"],["검색·조사","정책·지원사업 탐색","[기업/기관/지역]이 신청할 수 있는 [분야] 지원사업을 [기간·지역] 조건으로 찾아주세요. 신청자격, 지원규모, 자부담, 마감일, 필수서류, 평가기준, 중복수혜 제한을 공식 공고문 기준으로 비교하고 적합도 근거, 준비 일정, 탈락 위험을 정리하세요. 종료된 사업은 별도 표시하세요.","사업자 유형·업력·지역·매출을 기재"],["글쓰기","AEO·GEO 검색형 포스팅","[주제]를 검색하는 [독자]가 실제로 묻는 질문을 중심으로 1,800~2,200자 글을 작성하세요. 첫 문단에서 답을 요약하고 질문형 소제목 4개, 경험·사례, 단계별 방법, 비교표, 주의점, FAQ 5개를 포함하세요. 정의·수치·최신 사실에는 출처를 연결하고 제목 5개와 메타 설명도 제시하세요.","검색 의도와 게시 채널을 명시"],["글쓰기","대표자 기고문","[주제]에 대한 [대표자/전문가]의 기고문을 [분량]으로 작성하세요. 현장의 문제를 여는 화두, 필자의 실제 경험, 통념에 대한 반론, 근거, 실행 제안 순으로 구성하세요. 말투 샘플을 참고하되 복제하지 말고 AI식 상투어와 과도한 나열을 제거하세요.","경력·사례·기존 글 샘플을 제공"],["책쓰기","장별 원고 심층 집필","도서 [제목]의 [장 제목]을 [핵심 독자]용 실용서 원고로 집필하세요. 독자 장면, 핵심 개념, 실제 사례, 실행 프레임, 체크리스트, 다음 장 연결 순으로 구성하고 전체 목차와 중복을 피하세요. 인용과 통계는 확인 가능한 것만 쓰고 사실확인 목록을 작성하세요.","전체 목차와 저자 경험을 제공"],["책쓰기","원고 냉정한 편집 리뷰","첨부 원고를 출판기획자·분야 전문가·핵심 독자 관점에서 평가하세요. 콘셉트, 문제 해결력, 차별성, 사례, 논리, 반복, 문체, 사실성, AI 개입 인상을 10점 척도로 평가하고 삭제·통합·확장할 부분과 우선 수정 10개를 제시하세요.","평가 페이지와 예상 독자를 명시"],["보고서","경영진 의사결정 보고서","[안건]에 대해 결론과 요청 결정사항을 먼저 제시하고 현황 수치, 원인, 대안 3개, 비용·효과·기간·위험 비교, 권고안, 책임자와 마일스톤을 구성하세요. 데이터가 없는 부분은 가정으로 표시하고 결론이 달라지는 임계조건을 제시하세요.","의사결정자·대안·예산 한도를 입력"],["보고서","현장 컨설팅 결과보고서","[수진기업]의 [과제] 결과보고서를 신청 배경, 현황, 당면문제, 진단방법, 회차별 실행, 변화 전후, KPI, 미해결 과제, 향후 90일 과제로 작성하세요. 제공 기록만 사용하고 수행하지 않은 내용을 성과처럼 쓰지 마세요.","상담일지·KPI·증빙을 첨부"],["강의자료","완성형 강의 슬라이드 설계","[대상] 대상 [주제] [시간] 강의를 [장수]장으로 설계하세요. 학습목표에서 역산해 도입-개념-사례-실습-정리 흐름을 만들고 장별 제목, 핵심 메시지, 근거, 시각화, 강사 설명, 전환 질문을 표로 작성하세요. 한 장 한 메시지 원칙과 총 시간을 검증하세요.","대상 수준·시간·템플릿을 제공"],["강의자료","강사용 진행 대본","첨부 슬라이드 [범위]의 장별 예상 시간, 오프닝 멘트, 핵심 설명, 쉬운 비유, 현장 사례, 청중 질문, 다음 장 연결 멘트를 작성하세요. 화면 문구를 그대로 읽지 말고 총 시간이 [시간]을 넘지 않게 계산하세요.","실제 슬라이드와 청중 정보를 첨부"],["기획서","평가표 역산 사업계획서","첨부 [공고문·평가표]에서 평가항목, 배점, 필수요건, 실격조건, 증빙을 체크리스트로 만든 뒤 [사업 아이템]을 항목별로 대응시켜 문제, 고객검증, 해결책, 차별성, 시장성, 실행역량, 예산, KPI, 리스크를 작성하세요. 근거가 없으면 추가 자료 요청으로 남기세요.","공고문·평가표·보유 증빙을 첨부"],["기획서","국비공모 실행형 기획","[공모명]에 제출할 [지역/기관] 사업을 기획하세요. 정책목표와 지역문제를 연결하고 수혜대상, 세부사업별 투입-활동-산출-성과, 추진체계, 예산, KPI 산식, 운영비·자부담, 종료 후 지속운영 방안을 작성하세요. 심사위원 반론 7개와 보완 논리도 제시하세요.","공고문·지역통계·운영주체 자료 필수"],["마케팅","90일 고객획득 실행계획","[제품/서비스]의 [목표고객] 신규고객 [목표수] 확보를 위한 90일 계획을 작성하세요. 현재 채널·예산·전환율을 진단하고 퍼널별 메시지, 콘텐츠, 채널, 담당자, 주간 일정, 예산, KPI와 중단 기준을 표로 만드세요.","현재 수치와 월 예산을 입력"],["마케팅","SNS 월간 콘텐츠 캘린더","[브랜드]가 [플랫폼]에서 [목표]를 달성할 4주 캘린더를 만드세요. 고객 질문·실패·비교·사례·비하인드·CTA를 배치하고 게시물별 훅, 내용, 형식, 이미지/영상 프롬프트, 캡션, CTA, 측정지표를 작성하세요.","브랜드 톤·소재·게시 횟수를 입력"],["영업","B2B 맞춤 제안서","[제안 대상 기업]의 현안과 구매 기준을 분석한 뒤 [우리 솔루션] 제안서를 작성하세요. 고객 문제, 현행 비용, 제안 가치, 적용 범위, 차별성, 도입 절차, 예상효과 산식, 가격 옵션, 리스크 대응, 다음 행동 순으로 구성하세요. 미확인 정보는 가정으로 표시하세요.","고객사 정보·실적·가격을 제공"],["데이터·분석","설문 의사결정 분석","첨부 설문데이터의 표본, 결측, 이상치, 주요 분포, 집단 차이, 상관과 인과의 구분, 자유응답 주제를 분석하세요. 발견마다 표본수와 수치를 표시하고 적합한 차트, 분석 한계, 후속 행동을 제시하세요.","데이터·문항지·결정 목적을 첨부"],["재무·사업성","손익분기·민감도 분석","[사업]의 초기투자, 고정비, 변동비, 가격, 판매량 가정을 표로 정리하고 월별 손익·현금흐름·손익분기점을 계산하세요. 낙관·기준·비관 시나리오와 가격·판매량·원가 민감도, 자금 부족 시점을 제시하세요.","비용·판매가·회수 조건을 제공"],["AI·AX","업무 자동화 후보 발굴","[부서] 업무를 빈도·시간·반복성·오류위험·민감도·판단 난이도로 평가해 자동화, AI 보조, 사람 유지로 분류하세요. 우선 후보 5개의 현재/개선 프로세스, 필요 도구·데이터, 절감시간, 위험통제, 4주 실증계획을 작성하세요.","업무목록·시간·사용 시스템을 입력"],["로컬·관광","전통시장 90일 활성화","[시장명]의 고객·상인·공간·상품·채널 자료로 문제를 구조화하세요. 재방문과 매출을 만드는 핵점포, 동선, 공동상품, 콘텐츠, 조직, 관광 연계 과제를 효과·난이도·주체로 우선순위화하고 30·60·90일 실행표와 측정법을 작성하세요.","상권데이터·현장관찰·인터뷰 제공"],["영상","30초 숏폼 완성 패키지","[주제] 30초 세로형 영상을 0~2초 훅, 3~20초 장면 4개, 21~27초 인사이트, 28~30초 CTA로 설계하세요. 타임코드별 화면·행동·자막·내레이션·전환·효과음·BGM과 장면별 생성 프롬프트, 썸네일 문구를 포함하세요.","한 영상에 메시지와 행동 하나"],["인포그래픽","컨설팅 분석 슬라이드","[분석 주제]를 16:9 한 장으로 설계하세요. 상단 결론형 메시지 1~2줄, 본문에 이를 입증하는 차트·비교·프로세스, 하단에 실행 시사점 3개를 배치하세요. 수치·단위·출처·기준일을 표시하고 장식보다 논리 위계를 우선하세요.","한 장에 하나의 주장만 배치"]].map((x,i)=>({id:works.length+i+1,category:x[0],title:x[1],prompt:x[2],tip:x[3]}));
+works.push(...practicalPrompts);
 const recipes=[
 ['SNS','인스타그램 피드','신제품 [제품명]을 중앙에 배치한 프리미엄 제품 사진. 깨끗한 배경, 브랜드 컬러 포인트, 여백 있는 구성, 정사각형 1:1 /editorial /softlighting /minimalist','제품명·브랜드 컬러·핵심 효익을 구체화'],
 ['SNS','세로형 숏폼 썸네일','[주제]를 상징하는 강렬한 장면, 중앙 피사체, 큰 제목을 넣을 안전 여백, 높은 대비, 9:16 /cinematic /dramaticlighting','이미지 속 글자는 최소화하고 후편집 권장'],
@@ -179,15 +231,28 @@ const selected=new Set(); let category='전체',workCategory='전체',recipeCate
 const uniq=(arr,key)=>['전체',...new Set(arr.map(x=>x[key]))];
 const el=id=>document.getElementById(id); const norm=s=>s.toLowerCase().replace(/\s/g,'');
 function filters(id,items,key,setter){el(id).innerHTML=uniq(items,key).map((x,i)=>`<button class="chip ${i===0?'active':''}" data-value="${x}">${x}</button>`).join('');el(id).onclick=e=>{const b=e.target.closest('.chip');if(!b)return;el(id).querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');setter(b.dataset.value)}}
-function renderCommands(){const q=norm(el('commandSearch').value);const data=commands.filter(x=>(category==='전체'||x.category===category)&&norm(x.command+x.ko).includes(q));el('commandGrid').innerHTML=data.map(x=>`<button class="key-card ${selected.has(x.command)?'selected':''}" data-command="${x.command}"><span class="check">✓</span><code>${x.command}</code><b>${x.ko}</b><small>${x.category}</small></button>`).join('');el('commandEmpty').style.display=data.length?'none':'block';const vals=[...selected];el('comboBar').classList.toggle('empty',!vals.length);el('comboBar').querySelector('span').textContent=vals.length?vals.join(' '):'선택한 치트키가 없습니다.';el('comboCount').textContent=vals.length}
+function renderCommands(){const q=norm(el('commandSearch').value);const data=commands.filter(x=>(category==='전체'||x.category===category)&&norm(x.command+x.ko).includes(q));el('commandGrid').innerHTML=data.map(x=>`<button class="key-card ${selected.has(x.command)?'selected':''}" data-command="${x.command}"><span class="check">✓</span><code>${x.command}</code><b>${x.ko}</b><small>${x.category}</small></button>`).join('');el('commandEmpty').style.display=data.length?'none':'block';const vals=[...selected];el('comboBar').classList.toggle('empty',!vals.length);el('comboBar').querySelector('span').textContent=vals.length?vals.join(' '):'선택한 치트키가 없습니다.';el('comboCount').textContent=vals.length;if(el('commandResult'))el('commandResult').textContent=`${data.length}개 표시 · 전체 ${commands.length}개`}
 function card(x){return `<article class="prompt-card"><div class="meta"><span class="badge">${x.category}</span><span>#${String(x.id).padStart(2,'0')}</span></div><h3>${x.title}</h3><div class="text">${x.prompt}</div><p class="tip">활용 포인트 · ${x.tip}</p><button class="copy" data-copy="${x.prompt.replaceAll('"','&quot;')}">프롬프트 복사</button></article>`}
-function renderList(data,cat,qid,gid,eid){const q=norm(el(qid).value);const filtered=data.filter(x=>(cat==='전체'||x.category===cat)&&norm(x.category+x.title+x.prompt+x.tip).includes(q));el(gid).innerHTML=filtered.map(card).join('');el(eid).style.display=filtered.length?'none':'block'}
+function renderList(data,cat,qid,gid,eid){const q=norm(el(qid).value);const filtered=data.filter(x=>(cat==='전체'||x.category===cat)&&norm(x.category+x.title+x.prompt+x.tip).includes(q));el(gid).innerHTML=filtered.map(card).join('');el(eid).style.display=filtered.length?'none':'block';const rid=gid==='workGrid'?'workResult':'recipeResult';if(el(rid))el(rid).textContent=`${filtered.length}개 표시 · 전체 ${data.length}개`}
 async function copyText(t){await navigator.clipboard.writeText(t);el('toast').classList.add('show');setTimeout(()=>el('toast').classList.remove('show'),1400)}
 filters('categoryFilters',commands,'category',v=>{category=v;renderCommands()});filters('workFilters',works,'category',v=>{workCategory=v;renderList(works,workCategory,'workSearch','workGrid','workEmpty')});filters('recipeFilters',recipes,'category',v=>{recipeCategory=v;renderList(recipes,recipeCategory,'recipeSearch','recipeGrid','recipeEmpty')});
 el('commandSearch').oninput=renderCommands;el('workSearch').oninput=()=>renderList(works,workCategory,'workSearch','workGrid','workEmpty');el('recipeSearch').oninput=()=>renderList(recipes,recipeCategory,'recipeSearch','recipeGrid','recipeEmpty');
 el('commandGrid').onclick=e=>{const b=e.target.closest('.key-card');if(!b)return;selected.has(b.dataset.command)?selected.delete(b.dataset.command):selected.add(b.dataset.command);renderCommands()};
 el('clearCombo').onclick=()=>{selected.clear();renderCommands()};el('copyCombo').onclick=()=>selected.size&&copyText([...selected].join(' '));
 document.body.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b)copyText(b.dataset.copy)});
-document.querySelector('nav').onclick=e=>{const b=e.target.closest('.nav');if(!b)return;document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.workspace').forEach(x=>x.classList.add('hidden'));el(b.dataset.view+'View').classList.remove('hidden')};
-el('buildPrompt').onclick=()=>{const v=id=>el(id).value.trim()||'[입력 필요]';const level=v('bLevel');const detail=level==='초급'?'핵심 내용을 쉬운 말로 정리하세요.':level==='중급'?'현황→원인→대안→실행 순서로 분석하고 표로 요약하세요.':level==='고급'?'가설·반대근거·대안·우선순위·리스크를 검토하고 결론이 바뀌는 조건을 밝히세요.':'필요한 자료 확인부터 분석·초안·검증·최종 산출물 제작까지 완수하고, 결과를 크게 바꾸는 정보만 질문하세요.';el('builtPrompt').textContent=`당신은 이 과제의 실전 전문가이자 컨설턴트입니다.\n\n[목표]\n${v('bGoal')}\n\n[대상과 상황]\n${v('bContext')}\n\n[입력자료]\n${v('bInput')}\n\n[원하는 산출물]\n${v('bOutput')}\n\n[필수 조건]\n${v('bRules')}\n\n[수행 지침]\n${detail}\n사실·추정·제안을 구분하고, 일반론보다 이 상황에 맞는 구체적인 근거와 행동을 제시하세요. 완료 전 누락·중복·수치·출처·형식을 스스로 검수하세요.`};el('copyBuilt').onclick=()=>copyText(el('builtPrompt').textContent);
+document.querySelector('nav').onclick=e=>{const b=e.target.closest('button.nav[data-view]');if(!b)return;document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.workspace').forEach(x=>x.classList.add('hidden'));el(b.dataset.view+'View').classList.remove('hidden')};
+const presets={
+report:['의사결정에 필요한 현황 진단과 90일 실행계획이 포함된 보고서 작성','해당 산업의 경영컨설턴트','기관장 또는 경영진','현재 문제와 추진 배경','현황자료, 통계, 인터뷰, 기존 보고서','표 중심 보고서','A4 10쪽 내외','결론 중심의 명료한 문체','요약, 현황, 문제, 원인, 대안 비교, 권고안, 실행계획, KPI, 리스크','근거 없는 수치, 일반론, 중복','사실·추정·제안 구분, 출처·기준일·계산 검증'],
+plan:['평가기준을 충족하고 실행 가능한 사업기획서 작성','사업기획 및 공모사업 전문가','심사위원과 사업 책임자','해결할 문제와 추진 조직의 여건','공고문, 평가표, 고객·지역 데이터, 예산 기준','구조화된 문서','제출 양식 준수','근거 중심의 설득력 있는 문체','필요성, 대상, 목표, 세부사업, 체계, 일정, 예산, KPI, 지속가능성','평가항목 누락, 확인되지 않은 성과','평가항목 대응, 성과논리 연결, 예산 합계 검증'],
+lecture:['초보자가 이해하고 실습할 수 있는 강의자료 설계','성인교육 전문 교수설계자','해당 주제를 처음 배우는 실무자','대상 수준, 강의시간, 수업 방식','교안, 사례, 참고자료, 템플릿','슬라이드 장별 기획','16:9 슬라이드 30장','쉽고 전문적인 강의 문체','학습목표, 장별 메시지, 근거, 사례, 시각화, 강사 포인트, 실습','과도한 텍스트, 중복, 출처 없는 수치','한 장 한 메시지, 총 시간과 가독성 검증'],
+article:['검색 독자의 질문에 답하는 전문 콘텐츠 작성','전문 기자이자 콘텐츠 전략가','문제를 검색하는 실무자','검색 의도와 게시 채널','핵심 사실, 현장 경험, 공식 출처','구조화된 문서','1,800~2,200자','사례 중심의 자연스러운 평서체','제목, 답변형 도입, 질문형 소제목, 사례, 실행법, FAQ, 메타설명','상투어, 키워드 반복, 과장, 가짜 인용','최신 사실과 1차 출처 확인, 중복 제거'],
+image:['매체와 메시지에 맞는 고품질 이미지 제작','아트디렉터이자 상업 사진가','목표 고객','게시 채널, 감정, 브랜드 맥락','참조 이미지, 피사체, 브랜드 색상','이미지 생성 프롬프트','한글 프롬프트와 영문 키워드','구체적이고 시각적인 묘사','피사체, 행동, 배경, 구도, 카메라, 조명, 색감, 비율, 안전영역','불필요한 글자, 왜곡, 임의 로고','유지·변경 분리, 실제 특징과 화면비 검증'],
+video:['첫 2초 몰입과 CTA가 있는 짧은 영상 설계','숏폼 영상 감독','모바일 목표 시청자','플랫폼, 길이, 메시지, 행동','원고, 참조 이미지, 브랜드 소재','스크립트·콘티','30초, 9:16','빠르고 명료한 톤','타임코드별 화면, 동작, 자막, 내레이션, 전환, 음향, 생성 프롬프트','장면당 여러 동작, 작은 자막, 깜빡임','한 장면 한 동작, 자막 15자, 시간 합계 검증']};
+const ids=['bGoal','bRole','bAudience','bContext','bInput','bFormat','bLength','bTone','bOutput','bExclude','bRules'];
+el('builderPresets').onclick=e=>{const b=e.target.closest('button[data-preset]');if(!b)return;ids.forEach((id,i)=>el(id).value=presets[b.dataset.preset][i]);el('builderPresets').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));el('buildStatus').textContent='예시 입력 완료 · 내 상황에 맞게 수정하세요.'};
+const bv=id=>el(id).value.trim();
+el('buildPrompt').onclick=()=>{if(!bv('bGoal')){el('bGoal').focus();el('buildStatus').textContent='최종 목표를 먼저 입력하세요.';return}const level=bv('bLevel');const detail=level==='초급 안내형'?'전문용어를 풀어 쓰고 단계별 예시를 포함하세요.':level==='실무 적용형'?'현황→원인→대안→우선순위→실행을 연결하고 담당 행동을 구체화하세요.':level==='전문가 분석형'?'가설·반대근거·대안·민감도·리스크와 결론이 달라지는 조건을 검토하세요.':'자료 확인부터 조사·분석·초안·검증·최종본까지 자율 수행하되 결과를 크게 바꾸는 정보만 질문하세요.';const o=(id,f)=>bv(id)||f;el('builtPrompt').textContent=`당신은 ${o('bRole','이 과제의 실전 전문가이자 컨설턴트')}입니다. 다음 과제를 바로 사용할 수 있는 최종 산출물 수준으로 완성하세요.\n\n[최종 목표]\n${bv('bGoal')}\n\n[독자·사용자]\n${o('bAudience','실제 사용자를 추정하고 명시하세요.')}\n\n[배경·현재 상황]\n${o('bContext','핵심 배경이 부족하면 결론을 바꾸는 질문만 하세요.')}\n\n[입력자료·근거]\n${o('bInput','자료가 없는 부분은 가정으로 표시하세요.')}\n\n[결과물 조건]\n- 형식: ${o('bFormat','구조화된 문서')}\n- 분량: ${o('bLength','목적에 적합한 분량')}\n- 문체: ${o('bTone','명료하고 전문적인 문체')}\n- 반드시 포함: ${o('bOutput','결론, 근거, 실행방법, 점검기준')}\n\n[금지·제외]\n${o('bExclude','근거 없는 단정, 중복, 추상적 일반론')}\n\n[수행 절차]\n1. 목표·독자·자료와 누락 조건을 확인하세요.\n2. 사실·해석·가정·제안을 구분하세요.\n3. ${detail}\n4. 초안을 목표 적합성·근거성·구체성·실행성·형식 준수로 자체 검토하세요.\n5. 검토를 반영한 최종본과 추가 확인사항을 제시하세요.\n\n[품질·검증]\n${o('bRules','사실·수치·고유명사·출처·계산·누락·중복을 점검하세요.')}\n\n결론부터 쓰고 일반론 대신 이 상황에 맞는 근거, 예시, 담당 행동과 판단 기준을 제시하세요.`;el('buildStatus').textContent='완성형 프롬프트가 생성되었습니다.'};
+el('clearBuilder').onclick=()=>{document.querySelectorAll('#builderView input,#builderView textarea').forEach(x=>x.value='');el('bFormat').selectedIndex=0;el('bLevel').selectedIndex=1;el('builtPrompt').textContent='항목을 입력하거나 위의 용도별 예시를 선택하세요.';el('buildStatus').textContent='필수 입력: 최종 목표'};
+el('copyBuilt').onclick=()=>el('builtPrompt').textContent.startsWith('당신은')&&copyText(el('builtPrompt').textContent);
+el('commandStat').textContent=commands.length;el('workStat').textContent=works.length+recipes.length;
 renderCommands();renderList(works,workCategory,'workSearch','workGrid','workEmpty');renderList(recipes,recipeCategory,'recipeSearch','recipeGrid','recipeEmpty');
