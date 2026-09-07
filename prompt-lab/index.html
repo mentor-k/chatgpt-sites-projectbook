@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="이미지 치트키 100개와 검색·글쓰기·책쓰기·보고서·강의자료·기획서·이미지·영상·인포그래픽 프롬프트를 검색하고 복사하는 실전 도구">
+  <meta name="description" content="검색·글쓰기·책쓰기·보고서·강의자료·기획서·이미지·영상·인포그래픽 프롬프트를 찾고 설계해 바로 사용하는 한국어 실전 도구">
   <title>ChatGPT 프롬프트 랩</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,26 +15,26 @@
   <main>
     <section class="intro">
       <div><p class="eyebrow">SEARCH · COMBINE · COPY</p><h1>필요한 프롬프트를<br><em>찾고, 조합하고, 바로 사용하세요.</em></h1></div>
-      <div class="stats"><span><b>100</b> 이미지 치트키</span><span><b>96</b> 업무 템플릿</span><span><b>18</b> Astra 유형</span></div>
+      <div class="stats"><span><b id="commandStat">확장</b> 이미지 치트키</span><span><b id="workStat">다양</b> 실전 템플릿</span><span><b>6</b> 활용 메뉴</span></div>
     </section>
 
     <section class="workspace" id="commandsView">
-      <div class="section-head"><div><p class="eyebrow">IMAGE CHEAT KEYS</p><h2>이미지 치트키 100</h2><p>영문 명령어와 한국어 효과를 함께 확인하고 여러 개를 조합할 수 있습니다.</p></div><button id="copyCombo" class="primary">선택 조합 복사 <span id="comboCount">0</span></button></div>
+      <div class="section-head"><div><p class="eyebrow">IMAGE CHEAT KEYS</p><h2>이미지 치트키</h2><p>구도·렌즈·빛·스타일·재질·인물·품질 조건을 검색하고 조합해 이미지 프롬프트에 붙여 쓰세요.</p></div><button id="copyCombo" class="primary">선택 조합 복사 <span id="comboCount">0</span></button></div>
       <div class="controls"><label class="search"><span>⌕</span><input id="commandSearch" placeholder="명령어·한국어 효과 검색 (예: 노을, 필름, closeup)"></label><div id="categoryFilters" class="chips"></div></div>
       <div id="comboBar" class="combo empty"><span>선택한 치트키가 없습니다.</span><button id="clearCombo">모두 지우기</button></div>
-      <div id="commandGrid" class="card-grid"></div><p id="commandEmpty" class="empty-state">검색 결과가 없습니다.</p>
+      <div class="result-line" id="commandResult"></div><div id="commandGrid" class="card-grid"></div><p id="commandEmpty" class="empty-state">검색 결과가 없습니다. 비슷한 표현으로 다시 찾아보세요.</p>
     </section>
 
     <section class="workspace hidden" id="workView">
       <div class="section-head"><div><p class="eyebrow">WORK PROMPTS</p><h2>주요 업무·콘텐츠 프롬프트</h2><p>대괄호 [ ] 안의 내용만 내 상황에 맞게 바꾸면 됩니다.</p></div></div>
       <div class="controls"><label class="search"><span>⌕</span><input id="workSearch" placeholder="검색, 책쓰기, 강의, 영상 등 검색"></label><div id="workFilters" class="chips"></div></div>
-      <div id="workGrid" class="prompt-grid"></div><p id="workEmpty" class="empty-state">검색 결과가 없습니다.</p>
+      <div class="result-line" id="workResult"></div><div id="workGrid" class="prompt-grid"></div><p id="workEmpty" class="empty-state">검색 결과가 없습니다. 업무명이나 산출물로 다시 찾아보세요.</p>
     </section>
 
     <section class="workspace hidden" id="recipesView">
       <div class="section-head"><div><p class="eyebrow">IMAGE RECIPES</p><h2>상황·유형·용도별 이미지 프롬프트</h2><p>SNS, 블로그, 쇼핑몰, 브랜딩, 교육, 지역·관광 등 실제 제작 상황에 맞춰 골라 쓰세요.</p></div></div>
       <div class="controls"><label class="search"><span>⌕</span><input id="recipeSearch" placeholder="SNS, 썸네일, 제품, 전통시장 등 검색"></label><div id="recipeFilters" class="chips"></div></div>
-      <div id="recipeGrid" class="prompt-grid"></div><p id="recipeEmpty" class="empty-state">검색 결과가 없습니다.</p>
+      <div class="result-line" id="recipeResult"></div><div id="recipeGrid" class="prompt-grid"></div><p id="recipeEmpty" class="empty-state">검색 결과가 없습니다. 매체나 용도로 다시 찾아보세요.</p>
     </section>
 
     <section class="workspace hidden" id="astraView">
@@ -49,11 +49,21 @@
       </div>
     </section>
     <section class="workspace hidden" id="builderView">
-      <div class="section-head"><div><p class="eyebrow">PROMPT ENGINEER</p><h2>실전 프롬프트 설계기</h2><p>간단한 요구를 전문가형 프롬프트 구조로 바꿉니다.</p></div></div>
-      <div class="prompt-grid">
-        <label>업무 목표<textarea id="bGoal" placeholder="예: 전통시장 활성화 컨설팅 보고서 작성"></textarea></label><label>대상·상황<textarea id="bContext" placeholder="예: 지자체 담당자와 상인회가 읽는 보고서"></textarea></label><label>입력자료<textarea id="bInput" placeholder="예: 현황자료, 인터뷰, 매출자료"></textarea></label><label>원하는 결과<textarea id="bOutput" placeholder="예: 핵심문제, 전략과제, 90일 실행계획"></textarea></label><label>반드시 지킬 조건<textarea id="bRules" placeholder="예: 사실과 추정 구분, 근거 표시"></textarea></label><label>수준<select id="bLevel"><option>초급</option><option selected>중급</option><option>고급</option><option>Astra 전문가</option></select></label>
-      </div><br><button class="primary" id="buildPrompt">상세 프롬프트 만들기</button>
-      <div class="formula" style="margin-top:18px"><b>생성된 프롬프트</b><p id="builtPrompt" style="white-space:pre-wrap;font-size:16px">항목을 입력한 뒤 버튼을 누르세요.</p><button class="copy" id="copyBuilt">결과 복사</button></div>
+      <div class="section-head"><div><p class="eyebrow">PROMPT ENGINEER</p><h2>실전 프롬프트 설계기</h2><p>목적·독자·자료·형식·검증 조건을 결합해 바로 실행 가능한 프롬프트를 만듭니다.</p></div></div>
+      <div class="builder-presets" id="builderPresets"><button data-preset="report">보고서</button><button data-preset="plan">기획서</button><button data-preset="lecture">강의자료</button><button data-preset="article">글쓰기</button><button data-preset="image">이미지</button><button data-preset="video">영상</button></div>
+      <div class="builder-grid">
+        <label class="wide">1. 최종 목표 <span>*</span><textarea id="bGoal" placeholder="예: 지역상권 진단과 90일 실행계획이 포함된 보고서 작성"></textarea></label>
+        <label>2. 전문가 역할<input id="bRole" placeholder="예: 지역상권 전략 컨설턴트"></label><label>3. 독자·사용자<input id="bAudience" placeholder="예: 지자체 과장과 상인회 임원"></label>
+        <label class="wide">4. 배경·현재 상황<textarea id="bContext" placeholder="문제, 추진 배경, 현재 여건"></textarea></label>
+        <label class="wide">5. 입력자료·근거<textarea id="bInput" placeholder="첨부파일, 통계, 인터뷰, 참고자료와 우선순위"></textarea></label>
+        <label>6. 결과물 형식<select id="bFormat"><option>구조화된 문서</option><option>표 중심 보고서</option><option>슬라이드 장별 기획</option><option>체크리스트</option><option>스크립트·콘티</option><option>이미지 생성 프롬프트</option></select></label><label>7. 분량·범위<input id="bLength" placeholder="예: A4 10쪽 / 16장 / 1,800자"></label>
+        <label>8. 문체·톤<input id="bTone" placeholder="예: 명료한 컨설팅 보고서 문체"></label><label>9. 분석 수준<select id="bLevel"><option>초급 안내형</option><option selected>실무 적용형</option><option>전문가 분석형</option><option>Astra 자율수행형</option></select></label>
+        <label class="wide">10. 반드시 포함할 항목<textarea id="bOutput" placeholder="핵심문제, 원인, 대안, 우선순위, 일정, KPI 등"></textarea></label>
+        <label>11. 금지·제외 조건<textarea id="bExclude" placeholder="근거 없는 수치, 추상적 표현, 중복 등"></textarea></label><label>12. 품질·검증 기준<textarea id="bRules" placeholder="사실·추정 구분, 출처, 계산, 오탈자 검증 등"></textarea></label>
+      </div>
+      <div class="builder-actions"><button class="primary" id="buildPrompt">완성형 프롬프트 만들기</button><button class="secondary" id="clearBuilder">입력 초기화</button></div>
+      <div class="formula built-output"><div><b>생성된 프롬프트</b><small id="buildStatus">필수 입력: 최종 목표</small></div><p id="builtPrompt">항목을 입력하거나 위의 용도별 예시를 선택하세요.</p><button class="copy" id="copyBuilt">결과 복사</button></div>
+      <div class="quality-grid"><article><b>명확성</b><span>목표·독자·상황</span></article><article><b>근거성</b><span>자료·출처</span></article><article><b>실행성</b><span>형식·분량·항목</span></article><article><b>안전성</b><span>제외·검증</span></article></div>
     </section>
     <section class="workspace guide hidden" id="guideView">
       <div class="section-head"><div><p class="eyebrow">START HERE</p><h2>초보자 실전 가이드</h2><p>좋은 결과는 긴 프롬프트보다 빠지지 않은 조건에서 나옵니다.</p></div></div>
