@@ -257,3 +257,8 @@ el('clearBuilder').onclick=()=>{document.querySelectorAll('#builderView input,#b
 el('copyBuilt').onclick=()=>el('builtPrompt').textContent.startsWith('당신은')&&copyText(el('builtPrompt').textContent);
 el('commandStat').textContent=commands.length;el('workStat').textContent=works.length+recipes.length;
 renderCommands();renderList(works,workCategory,'workSearch','workGrid','workEmpty');renderList(recipes,recipeCategory,'recipeSearch','recipeGrid','recipeEmpty');
+
+filters('planningFilters',planningPrompts,'category',v=>{planningCategory=v;renderList(planningPrompts,planningCategory,'planningSearch','planningGrid','planningEmpty')});
+let planningCategory='전체';
+if(el('planningSearch'))el('planningSearch').oninput=()=>renderList(planningPrompts,planningCategory,'planningSearch','planningGrid','planningEmpty');
+if(el('planningGrid'))renderList(planningPrompts,planningCategory,'planningSearch','planningGrid','planningEmpty');
