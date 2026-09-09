@@ -262,3 +262,186 @@ filters('planningFilters',planningPrompts,'category',v=>{planningCategory=v;rend
 let planningCategory='전체';
 if(el('planningSearch'))el('planningSearch').oninput=()=>renderList(planningPrompts,planningCategory,'planningSearch','planningGrid','planningEmpty');
 if(el('planningGrid'))renderList(planningPrompts,planningCategory,'planningSearch','planningGrid','planningEmpty');
+
+
+/* Prompt Lab administrator dashboard */
+(() => {
+  const ADMIN_PIN_HASH = "e45870b5e5716bad459290561eaedf47972c65c9cb3d4f50762f46bf45e8f898";
+  const USAGE_KEY = "promptLabUsageV1";
+  const SESSION_KEY = "promptLabAdminSession";
+  const typeNames = { visits: "접속", copies: "복사", searches: "검색", download: "다운로드" };
+
+  function emptyUsage() {
+    return { visits: 0, copies: 0, searches: 0, events: [] };
+  }
+  function readUsage() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(USAGE_KEY) || "null");
+      return saved && typeof saved === "object" ? Object.assign(emptyUsage(), saved) : emptyUsage();
+    } catch (_) {
+      return emptyUsage();
+    }
+  }
+  function saveUsage(value) {
+    try { localStorage.setItem(USAGE_KEY, JSON.stringify(value)); } catch (_) {}
+  }
+  function hasAdminSession() {
+    try { return sessionStorage.getItem(SESSION_KEY) === "1"; } catch (_) { return false; }
+  }
+  function setAdminSession(value) {
+    try {
+      if (value) sessionStorage.setItem(SESSION_KEY, "1");
+      else sessionStorage.removeItem(SESSION_KEY);
+    } catch (_) {}
+  }
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+    });
+  }
+  function formatTime(value) {
+    try {
+      return new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+    } catch (_) {
+      return "-";
+    }
+  }
+  function recordUsage(type, label) {
+    const usage = readUsage();
+    if (Object.prototype.hasOwnProperty.call(usage, type) && typeof usage[type] === "number") usage[type] += 1;
+    usage.events = Array.isArray(usage.events) ? usage.events : [];
+    usage.events.unshift({ type: type, label: String(label || "사용").slice(0, 80), at: new Date().toISOString() });
+    usage.events = usage.events.slice(0, 80);
+    saveUsage(usage);
+    if (hasAdminSession()) renderUsage();
+  }
+  function renderUsage() {
+    const usage = readUsage();
+    if (el("statVisits")) el("statVisits").textContent = usage.visits || 0;
+    if (el("statCopies")) el("statCopies").textContent = usage.copies || 0;
+    if (el("statSearches")) el("statSearches").textContent = usage.searches || 0;
+    if (el("statLast")) el("statLast").textContent = usage.events && usage.events.length ? formatTime(usage.events[0].at) : "-";
+    const log = el("usageLog");
+    if (!log) return;
+    const events = Array.isArray(usage.events) ? usage.events.slice(0, 24) : [];
+    log.innerHTML = events.length ? events.map(function (item) {
+      return "<p><b>" + escapeHtml(typeNames[item.type] || item.type) + "</b> · " + escapeHtml(item.label) + "<br><small>" + escapeHtml(formatTime(item.at)) + "</small></p>";
+    }).join("") : "<p>아직 사용 기록이 없습니다.</p>";
+  }
+  async function verifyAdminPin(pin) {
+    if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) return false;
+    const digest = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(pin));
+    const hex = Array.from(new Uint8Array(digest)).map(function (byte) { return byte.toString(16).padStart(2, "0"); }).join("");
+    return hex === ADMIN_PIN_HASH;
+  }
+  async function renderDevLog() {
+    const log = el("devLog");
+    if (!log) return;
+    log.innerHTML = "<p>GitHub 수정 기록을 불러오는 중…</p>";
+    try {
+      const response = await fetch("https://api.github.com/repos/mentor-k/chatgpt-sites-projectbook/commits?path=prompt-lab&per_page=12", { headers: { Accept: "application/vnd.github+json" } });
+      if (!response.ok) throw new Error("GitHub API " + response.status);
+      const commits = await response.json();
+      log.innerHTML = commits.length ? commits.map(function (commit) {
+        const title = commit.commit && commit.commit.message ? commit.commit.message.split("\n")[0] : "수정 기록";
+        const date = commit.commit && commit.commit.author && commit.commit.author.date ? commit.commit.author.date : "";
+        const author = commit.author && commit.author.login ? commit.author.login : (commit.commit && commit.commit.author ? commit.commit.author.name : "GitHub");
+        return "<p><b>" + escapeHtml(title) + "</b><br><small>" + escapeHtml(formatTime(date)) + " · " + escapeHtml(author) + "</small></p>";
+      }).join("") : "<p>표시할 수정 기록이 없습니다.</p>";
+    } catch (_) {
+      log.innerHTML = "<p>기록을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.</p>";
+    }
+  }
+  function setAdminState(unlocked) {
+    const gate = el("adminGate");
+    const panel = el("adminPanel");
+    if (!gate || !panel) return;
+    gate.classList.toggle("hidden", unlocked);
+    panel.classList.toggle("hidden", !unlocked);
+    setAdminSession(unlocked);
+    if (unlocked) {
+      renderUsage();
+      renderDevLog();
+    }
+  }
+  function openAdmin() {
+    if (hasAdminSession()) setAdminState(true);
+    else {
+      setAdminState(false);
+      if (el("adminPin")) el("adminPin").focus();
+    }
+  }
+
+  recordUsage("visits", "페이지 접속");
+
+  ["commandSearch", "workSearch", "recipeSearch", "planningSearch"].forEach(function (id) {
+    const input = el(id);
+    if (!input) return;
+    let timer = null;
+    input.addEventListener("input", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        const query = input.value.trim();
+        if (query) recordUsage("searches", query);
+      }, 700);
+    });
+  });
+
+  document.body.addEventListener("click", function (event) {
+    const button = event.target.closest("[data-copy],#copyCombo,#copyBuilt");
+    if (!button) return;
+    if (button.id === "copyCombo" && (!selected || !selected.size)) return;
+    if (button.id === "copyBuilt" && (!el("builtPrompt") || !el("builtPrompt").textContent.startsWith("당신은"))) return;
+    const label = button.id === "copyCombo" ? "치트키 조합" : (button.id === "copyBuilt" ? "설계 결과" : "프롬프트");
+    recordUsage("copies", label);
+  });
+
+  const adminLogin = el("adminLogin");
+  const adminPin = el("adminPin");
+  if (adminLogin && adminPin) {
+    adminLogin.addEventListener("click", async function () {
+      const pin = adminPin.value.trim();
+      const message = el("adminMessage");
+      if (!pin) {
+        if (message) message.textContent = "PIN을 입력하세요.";
+        adminPin.focus();
+        return;
+      }
+      adminLogin.disabled = true;
+      adminLogin.textContent = "확인 중…";
+      try {
+        if (await verifyAdminPin(pin)) {
+          adminPin.value = "";
+          if (message) message.textContent = "";
+          setAdminState(true);
+        } else if (message) {
+          message.textContent = "PIN이 올바르지 않습니다.";
+        }
+      } catch (_) {
+        if (message) message.textContent = "인증을 처리하지 못했습니다. HTTPS에서 다시 시도해 주세요.";
+      } finally {
+        adminLogin.disabled = false;
+        adminLogin.textContent = "인증";
+      }
+    });
+    adminPin.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") adminLogin.click();
+    });
+  }
+  if (el("downloadExcel")) {
+    el("downloadExcel").addEventListener("click", function () {
+      const link = document.createElement("a");
+      link.href = "prompt-lab.xlsx";
+      link.download = "prompt-lab.xlsx";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      recordUsage("download", "엑셀");
+    });
+  }
+  if (el("refreshAdmin")) el("refreshAdmin").addEventListener("click", function () { renderUsage(); renderDevLog(); });
+  if (el("adminLogout")) el("adminLogout").addEventListener("click", function () { setAdminState(false); if (el("adminPin")) el("adminPin").focus(); });
+  const adminNav = document.querySelector('button.nav[data-view="admin"]');
+  if (adminNav) adminNav.addEventListener("click", openAdmin);
+  if (hasAdminSession()) setAdminState(true);
+})();
