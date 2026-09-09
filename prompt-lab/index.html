@@ -88,7 +88,7 @@
     </section>
     <section class="workspace hidden" id="adminView">
       <div class="section-head"><div><p class="eyebrow">ADMIN ONLY</p><h2>관리자 대시보드</h2><p>접속 현황과 개발·수정 기록을 확인하고 자료를 내려받습니다.</p></div></div>
-      <div id="adminGate" class="admin-gate"><h3>관리자 인증</h3><p>관리자 PIN을 입력하세요. GitHub Pages 정적 호스팅에서는 인증이 이 브라우저 세션의 잠금으로 동작합니다. 민감한 자료는 서버 인증으로 보호해야 합니다.</p><div class="admin-login"><input id="adminPin" type="password" placeholder="관리자 PIN" autocomplete="current-password"><button class="primary" id="adminLogin">인증</button></div><small id="adminMessage"></small></div>
+      <div id="adminGate" class="admin-gate"><h3>관리자 인증</h3><p>관리자 PIN을 입력하세요. GitHub Pages 정적 호스팅에서는 인증이 이 브라우저의 8시간 잠금으로 동작합니다. 민감한 자료는 서버 인증으로 보호해야 합니다.</p><div class="admin-login"><input id="adminPin" type="password" placeholder="관리자 PIN" autocomplete="current-password"><button class="primary" id="adminLogin">인증</button></div><small id="adminMessage"></small></div>
       <div id="adminPanel" class="admin-panel hidden">
         <div class="admin-actions"><button class="primary" id="downloadExcel">엑셀 다운로드</button><button class="secondary" id="refreshAdmin">통계·기록 새로고침</button><button class="secondary" id="adminLogout">잠금</button></div>
         <div class="admin-metrics"><article><b id="statVisits">0</b><span>이 브라우저 방문</span></article><article><b id="statCopies">0</b><span>프롬프트 복사</span></article><article><b id="statSearches">0</b><span>검색 실행</span></article><article><b id="statLast">-</b><span>최근 접속</span></article></div>
