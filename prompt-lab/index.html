@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="검색·글쓰기·책쓰기·보고서·강의자료·기획서·이미지·영상·인포그래픽 프롬프트와 GPT Image 2.5 활용법을 제공하는 한국어 실전 도구">
-  <title>ChatGPT 프롬프트 랩</title>
+  <title>멘토K 프롬프트랩</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="mark">P</span><div><strong>ChatGPT 프롬프트 랩</strong><small>Prompt Lab · 한국어 실전판</small></div></div>
+    <div class="brand"><div class="brand-lockup"><img src="assets/mentor-k-mark.jpg" alt="멘토K 로고"><span>프롬프트랩</span></div><div><strong>멘토K 프롬프트랩</strong><small>실전 프롬프트·이미지 제작 도구</small></div></div>
     <nav><button class="nav active" data-view="commands">이미지 치트키</button><button class="nav" data-view="work">업무 프롬프트</button><button class="nav" data-view="planning">기획 프롬프트</button><button class="nav" data-view="recipes">이미지 활용</button><button class="nav" data-view="imageGuide">GPT Image 2.5</button><button class="nav" data-view="astra">Astra 활용</button><button class="nav" data-view="builder">프롬프트 설계</button><button class="nav" data-view="guide">초보자 가이드</button><button class="nav" data-view="admin">관리자</button></nav>
   </header>
   <main>
@@ -88,7 +88,7 @@
     </section>
     <section class="workspace hidden" id="adminView">
       <div class="section-head"><div><p class="eyebrow">ADMIN ONLY</p><h2>관리자 대시보드</h2><p>접속 현황과 개발·수정 기록을 확인하고 자료를 내려받습니다.</p></div></div>
-      <div id="adminGate" class="admin-gate"><h3>관리자 인증</h3><p>관리자 PIN을 입력하세요. 이 사이트는 GitHub Pages 정적 호스팅이므로 관리자 잠금은 이 브라우저 세션 기준입니다.</p><div class="admin-login"><input id="adminPin" type="password" placeholder="관리자 PIN" autocomplete="current-password"><button class="primary" id="adminLogin">인증</button></div><small id="adminMessage"></small></div>
+      <div id="adminGate" class="admin-gate"><h3>관리자 인증</h3><p>관리자 PIN을 입력하세요. GitHub Pages 정적 호스팅에서는 인증이 이 브라우저 세션의 잠금으로 동작합니다. 민감한 자료는 서버 인증으로 보호해야 합니다.</p><div class="admin-login"><input id="adminPin" type="password" placeholder="관리자 PIN" autocomplete="current-password"><button class="primary" id="adminLogin">인증</button></div><small id="adminMessage"></small></div>
       <div id="adminPanel" class="admin-panel hidden">
         <div class="admin-actions"><button class="primary" id="downloadExcel">엑셀 다운로드</button><button class="secondary" id="refreshAdmin">통계·기록 새로고침</button><button class="secondary" id="adminLogout">잠금</button></div>
         <div class="admin-metrics"><article><b id="statVisits">0</b><span>이 브라우저 방문</span></article><article><b id="statCopies">0</b><span>프롬프트 복사</span></article><article><b id="statSearches">0</b><span>검색 실행</span></article><article><b id="statLast">-</b><span>최근 접속</span></article></div>
@@ -111,7 +111,7 @@
     </section>
   </main>
   <div id="toast" role="status">복사했습니다.</div>
-  <footer><span>ChatGPT Prompt Lab</span><span>원문 이미지 치트키: fieldby Notion · 활용 템플릿은 실무용으로 확장 구성</span></footer>
+  <footer><div class="footer-brand"><div class="brand-lockup footer-lockup"><img src="assets/mentor-k-mark.jpg" alt="멘토K 로고"><span>프롬프트랩</span></div><div><strong>멘토K 프롬프트랩</strong><small>검색·설계·이미지 제작 실전 도구</small></div></div><div class="footer-info"><span>© 2026 멘토K 프롬프트랩</span><span>OpenAI 공식 프롬프트 가이드 기반 · 개인정보를 수집하지 않는 브라우저형 도구</span></div></footer>
   <script src="app.js"></script>
 </body>
 </html>
