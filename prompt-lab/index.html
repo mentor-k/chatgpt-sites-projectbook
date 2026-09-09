@@ -10,7 +10,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><span class="mark">P</span><div><strong>ChatGPT 프롬프트 랩</strong><small>Prompt Lab · 한국어 실전판</small></div></div>
-    <nav><button class="nav active" data-view="commands">이미지 치트키</button><button class="nav" data-view="work">업무 프롬프트</button><button class="nav" data-view="recipes">이미지 활용</button><button class="nav" data-view="astra">Astra 활용</button><button class="nav" data-view="builder">프롬프트 설계</button><button class="nav" data-view="guide">초보자 가이드</button><a class="nav excel-download" href="prompt-lab.xlsx" download>엑셀 다운로드</a></nav>
+    <nav><button class="nav active" data-view="commands">이미지 치트키</button><button class="nav" data-view="work">업무 프롬프트</button><button class="nav" data-view="recipes">이미지 활용</button><button class="nav" data-view="astra">Astra 활용</button><button class="nav" data-view="builder">프롬프트 설계</button><button class="nav" data-view="guide">초보자 가이드</button><button class="nav" data-view="admin">관리자</button></nav>
   </header>
   <main>
     <section class="intro">
@@ -64,6 +64,16 @@
       <div class="builder-actions"><button class="primary" id="buildPrompt">완성형 프롬프트 만들기</button><button class="secondary" id="clearBuilder">입력 초기화</button></div>
       <div class="formula built-output"><div><b>생성된 프롬프트</b><small id="buildStatus">필수 입력: 최종 목표</small></div><p id="builtPrompt">항목을 입력하거나 위의 용도별 예시를 선택하세요.</p><button class="copy" id="copyBuilt">결과 복사</button></div>
       <div class="quality-grid"><article><b>명확성</b><span>목표·독자·상황</span></article><article><b>근거성</b><span>자료·출처</span></article><article><b>실행성</b><span>형식·분량·항목</span></article><article><b>안전성</b><span>제외·검증</span></article></div>
+    </section>
+    <section class="workspace hidden" id="adminView">
+      <div class="section-head"><div><p class="eyebrow">ADMIN ONLY</p><h2>관리자 대시보드</h2><p>접속 현황과 개발·수정 기록을 확인하고 자료를 내려받습니다.</p></div></div>
+      <div id="adminGate" class="admin-gate"><h3>관리자 인증</h3><p>관리자 PIN을 입력하세요. 이 사이트는 GitHub Pages 정적 호스팅이므로 관리자 잠금은 이 브라우저 세션 기준입니다.</p><div class="admin-login"><input id="adminPin" type="password" placeholder="관리자 PIN" autocomplete="current-password"><button class="primary" id="adminLogin">인증</button></div><small id="adminMessage"></small></div>
+      <div id="adminPanel" class="admin-panel hidden">
+        <div class="admin-actions"><button class="primary" id="downloadExcel">엑셀 다운로드</button><button class="secondary" id="refreshAdmin">통계·기록 새로고침</button><button class="secondary" id="adminLogout">잠금</button></div>
+        <div class="admin-metrics"><article><b id="statVisits">0</b><span>이 브라우저 방문</span></article><article><b id="statCopies">0</b><span>프롬프트 복사</span></article><article><b id="statSearches">0</b><span>검색 실행</span></article><article><b id="statLast">-</b><span>최근 접속</span></article></div>
+        <div class="admin-columns"><div><h3>최근 사용 기록</h3><div id="usageLog" class="admin-log"></div></div><div><h3>개발·수정 기록 <small>(GitHub 자동 조회)</small></h3><div id="devLog" class="admin-log"><p>인증 후 불러옵니다.</p></div></div></div>
+        <p class="admin-note">접속통계는 개인정보를 수집하지 않고 이 브라우저의 사용 기록만 저장합니다. 전체 방문자 통계가 필요하면 별도 분석 서비스 또는 서버형 관리자 기능을 연결해야 합니다.</p>
+      </div>
     </section>
     <section class="workspace guide hidden" id="guideView">
       <div class="section-head"><div><p class="eyebrow">START HERE</p><h2>초보자 실전 가이드</h2><p>좋은 결과는 긴 프롬프트보다 빠지지 않은 조건에서 나옵니다.</p></div></div>
