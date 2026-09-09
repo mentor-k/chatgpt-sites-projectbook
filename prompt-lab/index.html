@@ -10,7 +10,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><span class="mark">P</span><div><strong>ChatGPT 프롬프트 랩</strong><small>Prompt Lab · 한국어 실전판</small></div></div>
-    <nav><button class="nav active" data-view="commands">이미지 치트키</button><button class="nav" data-view="work">업무 프롬프트</button><button class="nav" data-view="recipes">이미지 활용</button><button class="nav" data-view="astra">Astra 활용</button><button class="nav" data-view="builder">프롬프트 설계</button><button class="nav" data-view="guide">초보자 가이드</button><button class="nav" data-view="admin">관리자</button></nav>
+    <nav><button class="nav active" data-view="commands">이미지 치트키</button><button class="nav" data-view="work">업무 프롬프트</button><button class="nav" data-view="planning">기획 프롬프트</button><button class="nav" data-view="recipes">이미지 활용</button><button class="nav" data-view="astra">Astra 활용</button><button class="nav" data-view="builder">프롬프트 설계</button><button class="nav" data-view="guide">초보자 가이드</button><button class="nav" data-view="admin">관리자</button></nav>
   </header>
   <main>
     <section class="intro">
@@ -29,6 +29,12 @@
       <div class="section-head"><div><p class="eyebrow">WORK PROMPTS</p><h2>주요 업무·콘텐츠 프롬프트</h2><p>대괄호 [ ] 안의 내용만 내 상황에 맞게 바꾸면 됩니다.</p></div></div>
       <div class="controls"><label class="search"><span>⌕</span><input id="workSearch" placeholder="검색, 책쓰기, 강의, 영상 등 검색"></label><div id="workFilters" class="chips"></div></div>
       <div class="result-line" id="workResult"></div><div id="workGrid" class="prompt-grid"></div><p id="workEmpty" class="empty-state">검색 결과가 없습니다. 업무명이나 산출물로 다시 찾아보세요.</p>
+    </section>
+
+    <section class="workspace hidden" id="planningView">
+      <div class="section-head"><div><p class="eyebrow">PLANNING PROMPTS</p><h2>기획 프롬프트</h2><p>아이디어를 검증하고 창업·정책·사업 실행계획으로 구체화하는 실전 프롬프트입니다.</p></div></div>
+      <div class="controls"><label class="search"><span>⌕</span><input id="planningSearch" placeholder="아이디어, 창업, 상권, 전통시장, 소상공인, 국비공모 검색"></label><div id="planningFilters" class="chips"></div></div>
+      <div class="result-line" id="planningResult"></div><div id="planningGrid" class="prompt-grid"></div><p id="planningEmpty" class="empty-state">검색 결과가 없습니다. 아이디어·상권·정책·사업으로 다시 검색해 보세요.</p>
     </section>
 
     <section class="workspace hidden" id="recipesView">
