@@ -268,7 +268,8 @@ if(el('planningGrid'))renderList(planningPrompts,planningCategory,'planningSearc
 (() => {
   const ADMIN_PIN_HASH = "e45870b5e5716bad459290561eaedf47972c65c9cb3d4f50762f46bf45e8f898";
   const USAGE_KEY = "promptLabUsageV1";
-  const SESSION_KEY = "promptLabAdminSession";
+  const SESSION_KEY = "promptLabAdminSessionUntil";
+  const ADMIN_SESSION_MS = 8 * 60 * 60 * 1000;
   const typeNames = { visits: "접속", copies: "복사", searches: "검색", download: "다운로드" };
 
   function emptyUsage() {
@@ -286,12 +287,17 @@ if(el('planningGrid'))renderList(planningPrompts,planningCategory,'planningSearc
     try { localStorage.setItem(USAGE_KEY, JSON.stringify(value)); } catch (_) {}
   }
   function hasAdminSession() {
-    try { return sessionStorage.getItem(SESSION_KEY) === "1"; } catch (_) { return false; }
+    try {
+      const until = Number(localStorage.getItem(SESSION_KEY) || 0);
+      if (until > Date.now()) return true;
+      localStorage.removeItem(SESSION_KEY);
+    } catch (_) {}
+    return false;
   }
   function setAdminSession(value) {
     try {
-      if (value) sessionStorage.setItem(SESSION_KEY, "1");
-      else sessionStorage.removeItem(SESSION_KEY);
+      if (value) localStorage.setItem(SESSION_KEY, String(Date.now() + ADMIN_SESSION_MS));
+      else localStorage.removeItem(SESSION_KEY);
     } catch (_) {}
   }
   function escapeHtml(value) {
