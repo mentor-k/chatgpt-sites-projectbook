@@ -451,3 +451,5 @@ if(el('planningGrid'))renderList(planningPrompts,planningCategory,'planningSearc
   if (adminNav) adminNav.addEventListener("click", openAdmin);
   if (hasAdminSession()) setAdminState(true);
 })();
+
+if(el("webAppSearch")){el("webAppSearch").oninput=()=>{const q=norm(el("webAppSearch").value);const cards=[...document.querySelectorAll(".web-app-card")];let n=0;cards.forEach(card=>{const show=!q||norm(card.dataset.search||card.textContent).includes(q);card.style.display=show?"flex":"none";if(show)n++});if(el("webAppEmpty"))el("webAppEmpty").style.display=n?"none":"block"}}
