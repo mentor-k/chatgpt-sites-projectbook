@@ -75,3 +75,21 @@
   .source-print-slide{width:11in!important;height:7.333333in!important;min-height:7.333333in!important;max-height:7.333333in!important;padding:0!important}
   .source-print-slide img{width:11in!important;height:7.333333in!important;object-fit:contain!important}
 }
+
+
+/* 상담·실전 프롬프트랩 연결 블록 */
+.support-section{max-width:1320px;margin:0 auto;padding:20px 40px 90px}
+.support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.support-card{display:flex;flex-direction:column;min-height:240px;padding:28px;border-radius:22px;border:1px solid var(--line);background:#fff;box-shadow:0 12px 36px rgba(20,47,94,.08);transition:transform .2s,box-shadow .2s,border-color .2s}
+.support-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#b7c9ee}
+.support-card:focus-visible{outline:3px solid rgba(46,108,246,.28);outline-offset:3px}
+.support-badge{display:inline-flex;align-self:flex-start;margin-bottom:34px;padding:7px 10px;border-radius:999px;background:#edf3ff;color:var(--blue);font-size:9px;font-weight:900;letter-spacing:.12em}
+.support-card strong{font-size:26px;letter-spacing:-.07em}
+.support-card p{max-width:500px;margin:10px 0 25px;color:#607086;font-size:13px;line-height:1.7}
+.support-link{margin-top:auto;color:var(--blue);font-size:11px;font-weight:900}
+.consultation-card{background:linear-gradient(145deg,#fff 0%,#f2f6ff 100%)}
+.prompt-card-link{background:linear-gradient(145deg,#0f1a2f 0%,#1b3152 100%);border-color:#233b62;color:#fff}
+.prompt-card-link .support-badge{background:rgba(118,239,193,.12);color:#76efc1}
+.prompt-card-link p{color:#c2cee0}
+.prompt-card-link .support-link{color:#76efc1}
+@media (max-width:640px){.support-section{padding-left:16px;padding-right:16px;padding-bottom:60px}.support-grid{grid-template-columns:1fr}.support-card{min-height:210px;padding:23px}.support-badge{margin-bottom:24px}.support-card strong{font-size:23px}}
