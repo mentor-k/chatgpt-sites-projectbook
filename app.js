@@ -254,7 +254,6 @@ document.addEventListener('DOMContentLoaded',function(){
   renderAll();
   preloadSlide(2);
   document.getElementById('startCourse')?.addEventListener('click',function(){ jumpToSlide(1); });
-  document.getElementById('resourceSlides')?.addEventListener('click',downloadPdf);
   document.getElementById('toggleOverview')?.addEventListener('click',openOverview);
   document.getElementById('toggleFullscreen')?.addEventListener('click',toggleFullscreen);
   document.getElementById('prevLesson')?.addEventListener('click',function(){ moveSlide(-1); });
