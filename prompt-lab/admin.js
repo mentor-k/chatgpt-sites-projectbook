@@ -16,7 +16,7 @@
     {id:"image-astra",title:"GPT Image 2.5·Astra 활용 가이드 추가",category:"자료",body:"이미지 치트키, 모션그래픽, 숏폼·광고·상품영상 제작 프롬프트를 한글로 정리했습니다.",date:"2026-08-20",pinned:false,published:true}
   ];
   function readUsage(){ try { const u=JSON.parse(localStorage.getItem(USAGE_KEY)||"null"); return u&&typeof u==="object" ? Object.assign({visits:0,copies:0,searches:0,notice_views:0,notice_clicks:0,events:[]},u) : {visits:0,copies:0,searches:0,notice_views:0,notice_clicks:0,events:[]}; } catch(_) { return {visits:0,copies:0,searches:0,notice_views:0,notice_clicks:0,events:[]}; } }
-  function readNotices(){ try { const n=JSON.parse(localStorage.getItem(NOTICE_KEY)||"null"); if(Array.isArray(n)&&n.length) return n; } catch(_){} try{localStorage.setItem(NOTICE_KEY,JSON.stringify(defaultNotices));}catch(_){} return defaultNotices.slice(); }
+  function readNotices(){ try { const raw=localStorage.getItem(NOTICE_KEY); if(raw!==null){ const n=JSON.parse(raw); if(Array.isArray(n)) return n; } } catch(_){} try{localStorage.setItem(NOTICE_KEY,JSON.stringify(defaultNotices));}catch(_){} return defaultNotices.slice(); }
   function saveNotices(n){ try{localStorage.setItem(NOTICE_KEY,JSON.stringify(n)); return true;}catch(_){return false;} }
   function hasSession(){ try { return Number(localStorage.getItem(SESSION_KEY)||0)>Date.now(); } catch(_){ return false; } }
   function setSession(on){ try{ if(on) localStorage.setItem(SESSION_KEY,String(Date.now()+SESSION_MS)); else localStorage.removeItem(SESSION_KEY); }catch(_){} }
