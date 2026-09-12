@@ -241,7 +241,23 @@ el('commandSearch').oninput=renderCommands;el('workSearch').oninput=()=>renderLi
 el('commandGrid').onclick=e=>{const b=e.target.closest('.key-card');if(!b)return;selected.has(b.dataset.command)?selected.delete(b.dataset.command):selected.add(b.dataset.command);renderCommands()};
 el('clearCombo').onclick=()=>{selected.clear();renderCommands()};el('copyCombo').onclick=()=>selected.size&&copyText([...selected].join(' '));
 document.body.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b)copyText(b.dataset.copy)});
-document.querySelector('nav').onclick=e=>{const b=e.target.closest('button.nav[data-view]');if(!b)return;document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.workspace').forEach(x=>x.classList.add('hidden'));el(b.dataset.view+'View').classList.remove('hidden')};
+const viewTitles={home:"멘토K 프롬프트랩",commands:"이미지 치트키",work:"업무 프롬프트",planning:"기획 프롬프트",recipes:"이미지 활용",imageGuide:"GPT Image 2.5",astra:"Astra 활용",website:"웹사이트",app:"앱 구축",shop:"쇼핑몰·자사몰",builder:"프롬프트 설계",guide:"초보자 가이드"};
+function activateView(name,scrollTop){
+  const target=el(name==="home"?"homeView":name+"View");
+  if(!target)return;
+  const isHome=name==="home";
+  document.querySelectorAll(".workspace,#homeView").forEach(x=>x.classList.add("hidden"));
+  document.querySelectorAll(".home-only").forEach(x=>x.classList.toggle("hidden",!isHome));
+  target.classList.remove("hidden");
+  document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.view===name));
+  document.body.classList.toggle("detail-mode",!isHome);
+  document.title=(viewTitles[name]||"멘토K 프롬프트랩")+" · 멘토K 프롬프트랩";
+  if(scrollTop!==false) window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelector("nav").addEventListener("click",e=>{const b=e.target.closest("button.nav[data-view]");if(b)activateView(b.dataset.view,true)});
+const homeLink=document.querySelector(".brand-home-link");
+if(homeLink)homeLink.addEventListener("click",e=>{e.preventDefault();activateView("home",true);history.replaceState(null,"","#homeView")});
+activateView("home",false);
 const presets={
 report:['의사결정에 필요한 현황 진단과 90일 실행계획이 포함된 보고서 작성','해당 산업의 경영컨설턴트','기관장 또는 경영진','현재 문제와 추진 배경','현황자료, 통계, 인터뷰, 기존 보고서','표 중심 보고서','A4 10쪽 내외','결론 중심의 명료한 문체','요약, 현황, 문제, 원인, 대안 비교, 권고안, 실행계획, KPI, 리스크','근거 없는 수치, 일반론, 중복','사실·추정·제안 구분, 출처·기준일·계산 검증'],
 plan:['평가기준을 충족하고 실행 가능한 사업기획서 작성','사업기획 및 공모사업 전문가','심사위원과 사업 책임자','해결할 문제와 추진 조직의 여건','공고문, 평가표, 고객·지역 데이터, 예산 기준','구조화된 문서','제출 양식 준수','근거 중심의 설득력 있는 문체','필요성, 대상, 목표, 세부사업, 체계, 일정, 예산, KPI, 지속가능성','평가항목 누락, 확인되지 않은 성과','평가항목 대응, 성과논리 연결, 예산 합계 검증'],
