@@ -471,8 +471,8 @@ if(el("webAppSearch")){el("webAppSearch").oninput=()=>{const q=norm(el("webAppSe
   const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const read = () => {
     try {
-      const saved = JSON.parse(localStorage.getItem(NOTICE_KEY) || "null");
-      if (Array.isArray(saved) && saved.length) return saved;
+      const raw = localStorage.getItem(NOTICE_KEY);
+      if (raw !== null) { const saved = JSON.parse(raw); if (Array.isArray(saved)) return saved; }
     } catch (_) {}
     try { localStorage.setItem(NOTICE_KEY, JSON.stringify(DEFAULT_NOTICES)); } catch (_) {}
     return DEFAULT_NOTICES.slice();
