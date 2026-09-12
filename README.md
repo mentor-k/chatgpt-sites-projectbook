@@ -10,6 +10,7 @@ Project·Work·Sites로 기획부터 공개까지 실습하는 4시간 강의용
 - `app.js`: 70장 탐색·진도 저장·발표 화면·Project·Work·Sites 안내
 - `assets/slides/`: 첨부 강의안 기준 웹용 슬라이드 이미지 70장
 - `assets/AI_홈페이지_웹서비스_강의안_최종70장.pdf`: 수강생 다운로드용 원본 PDF
+- `prompt-lab/`: 멘토K 프롬프트랩(실전 프롬프트 검색·복사 사이트)
 
 ## PDF 저장
 
@@ -24,6 +25,13 @@ Project·Work·Sites로 기획부터 공개까지 실습하는 4시간 강의용
 1. 저장소 루트에 모든 파일을 업로드합니다.
 2. 기본 브랜치를 `main`으로 설정합니다.
 3. 저장소의 `Settings → Pages → Build and deployment`에서 `Deploy from a branch`를 선택합니다.
-4. Branch를 `main`, 폴더를 `/(root)`로 저장한 뒤 공개 주소를 엽니다.
+4. Branch를 `main`, 폴더를 `/(root)`로 저장합니다.
+5. Custom domain에 `aiwith.kr`을 입력하고 인증서 발급 후 `Enforce HTTPS`를 켭니다.
 
-예상 주소: `https://mentor-k.github.io/chatgpt-sites-projectbook/`
+현재 루트 `CNAME`에 `aiwith.kr`이 등록되어 있습니다.
+
+- 공개 루트: [https://aiwith.kr/](https://aiwith.kr/)
+- 프롬프트랩: [https://aiwith.kr/prompt-lab/](https://aiwith.kr/prompt-lab/)
+- GitHub Pages 기본 주소: [https://mentor-k.github.io/chatgpt-sites-projectbook/](https://mentor-k.github.io/chatgpt-sites-projectbook/)
+
+DNS가 전파된 뒤에도 HTTPS 인증서 발급에는 수 분에서 최대 24시간이 걸릴 수 있습니다. `prompt-lab/DOMAIN_SETUP.md`에 hosting.kr 레코드와 검증 절차를 정리했습니다.
