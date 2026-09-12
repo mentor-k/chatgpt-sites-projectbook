@@ -20,6 +20,7 @@
 
     <section class="workspace" id="commandsView">
       <div class="section-head"><div><p class="eyebrow">IMAGE CHEAT KEYS</p><h2>이미지 치트키</h2><p>구도·렌즈·빛·스타일·재질·인물·품질 조건을 검색하고 조합해 이미지 프롬프트에 붙여 쓰세요.</p></div><button id="copyCombo" class="primary">선택 조합 복사 <span id="comboCount">0</span></button></div>
+      <div class="cheat-guide" aria-label="이미지 치트키 사용방법"><div class="cheat-guide-title">이미지 치트키, 이렇게 쓰세요</div><ol><li>검색창에서 원하는 효과를 찾습니다.</li><li>카드를 눌러 치트키를 2~4개 선택합니다.</li><li>위의 <b>선택 조합 복사</b>를 눌러 이미지 프롬프트에 붙여 넣습니다.</li></ol><p><b>예시</b> /closeup + /softlighting + /filmgrain → 인물 클로즈업·부드러운 조명·필름 질감</p></div>
       <div class="controls"><label class="search"><span>⌕</span><input id="commandSearch" placeholder="명령어·한국어 효과 검색 (예: 노을, 필름, closeup)"></label><div id="categoryFilters" class="chips"></div></div>
       <div id="comboBar" class="combo empty"><span>선택한 치트키가 없습니다.</span><button id="clearCombo">모두 지우기</button></div>
       <div class="result-line" id="commandResult"></div><div id="commandGrid" class="card-grid"></div><p id="commandEmpty" class="empty-state">검색 결과가 없습니다. 비슷한 표현으로 다시 찾아보세요.</p>
