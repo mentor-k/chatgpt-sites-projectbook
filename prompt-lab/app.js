@@ -251,7 +251,7 @@ function activateView(name,scrollTop){
   target.classList.remove("hidden");
   document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.view===name));
   document.body.classList.toggle("detail-mode",!isHome);
-  document.title=(viewTitles[name]||"멘토K 프롬프트랩")+" · 멘토K 프롬프트랩";
+  document.title=name==="home"?"멘토K 프롬프트랩":(viewTitles[name]||"멘토K 프롬프트랩")+" · 멘토K 프롬프트랩";
   if(scrollTop!==false) window.scrollTo({top:0,behavior:"smooth"});
 }
 document.querySelector("nav").addEventListener("click",e=>{const b=e.target.closest("button.nav[data-view]");if(b)activateView(b.dataset.view,true)});
