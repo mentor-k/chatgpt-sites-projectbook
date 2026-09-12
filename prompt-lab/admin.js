@@ -41,13 +41,15 @@
   function deleteNotice(id){ const n=readNotices().find(x=>x.id===id); if(!n)return; if(!window.confirm("‘"+n.title+"’ 공지를 삭제할까요?"))return; saveNotices(readNotices().filter(x=>x.id!==id)); renderNoticeAdmin(); }
   async function renderDevLog(){ const log=$("devLog"); if(!log)return; log.innerHTML="<p>GitHub 수정 기록을 불러오는 중…</p>"; try{ const response=await fetch("https://api.github.com/repos/mentor-k/chatgpt-sites-projectbook/commits?path=prompt-lab&per_page=12",{headers:{Accept:"application/vnd.github+json"}}); if(!response.ok)throw new Error(); const commits=await response.json(); log.innerHTML=commits.length?commits.map(c=>{const title=c.commit&&c.commit.message?c.commit.message.split("\n")[0]:"수정 기록";const date=c.commit&&c.commit.author?c.commit.author.date:"";const author=c.author&&c.author.login?c.author.login:(c.commit&&c.commit.author?c.commit.author.name:"GitHub");return "<p><b>"+esc(title)+"</b><br><small>"+esc(formatTime(date))+" · "+esc(author)+"</small></p>";}).join(""):"<p>표시할 수정 기록이 없습니다.</p>"; }catch(_){ log.innerHTML="<p>GitHub 기록을 불러오지 못했습니다. 새로고침해 주세요.</p>"; } }
   function renderAll(){renderMetrics();renderNoticeAdmin();renderDevLog();}
+  function activateAdminView(name){ document.querySelectorAll(".admin-screen").forEach(x=>x.classList.toggle("hidden",x.id!=="admin"+name.charAt(0).toUpperCase()+name.slice(1)+"View")); document.querySelectorAll(".admin-tab").forEach(x=>{const active=x.dataset.adminView===name;x.classList.toggle("active",active);x.setAttribute("aria-selected",String(active));}); }
   document.addEventListener("DOMContentLoaded",()=>{
     $("adminLoginForm").addEventListener("submit",async e=>{e.preventDefault();const pin=$("adminPin").value.trim();if(!pin){$("adminMessage").textContent="PIN을 입력하세요.";return;}const button=$("adminLogin");button.disabled=true;button.textContent="확인 중…";try{if(await verifyPin(pin)){ $("adminPin").value="";$("adminMessage").textContent="";showPanel(true);}else $("adminMessage").textContent="PIN이 올바르지 않습니다.";}catch(_){$("adminMessage").textContent="HTTPS에서 다시 시도해 주세요.";}finally{button.disabled=false;button.textContent="인증";}});
     $("adminLogout").addEventListener("click",()=>{setSession(false);showPanel(false);$("adminPin").focus();});
-    $("refreshAdmin").addEventListener("click",renderAll);
+    $("refreshAdmin").addEventListener("click",renderAll); $("refreshDevLog").addEventListener("click",renderDevLog);
+    document.querySelectorAll(".admin-tab").forEach(tab=>tab.addEventListener("click",()=>activateAdminView(tab.dataset.adminView)));
     $("downloadExcel").addEventListener("click",()=>{const a=document.createElement("a");a.href="prompt-lab.xlsx";a.download="prompt-lab.xlsx";document.body.appendChild(a);a.click();a.remove();});
     $("noticeForm").addEventListener("submit",saveNotice); $("newNotice").addEventListener("click",resetForm); $("cancelNotice").addEventListener("click",resetForm);
     $("noticeAdminList").addEventListener("click",e=>{const edit=e.target.closest(".edit-notice"),del=e.target.closest(".delete-notice");if(edit)editNotice(edit.dataset.id);if(del)deleteNotice(del.dataset.id);});
-    resetForm(); if(hasSession()) showPanel(true); else showPanel(false);
+    resetForm(); activateAdminView("overview"); if(hasSession()) showPanel(true); else showPanel(false);
   });
 })();
