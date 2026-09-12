@@ -5,16 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="AI 홈페이지·웹서비스 실전 과정 첨부 강의안 전체 69장" />
   <title>전체 69장 슬라이드 | AI 홈페이지·웹서비스 실전 과정</title>
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=10" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <style>
+    :root{--deck-navy:#0b1629;--deck-blue:#2e6cf6}
     html,body{margin:0;min-height:100%;background:#dfe5ee}
     .slides-page{min-height:100vh}
-    .pdf-embed{display:block;width:min(1400px,calc(100vw - 32px));height:calc(100vh - 100px);min-height:640px;margin:20px auto 40px;border:0;background:#fff;box-shadow:0 12px 34px rgba(22,39,69,.16)}
-    @media(max-width:640px){.pdf-embed{width:calc(100vw - 16px);height:calc(100vh - 132px);min-height:560px;margin:8px auto 20px}}
+    .deck-toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 18px;background:var(--deck-navy);color:#fff;box-shadow:0 4px 16px rgba(7,18,38,.18)}
+    .deck-toolbar strong{font-size:13px;white-space:nowrap}
+    .deck-toolbar .deck-meta{margin-right:auto;color:#b9c7dc;font-size:11px}
+    .deck-toolbar button,.deck-toolbar a{border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 11px;color:#fff;background:rgba(255,255,255,.08);font-size:11px;font-weight:800;text-decoration:none;cursor:pointer}
+    .deck-toolbar button:hover,.deck-toolbar a:hover{background:rgba(255,255,255,.16)}
+    .deck-toolbar .deck-primary{background:var(--deck-blue);border-color:var(--deck-blue)}
+    .deck-shell{width:min(1400px,calc(100vw - 32px));margin:20px auto 40px}
+    .deck-screen{position:relative;display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:6/4;overflow:hidden;background:#fff;border-radius:12px;box-shadow:0 16px 46px rgba(22,39,69,.2)}
+    #deckCanvas{display:block;width:100%;height:auto;background:#fff}
+    .deck-status{position:absolute;inset:0;display:grid;place-items:center;color:#64738a;background:linear-gradient(135deg,#f7fafc,#eef4fb);font-size:13px}
+    .deck-status[hidden]{display:none}
+    .deck-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
+    .deck-nav button{min-width:100px;border:1px solid #cbd7e6;border-radius:9px;padding:11px 16px;background:#fff;color:#34445b;font-size:12px;font-weight:900;cursor:pointer}
+    .deck-nav button:hover{border-color:#8eabe3;color:var(--deck-blue)}
+    .deck-nav button:disabled{opacity:.4;cursor:not-allowed}
+    .deck-counter{min-width:112px;text-align:center;color:#506075;font-size:12px;font-weight:800}
+    .deck-help{text-align:center;color:#718097;font-size:10px;margin:10px 0 0}
+    .deck-screen.presentation-mode{position:fixed;inset:0;z-index:50;width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;background:#081221}
+    .deck-screen.presentation-mode #deckCanvas{width:min(100vw,calc(100vh * 1.5));max-height:100vh;object-fit:contain}
+    .deck-screen.presentation-mode .deck-status{background:#081221;color:#c6d4e8}
+    .deck-shell.presentation-active .deck-nav{position:fixed;z-index:60;left:50%;bottom:22px;transform:translateX(-50%);margin:0;padding:8px 10px;border-radius:12px;background:rgba(8,18,33,.82);backdrop-filter:blur(12px)}
+    .deck-shell.presentation-active .deck-counter{color:#fff}
+    .deck-shell.presentation-active .deck-help{position:fixed;z-index:60;left:50%;bottom:4px;transform:translateX(-50%);color:#c5d2e4}
+    @media(max-width:640px){.deck-toolbar{padding:10px 12px}.deck-toolbar strong{width:100%}.deck-toolbar .deck-meta{width:100%;margin:0}.deck-toolbar button,.deck-toolbar a{padding:7px 8px;font-size:10px}.deck-shell{width:calc(100vw - 16px);margin:8px auto 20px}.deck-nav{gap:6px}.deck-nav button{min-width:86px;padding:10px 9px;font-size:10px}.deck-counter{min-width:86px;font-size:10px}}
   </style>
 </head>
 <body class="slides-page">
-  <div class="print-toolbar"><strong>AI 홈페이지·웹서비스 실전 과정</strong><span>전체 69장 · 가로 6 : 세로 4 · 강사 엠아이넥스트 김용한</span><a class="toolbar-primary" href="assets/0917_homepage_webservice_lecture.pdf" download="0917_홈페이지_웹서비스_강의안_엠아이넥스트_김용한.pdf">원본 PDF 다운로드</a><a href="index.html">강의 홈페이지로 돌아가기</a></div>
-  <main><iframe class="pdf-embed" src="assets/0917_homepage_webservice_lecture.pdf#view=FitH" title="첨부 강의안 69장"></iframe></main>
+  <div class="deck-toolbar">
+    <strong>AI 홈페이지·웹서비스 실전 과정</strong>
+    <span class="deck-meta">첨부 강의안 · 69장 · 가로 6 : 세로 4 · 엠아이넥스트 김용한</span>
+    <button id="toolbarPrev" type="button">← 이전</button>
+    <button id="toolbarNext" type="button">다음 →</button>
+    <button id="fullscreenBtn" type="button">전체화면</button>
+    <button id="presentBtn" class="deck-primary" type="button">프레젠테이션</button>
+    <a href="assets/0917_homepage_webservice_lecture.pdf" download="0917_홈페이지_웹서비스_강의안_엠아이넥스트_김용한.pdf">원본 PDF</a>
+    <a href="index.html">강의 홈페이지</a>
+  </div>
+  <main class="deck-shell" id="deckShell">
+    <section class="deck-screen" id="deckScreen" aria-label="슬라이드 전체 보기">
+      <canvas id="deckCanvas" width="1500" height="1000"></canvas>
+      <div class="deck-status" id="deckStatus" role="status">슬라이드 불러오는 중…</div>
+    </section>
+    <nav class="deck-nav" aria-label="슬라이드 이동">
+      <button id="prevBtn" type="button">← 이전 페이지</button>
+      <span class="deck-counter" id="deckCounter">1 / 69</span>
+      <button id="nextBtn" type="button">다음 페이지 →</button>
+    </nav>
+    <p class="deck-help">← → 방향키 또는 PageUp·PageDown으로 이동 · F 전체화면 · P 프레젠테이션</p>
+  </main>
+  <script>
+    const PDF_PATH='assets/0917_homepage_webservice_lecture.pdf';
+    const TOTAL=69;
+    let pageNumber=1, pdf=null, loading=null, renderToken=0;
+    const screen=document.getElementById('deckScreen'), shell=document.getElementById('deckShell'), canvas=document.getElementById('deckCanvas'), status=document.getElementById('deckStatus'), counter=document.getElementById('deckCounter');
+    function loadPdf(){if(pdf)return Promise.resolve(pdf);if(loading)return loading;pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';loading=pdfjsLib.getDocument(PDF_PATH).promise.then(function(doc){pdf=doc;return doc});return loading}
+    async function renderPage(){const token=++renderToken;status.hidden=false;status.textContent='슬라이드 불러오는 중…';counter.textContent=pageNumber+' / '+TOTAL;document.getElementById('prevBtn').disabled=pageNumber===1;document.getElementById('toolbarPrev').disabled=pageNumber===1;document.getElementById('nextBtn').disabled=pageNumber===TOTAL;document.getElementById('toolbarNext').disabled=pageNumber===TOTAL;try{const doc=await loadPdf(),page=await doc.getPage(pageNumber);if(token!==renderToken)return;const base=page.getViewport({scale:1});const maxWidth=Math.min(screen.clientWidth||1200,1500);const scale=maxWidth/base.width;const dpr=Math.min(devicePixelRatio||1,2);const viewport=page.getViewport({scale:scale*dpr});canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);canvas.style.width=maxWidth+'px';canvas.style.height=(base.height*scale)+'px';await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;if(token===renderToken)status.hidden=true}catch(e){status.textContent='슬라이드를 불러오지 못했습니다. 원본 PDF 버튼으로 확인해 주세요.';console.error(e)}}
+    function go(delta){pageNumber=Math.max(1,Math.min(TOTAL,pageNumber+delta));renderPage()}
+    function toggleFullscreen(){if(!document.fullscreenElement){(screen.requestFullscreen||screen.webkitRequestFullscreen).call(screen).catch(function(){screen.classList.toggle('presentation-mode')})}else{document.exitFullscreen()}}
+    function togglePresentation(){const active=shell.classList.toggle('presentation-active');screen.classList.toggle('presentation-mode',active);if(active&&!document.fullscreenElement){(screen.requestFullscreen||screen.webkitRequestFullscreen).call(screen).catch(function(){})}if(!active&&document.fullscreenElement)document.exitFullscreen()}
+    document.getElementById('prevBtn').onclick=function(){go(-1)};document.getElementById('nextBtn').onclick=function(){go(1)};document.getElementById('toolbarPrev').onclick=function(){go(-1)};document.getElementById('toolbarNext').onclick=function(){go(1)};document.getElementById('fullscreenBtn').onclick=toggleFullscreen;document.getElementById('presentBtn').onclick=togglePresentation;
+    document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement&&!shell.classList.contains('presentation-active'))screen.classList.remove('presentation-mode')});
+    window.addEventListener('resize',function(){clearTimeout(window.__deckResize);window.__deckResize=setTimeout(renderPage,150)});
+    document.addEventListener('keydown',function(e){if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1)}if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(1)}if(e.key.toLowerCase()==='f')toggleFullscreen();if(e.key.toLowerCase()==='p')togglePresentation();if(e.key==='Home'){pageNumber=1;renderPage()}if(e.key==='End'){pageNumber=TOTAL;renderPage()}});
+    renderPage();
+  </script>
 </body>
 </html>
