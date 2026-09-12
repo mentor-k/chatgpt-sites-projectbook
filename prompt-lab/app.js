@@ -457,3 +457,49 @@ if(el("webAppSearch")){el("webAppSearch").oninput=()=>{const q=norm(el("webAppSe
 ["website","app"].forEach(function(kind){const input=el(kind+"Search"),grid=el(kind+"Grid"),empty=el(kind+"Empty");if(!input||!grid)return;input.oninput=function(){const q=norm(input.value),cards=[...grid.querySelectorAll(".build-card")];let n=0;cards.forEach(card=>{const show=!q||norm(card.dataset.search||card.textContent).includes(q);card.style.display=show?"flex":"none";if(show)n++});if(empty)empty.style.display=n?"none":"block"}});
 
 ["astra","shop"].forEach(function(kind){const input=el(kind+"Search"),grid=el(kind+"VideoGrid")||el(kind+"Grid"),empty=el(kind+"VideoEmpty")||el(kind+"Empty");if(!input||!grid)return;input.oninput=function(){const q=norm(input.value),cards=[...grid.querySelectorAll(".build-card")];let n=0;cards.forEach(card=>{const show=!q||norm(card.dataset.search||card.textContent).includes(q);card.style.display=show?"flex":"none";if(show)n++});if(empty)empty.style.display=n?"none":"block"}});
+
+
+/* Prompt Lab public notices and privacy-safe event counters */
+(() => {
+  const NOTICE_KEY = "promptLabNoticesV1";
+  const USAGE_KEY = "promptLabUsageV1";
+  const DEFAULT_NOTICES = [
+    {id:"welcome-2026", title:"프롬프트랩 운영 안내", category:"운영", body:"검색·조합한 프롬프트는 결과를 그대로 믿기보다 사실·출처·저작권·개인정보를 최종 확인한 뒤 사용해 주세요.", date:"2026-09-01", pinned:true, published:true},
+    {id:"workflow-update", title:"웹·앱·쇼핑몰 구축 메뉴 업데이트", category:"업데이트", body:"기획→구조설계→개발→검수→저장소→배포 단계별 실전 프롬프트를 추가했습니다.", date:"2026-08-28", pinned:false, published:true},
+    {id:"image-astra", title:"GPT Image 2.5·Astra 활용 가이드 추가", category:"자료", body:"이미지 치트키, 모션그래픽, 숏폼·광고·상품영상 제작 프롬프트를 한글로 정리했습니다.", date:"2026-08-20", pinned:false, published:true}
+  ];
+  const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const read = () => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(NOTICE_KEY) || "null");
+      if (Array.isArray(saved) && saved.length) return saved;
+    } catch (_) {}
+    try { localStorage.setItem(NOTICE_KEY, JSON.stringify(DEFAULT_NOTICES)); } catch (_) {}
+    return DEFAULT_NOTICES.slice();
+  };
+  const visible = () => read().filter(n => n && n.published !== false).sort((a,b) => Number(Boolean(b.pinned))-Number(Boolean(a.pinned)) || String(b.date||"").localeCompare(String(a.date||"")));
+  const track = (type, label) => {
+    try {
+      const u = JSON.parse(localStorage.getItem(USAGE_KEY) || "{}");
+      u[type] = Number(u[type] || 0) + 1;
+      u.events = Array.isArray(u.events) ? u.events : [];
+      u.events.unshift({type, label:String(label||"공지").slice(0,80), at:new Date().toISOString()});
+      u.events = u.events.slice(0,80);
+      localStorage.setItem(USAGE_KEY, JSON.stringify(u));
+    } catch (_) {}
+  };
+  function render() {
+    const root = document.getElementById("noticeList");
+    if (!root) return;
+    const items = visible().slice(0, 6);
+    root.innerHTML = items.length ? items.map(n => `<article class="notice-item${n.pinned ? " pinned" : ""}" data-notice-id="${esc(n.id)}"><div class="notice-meta"><span class="badge">${esc(n.category || "공지")}</span><time datetime="${esc(n.date || "")}">${esc(n.date || "")}</time></div><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p></article>`).join("") : "<p class=\"empty-state\">등록된 공지사항이 없습니다.</p>";
+    track("notice_views", "공지 목록");
+  }
+  document.addEventListener("DOMContentLoaded", render);
+  if (document.readyState !== "loading") render();
+  document.addEventListener("click", e => {
+    const item = e.target.closest(".notice-item");
+    if (item) track("notice_clicks", item.querySelector("h3") ? item.querySelector("h3").textContent : "공지");
+  });
+  window.PromptLabNotices = { read, save: values => { localStorage.setItem(NOTICE_KEY, JSON.stringify(values)); render(); }, defaults: DEFAULT_NOTICES };
+})();
