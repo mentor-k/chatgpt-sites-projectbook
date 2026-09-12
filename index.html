@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b1220" />
   <meta name="description" content="코딩 없이 반나절 만에 만드는 홈페이지·웹서비스 실전 과정 - Project, Work, Sites로 기획부터 공개까지" />
   <title>AI 홈페이지·웹서비스 실전 과정 | 엠아이넥스트 김용한</title>
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
   <style>
     .pdf-slide-frame{position:relative;display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:6/4;overflow:hidden;background:#fff}
     .pdf-slide-canvas{display:block;max-width:100%;width:100%;height:auto!important;aspect-ratio:auto!important;background:#fff}
@@ -35,7 +35,6 @@
           <p class="hero-lead">핵심지식 1시간과 실습 3시간으로 구성된 4시간 과정입니다. Project에서 기준을 만들고, Work에서 기획·개발하며, Sites에서 검수·수정한 뒤 실제 공개·도메인 연결까지 한 사이클을 완성합니다.</p>
           <div class="hero-actions">
             <button class="primary-button" id="startCourse">실전 강의 시작하기 <span>→</span></button>
-            <button class="ghost-button" id="openSlides">전체 슬라이드 PDF 저장</button>
           </div>
           <div class="hero-proof">
             <div><strong>69</strong><span>학습 슬라이드</span></div>
@@ -83,10 +82,21 @@
         </div>
       </section>
 
-      <section class="resource-section" id="resources">
-        <div class="resource-card">
-          <div><p class="eyebrow">RESOURCE LIBRARY</p><h2>수강생이 바로 보는<br /><span>전체 69장 슬라이드</span></h2><p>첨부 강의안의 가로 6 : 세로 4 디자인과 내용을 그대로 확인하고, 원본 PDF를 한 번에 내려받을 수 있습니다.</p></div>
-          <div class="resource-actions"><button class="primary-button" id="resourceSlides">전체 슬라이드 PDF 다운로드 <span>↓</span></button><button class="text-button" id="downloadChecklist">공개 전 체크리스트 위치 보기</button><small>강사 · 엠아이넥스트 김용한</small></div>
+      <section class="support-section" id="consultation">
+        <div class="section-heading compact"><div><p class="eyebrow">NEXT STEP</p><h2>강의 후 바로 이어지는<br /><span>상담과 실전 도구</span></h2></div><p>강의에서 만든 기획안과 MVP를 실제 프로젝트로 연결할 수 있도록 상담과 프롬프트 실습 공간을 한곳에 모았습니다.</p></div>
+        <div class="support-grid">
+          <a class="support-card consultation-card" href="https://aiwith.kr/" target="_blank" rel="noopener noreferrer">
+            <span class="support-badge">CONSULTATION</span>
+            <strong>홈페이지 제작 상담</strong>
+            <p>내 사업·기관에 맞는 홈페이지 방향, 기획안 보완, 제작·운영 방법을 상담받아 보세요.</p>
+            <span class="support-link">상담 페이지 열기 ↗</span>
+          </a>
+          <a class="support-card prompt-card-link" href="https://aiwith.kr/prompt/" target="_blank" rel="noopener noreferrer">
+            <span class="support-badge">PRACTICE LAB</span>
+            <strong>실전 프롬프트랩</strong>
+            <p>Project·Work·Sites에서 바로 써볼 수 있는 실전 프롬프트를 확인하고, 강의 실습을 계속 이어가세요.</p>
+            <span class="support-link">실전 프롬프트랩 열기 ↗</span>
+          </a>
         </div>
       </section>
     </main>
@@ -94,6 +104,6 @@
     <footer class="footer"><span>AI 홈페이지·웹서비스 실전 과정</span><span>강사 · 엠아이넥스트 김용한</span><span>Project · Work · Sites · 공개·운영</span></footer>
   </div>
   <div class="modal-backdrop" id="toolModal" hidden><div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="toolModalTitle"><button type="button" class="modal-close" id="closeToolModal" aria-label="닫기">×</button><p class="eyebrow">NEXT ACTION</p><h2 id="toolModalTitle">Project</h2><p id="toolModalText"></p><div class="modal-steps" id="toolModalSteps"></div><a class="primary-button modal-link" href="https://chatgpt.com/" target="_blank" rel="noreferrer">ChatGPT 열기 <span>↗</span></a></div></div>
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
