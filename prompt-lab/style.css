@@ -46,3 +46,6 @@
 .admin-log small{color:var(--muted)}
 .admin-note{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:#edf5ff;color:#184b99;font-size:13px}
 @media(max-width:680px){.footer-info{align-items:flex-start;text-align:left}.footer-brand{align-items:flex-start}.admin-login{flex-direction:column}.admin-columns{grid-template-columns:1fr}.admin-metrics{grid-template-columns:repeat(2,1fr)}}
+
+.cheat-guide{margin:4px 0 18px;padding:14px 17px;border:1px solid #b9d2f2;border-radius:13px;background:#f2f7ff;color:#29466a}.cheat-guide-title{margin-bottom:5px;color:var(--navy);font-weight:850;font-size:16px}.cheat-guide ol{display:flex;gap:22px;flex-wrap:wrap;margin:4px 0 6px;padding-left:21px}.cheat-guide li{font-size:14px}.cheat-guide p{margin:7px 0 0;font-size:14px;color:#43617f}.cheat-guide p b{color:var(--blue)}
+@media(max-width:680px){.cheat-guide ol{display:block;margin:4px 0;padding-left:20px}.cheat-guide li{margin:3px 0}.cheat-guide p{line-height:1.55}}
