@@ -1,5 +1,5 @@
 const TOTAL_SLIDES = 69;
-const PDF_PATH = 'assets/0917_homepage_webservice_lecture.pdf';
+const PDF_PATH = '/assets/0917_homepage_webservice_lecture.pdf';
 const PDF_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 const DONE_KEY = 'mentor-k-ai-lecture-done-v3';
 
@@ -224,7 +224,7 @@ function downloadPdf(){
   anchor.click();
   anchor.remove();
 }
-function openOverview(){ window.open('slides.html','_blank','noopener,noreferrer'); }
+function openOverview(){ window.open('/slides.html','_blank','noopener,noreferrer'); }
 function toggleFullscreen(){
   const stage = document.getElementById('lessonStage');
   if (!stage) return;
