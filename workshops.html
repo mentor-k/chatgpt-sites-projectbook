@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="멘토K 김용한 박사의 AI·AX, 웹사이트 구축, 창업·R&D, 상권·로컬 정책기획 강의와 워크숍" />
+  <title>강의·워크숍 | AI와 함께 만드는 실전 플랫폼</title>
+  <link rel="stylesheet" href="styles.css?v=13" />
+  <style>
+    .workshops-page{background:var(--bg)}
+    .workshops-page .topbar-meta{gap:8px}
+    .workshops-page .workshops-back{display:inline-flex;align-items:center;padding:10px 13px;border-radius:10px;background:#fff;color:var(--blue);border:1px solid var(--line);font-size:11px;font-weight:900;white-space:nowrap}
+    .workshops-page .workshops-back:hover{border-color:#9fb9ec;background:#f7faff}
+    .program-hero{max-width:1320px;margin:0 auto;padding:78px 40px 50px;display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:end}
+    .program-hero h1{font-size:clamp(42px,5vw,72px);line-height:1.04;letter-spacing:-.08em;margin:0 0 22px}.program-hero h1 em{font-style:normal;color:var(--blue)}
+    .program-lead{max-width:690px;color:#5d6b80;font-size:16px;line-height:1.8;letter-spacing:-.035em}
+    .program-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.program-proof div{padding:18px 15px;border:1px solid var(--line);border-radius:16px;background:#fff}.program-proof strong{display:block;color:var(--blue);font-size:24px}.program-proof span{display:block;margin-top:5px;color:var(--muted);font-size:10px;line-height:1.4}
+    .program-section{max-width:1320px;margin:0 auto;padding:34px 40px 74px}.program-section h2{font-size:32px;letter-spacing:-.07em;margin:0}.program-section h2 span{color:var(--blue)}
+    .audience-grid,.program-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:25px}.audience-card{min-height:135px;padding:20px;border-radius:17px;background:var(--navy);color:#fff}.audience-card b{display:block;color:#84a9ff;font-size:10px;margin-bottom:22px}.audience-card strong{font-size:17px;letter-spacing:-.05em}.audience-card p{margin:8px 0 0;color:#bdc9da;font-size:11px;line-height:1.5}
+    .program-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.program-card{display:flex;flex-direction:column;min-height:245px;padding:23px;border:1px solid var(--line);border-radius:19px;background:#fff;box-shadow:0 10px 28px rgba(20,47,94,.06)}.program-card:hover{border-color:#afc5ed;box-shadow:var(--shadow);transform:translateY(-3px)}.program-card .program-label{color:var(--blue);font-size:9px;font-weight:900;letter-spacing:.1em}.program-card h3{margin:14px 0 8px;font-size:20px;line-height:1.25;letter-spacing:-.06em}.program-card p{margin:0;color:#607086;font-size:12px;line-height:1.65}.program-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:18px}.program-meta span{padding:6px 8px;border-radius:999px;background:#f0f4fa;color:#55657b;font-size:9px;font-weight:800}
+    .process-band{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:25px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--line)}.process-step{min-height:130px;padding:18px;background:#fff}.process-step b{display:block;color:var(--blue);font-size:10px}.process-step strong{display:block;margin:18px 0 7px;font-size:14px}.process-step span{color:var(--muted);font-size:10px;line-height:1.45}
+    .workshop-cta{max-width:1320px;margin:0 auto;padding:0 40px 90px}.workshop-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:31px 36px;border-radius:23px;background:var(--navy);color:#fff}.workshop-cta h2{margin:0 0 9px;font-size:28px;letter-spacing:-.07em}.workshop-cta p{margin:0;color:#b7c5d9;font-size:12px;line-height:1.6}.workshop-cta .primary-button{white-space:nowrap}
+    @media(max-width:980px){.program-hero{grid-template-columns:1fr;padding-top:55px}.audience-grid{grid-template-columns:repeat(2,1fr)}.program-grid{grid-template-columns:repeat(2,1fr)}.process-band{grid-template-columns:repeat(3,1fr)}.workshop-cta-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:640px){.workshops-page .workshops-back{font-size:9px;padding:8px 9px}.program-hero,.program-section,.workshop-cta{padding-left:16px;padding-right:16px}.program-hero{padding-top:48px;gap:30px}.program-hero h1{font-size:45px}.program-lead{font-size:14px}.program-proof{gap:6px}.program-proof div{padding:14px 9px}.program-proof strong{font-size:20px}.program-proof span{font-size:9px}.program-section{padding-bottom:55px}.program-section h2{font-size:28px}.audience-grid,.program-grid,.process-band{grid-template-columns:1fr}.audience-card{min-height:115px}.program-card{min-height:220px}.process-step{min-height:105px}.process-step strong{margin:12px 0 5px}.workshop-cta{padding-bottom:60px}.workshop-cta-inner{padding:24px 21px}.workshop-cta h2{font-size:24px}}
+  </style>
+</head>
+<body class="workshops-page">
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="홈페이지 만들기 프로젝트 WEB 홈">
+        <img class="brand-logo" src="assets/mentor-k-header-logo.png" alt="멘토K" />
+        <span class="brand-title">AI와 함께 만드는 실전 플랫폼</span>
+      </a>
+      <div class="topbar-meta">
+        <a class="workshops-back" href="index.html">메인으로</a>
+        <a class="prompt-topbar-link" href="https://aiwith.kr/prompt/" target="_blank" rel="noopener noreferrer">실전 프롬프트랩 ↗</a>
+      </div>
+    </header>
+    <main>
+      <section class="program-hero">
+        <div><p class="eyebrow">02 강의·워크숍 : PROGRAMS</p><h1>AI와 함께 배우고,<br /><em>현장에서 완성합니다</em></h1><p class="program-lead">김용한 박사(멘토K)의 강의·워크숍은 지식을 전달하는 데서 끝나지 않습니다. 기업·기관의 실제 고민을 출발점으로 AI를 활용해 기획하고, 토론하고, 결과물을 완성하도록 설계합니다.</p></div>
+        <div class="program-proof"><div><strong>4H</strong><span>웹사이트 구축 실습</span></div><div><strong>5+</strong><span>핵심 교육 영역</span></div><div><strong>맞춤</strong><span>기관·기업별 설계</span></div></div>
+      </section>
+      <section class="program-section">
+        <p class="eyebrow">AUDIENCE</p><h2>대상에 따라 <span>문제와 결과물</span>을 맞춥니다</h2>
+        <div class="audience-grid"><div class="audience-card"><b>01 · BUSINESS</b><strong>스타트업·중소기업</strong><p>사업기획, 고객검증, 마케팅, AX 성장 전략</p></div><div class="audience-card"><b>02 · PUBLIC</b><strong>지자체·공공기관</strong><p>정책기획, 국비공모, 상권·로컬·관광 활성화</p></div><div class="audience-card"><b>03 · INSTITUTION</b><strong>기업·기관·출연연</strong><p>AI 업무혁신, R&D 기획, 조직 역량 강화</p></div><div class="audience-card"><b>04 · CREATOR</b><strong>예비창업자·전문가</strong><p>웹사이트, 개인브랜딩, 책쓰기 실전</p></div></div>
+      </section>
+      <section class="program-section">
+        <p class="eyebrow">CORE PROGRAMS</p><h2>현장에서 바로 쓰는 <span>강의·워크숍 주제</span></h2>
+        <div class="program-grid">
+          <article class="program-card"><span class="program-label">WEB · AI · PRACTICE</span><h3>AI와 함께 웹사이트·웹서비스 구축</h3><p>Project에서 기준을 만들고 Work에서 기획·개발하며 Sites에서 검수·공개합니다. 4시간 안에 아이디어를 접속 가능한 MVP로 연결합니다.</p><div class="program-meta"><span>핵심 1H</span><span>실습 3H</span><span>Project·Work·Sites</span></div></article>
+          <article class="program-card"><span class="program-label">STARTUP · BUSINESS PLAN</span><h3>선정되는 사업계획서와 창업지원사업</h3><p>창업지원사업의 선정 구조와 평가 관점을 이해하고 문제정의·고객검증·시장진입·발표평가까지 계획서를 재설계합니다.</p><div class="program-meta"><span>예비·초기창업</span><span>평가 대응</span><span>실전 작성</span></div></article>
+          <article class="program-card"><span class="program-label">AX · AI TRANSFORMATION</span><h3>스타트업·중소기업 AX 전환 전략</h3><p>AI 활용 현황을 진단하고 업무·프로세스 혁신 과제를 선정해 조직이 실행할 수 있는 AX 로드맵과 성과지표를 만듭니다.</p><div class="program-meta"><span>AX 진단</span><span>업무혁신</span><span>실행 로드맵</span></div></article>
+          <article class="program-card"><span class="program-label">LOCAL · POLICY WORKSHOP</span><h3>상권·로컬·관광 정책기획 워크숍</h3><p>현장 문제와 데이터를 읽고 AI로 아이디어를 확장합니다. 팀 토론·4사분면 평가·정책기획서 작성·발표·피드백으로 연결합니다.</p><div class="program-meta"><span>팀 토론</span><span>정책기획서</span><span>발표·평가</span></div></article>
+          <article class="program-card"><span class="program-label">R&amp;D · FUNDING</span><h3>정부지원 R&amp;D 기획과 평가 대응</h3><p>지원사업 탐색부터 과제 발굴·기획·계획서·평가 대응·수행·기술사업화까지 연구개발 전 과정을 실무 관점으로 다룹니다.</p><div class="program-meta"><span>과제 발굴</span><span>계획서</span><span>기술사업화</span></div></article>
+          <article class="program-card"><span class="program-label">AI · BRANDING · CONTENT</span><h3>생성형 AI 정보탐색과 개인브랜딩</h3><p>정보를 찾고 검증하는 방법부터 블로그·SNS·강의자료·책으로 확장하는 콘텐츠 제작과 개인브랜딩 실행까지 다룹니다.</p><div class="program-meta"><span>5회 과정</span><span>시니어·전문가</span><span>콘텐츠 실습</span></div></article>
+        </div>
+      </section>
+      <section class="program-section">
+        <p class="eyebrow">WORKSHOP FLOW</p><h2>맞춤형 강의·워크숍 <span>진행 방식</span></h2>
+        <div class="process-band"><div class="process-step"><b>01</b><strong>현황·고민 파악</strong><span>대상·인원·시간·주제·현재 과제를 확인합니다.</span></div><div class="process-step"><b>02</b><strong>맞춤 설계</strong><span>목표와 산출물에 맞춰 강의·실습·워크숍을 조합합니다.</span></div><div class="process-step"><b>03</b><strong>강의·실습</strong><span>핵심 개념을 이해하고 개인 또는 팀 결과물을 만듭니다.</span></div><div class="process-step"><b>04</b><strong>발표·피드백</strong><span>결과물을 공유하고 전문가 관점의 개선 방향을 확인합니다.</span></div><div class="process-step"><b>05</b><strong>후속 실행</strong><span>완성된 산출물을 실제 업무·사업·서비스에 연결합니다.</span></div></div>
+      </section>
+      <section class="workshop-cta"><div class="workshop-cta-inner"><div><h2>우리 기관에 맞는 강의·워크숍을 제안받아 보세요</h2><p>대상·인원·시간·주제·현재 고민을 남겨 주시면 목적에 맞는 과정과 진행방식을 제안합니다.</p></div><a class="primary-button" href="index.html#consultation">맞춤 과정 문의하기 <span>↗</span></a></div></section>
+    </main>
+    <footer class="footer"><span>AI와 함께 만드는 실전 플랫폼</span><span>강의·워크숍</span><span>김용한 박사 · 멘토K</span></footer>
+  </div>
+</body>
+</html>
