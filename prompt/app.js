@@ -299,7 +299,7 @@ el('buildPrompt').onclick=()=>{if(!bv('bGoal')){el('bGoal').focus();el('buildSta
 el('clearBuilder').onclick=()=>{document.querySelectorAll('#builderView input,#builderView textarea').forEach(x=>x.value='');el('bFormat').selectedIndex=0;el('bLevel').selectedIndex=1;el('builtPrompt').textContent='항목을 입력하거나 위의 용도별 예시를 선택하세요.';el('buildStatus').textContent='필수 입력: 최종 목표'};
 el('copyBuilt').onclick=()=>el('builtPrompt').textContent.startsWith('당신은')&&copyText(el('builtPrompt').textContent);
 el('commandStat').textContent=commands.length;el('workStat').textContent=works.length+recipes.length;
-renderCommands();renderList(works,workCategory,'workSearch','workGrid','workEmpty');renderList(recipes,recipeCategory,'recipeSearch','recipeGrid','recipeEmpty');
+renderCommands();renderList(works,workCategory,'workSearch','workGrid','workEmpty');renderList(recipes,recipeCategory,'recipeSearch','recipeGrid','recipeEmpty');renderMetaKeys();
 
 filters('planningFilters',planningPrompts,'category',v=>{planningCategory=v;renderList(planningPrompts,planningCategory,'planningSearch','planningGrid','planningEmpty')});
 let planningCategory='전체';
