@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /admin.html
+Disallow: /admin/
 Disallow: /prompt/admin.html
-Disallow: /prompt-lab/admin.html
 Sitemap: https://aiwith.kr/sitemap.xml

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aiwith.kr/</loc></url>
-  <url><loc>https://aiwith.kr/slides.html</loc></url>
-  <url><loc>https://aiwith.kr/prompt/</loc></url>
+  <url><loc>https://aiwith.kr/</loc><priority>1.0</priority></url>
+  <url><loc>https://aiwith.kr/website/</loc><priority>0.9</priority></url>
+  <url><loc>https://aiwith.kr/website/benchmark/</loc><priority>0.7</priority></url>
+  <url><loc>https://aiwith.kr/prompt/</loc><priority>0.9</priority></url>
+  <url><loc>https://aiwith.kr/book-school/</loc><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/workshops/</loc><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/columns/</loc><priority>0.7</priority></url>
+  <url><loc>https://aiwith.kr/notices/</loc><priority>0.6</priority></url>
+  <url><loc>https://aiwith.kr/consultation/</loc><priority>0.8</priority></url>
 </urlset>
