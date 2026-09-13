@@ -361,7 +361,7 @@ function attachBuildSearch(kind,gridId,emptyId){const input=el(kind+"Search"),gr
 
 /* Privacy-safe server telemetry. No secrets or user content are stored here. */
 (() => {
-  const base = (window.PROMPTLAB_API_BASE || "/api").replace(/\\/+$/, "");
+  const base = (window.PROMPTLAB_API_BASE || "/api").replace(/\/+$/, "");
   const send = (type, label) => {
     try {
       const payload = JSON.stringify({ type: String(type || "event").slice(0, 32), label: String(label || "").slice(0, 80), at: new Date().toISOString() });
