@@ -12,7 +12,8 @@
     row.classList.add('cardnews-preview-topics');
     row.innerHTML = latest.map((post) => {
       const href = `/cardnews/view/?slug=${encodeURIComponent(post.slug)}`;
-      return `<article class="cardnews-preview-post"><a href="${href}"><div class="cardnews-preview-cover"><img src="${image(post.cards[0])}" alt="${esc(post.title)} 대표 카드" loading="lazy"><span>5장</span></div><div class="cardnews-preview-post-copy"><small>AIWITH · CARD NEWS</small><b>${esc(post.title)}</b><p>${esc(post.summary)}</p></div></a></article>`;
+      const cards = post.cards.slice(0, 5).map((card, index) => `<span class="cardnews-preview-gallery-card"><img src="${image(card)}" alt="${esc(post.title)} ${index + 1}장" loading="lazy"><em>${String(index + 1).padStart(2, '0')}</em></span>`).join('');
+      return `<article class="cardnews-preview-post"><a href="${href}" aria-label="${esc(post.title)} 5장 전체 보기"><div class="cardnews-preview-gallery">${cards}</div><div class="cardnews-preview-post-copy"><small>AIWITH · CARD NEWS · 5 CARDS</small><b>${esc(post.title)}</b><p>${esc(post.summary)}</p><span class="cardnews-preview-detail">5장 전체 보기 →</span></div></a></article>`;
     }).join('');
     const meta = root.querySelector('.cardnews-preview-meta');
     if (meta) meta.innerHTML = `<div><b>최신 카드뉴스 ${latest.length}개</b><span>각 주제의 상세보기에서 5장 전체를 확인할 수 있습니다.</span></div><a class="text-link" href="/cardnews/">카드뉴스 전체보기 →</a>`;
