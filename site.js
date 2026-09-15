@@ -11,6 +11,7 @@
     const closeMenu = () => { toggle.setAttribute('aria-expanded', 'false'); nav.classList.remove('open'); document.body.classList.remove('menu-open'); };
     toggle.addEventListener('click', () => { const on = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(on)); nav.classList.toggle('open', on); document.body.classList.toggle('menu-open', on); });
     nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
     header.querySelectorAll('.nav-group>button').forEach((button) => button.addEventListener('click', () => { const on = button.getAttribute('aria-expanded') !== 'true'; header.querySelectorAll('.nav-group>button').forEach((x) => { x.setAttribute('aria-expanded', 'false'); x.parentElement.classList.remove('open'); }); button.setAttribute('aria-expanded', String(on)); button.parentElement.classList.toggle('open', on); }));
     header.querySelectorAll('a').forEach((a) => { const href = a.getAttribute('href'); if (href && active(href) && href !== '/') a.classList.add('active'); if (href === '/' && path === '/') a.classList.add('active'); });
     const adminHash = 'e45870b5e5716bad459290561eaedf47972c65c9cb3d4f50762f46bf45e8f898';
@@ -22,7 +23,7 @@
       if (password && await digest(password) === adminHash) { sessionStorage.setItem('aiwith_admin_access', 'granted'); location.href = '/admin/'; }
       else if (password !== null) window.alert('비밀번호가 올바르지 않습니다.');
     });
-    document.addEventListener('click', (event) => { if (!event.target.closest('.nav-group')) header.querySelectorAll('.nav-group').forEach((g) => { g.classList.remove('open'); g.querySelector('button')?.setAttribute('aria-expanded', 'false'); }); });
+    document.addEventListener('click', (event) => { if (!event.target.closest('.nav-group')) header.querySelectorAll('.nav-group').forEach((g) => { g.classList.remove('open'); g.querySelector('button')?.setAttribute('aria-expanded', 'false'); }); if (!event.target.closest('.global-header') && nav.classList.contains('open')) closeMenu(); });
   }
   if (footer) footer.innerHTML = '<footer class="global-footer"><a class="footer-brand" href="/"><b>AIWITH</b><span>AI와 함께 배우고, 만들고, 성장하다</span></a><div class="footer-nav"><a href="/website/">웹사이트 구축 강의</a><a href="/prompt/">AI 프롬프트랩</a><a href="/book-school/">책쓰기 스쿨</a><a href="/workshops/">강의·워크숍</a><a href="/columns/">컬럼</a><a href="/notices/">공지</a><a href="/consultation/">상담</a></div><p>© 2026 AIWITH · 엠아이넥스트㈜ · 김용한 박사(멘토K)</p></footer>';
   try {
