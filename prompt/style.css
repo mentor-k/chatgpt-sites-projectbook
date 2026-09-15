@@ -121,3 +121,10 @@
 /* Keep shared footer contact readable in the prompt workspace. */
 .global-footer>p .footer-contact{display:inline-block;margin-left:10px;color:#9fb0c4;white-space:nowrap}
 @media(max-width:560px){.global-footer>p .footer-contact{display:block;margin:6px 0 0;white-space:normal}}
+
+
+
+/* Supplied AI위드스쿨 wordmark in the shared footer. */
+.global-footer .footer-brand{align-items:center}
+.global-footer .footer-brand img{display:block;width:260px;max-width:100%;height:auto;padding:8px;border-radius:10px;background:#fff}
+@media(max-width:560px){.global-footer .footer-brand img{width:220px}}

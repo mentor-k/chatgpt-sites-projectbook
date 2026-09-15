@@ -1,6 +1,6 @@
-# AIWITH 통합 플랫폼
+# AI위드스쿨 통합 플랫폼
 
-AIWITH는 AI 웹사이트 구축, 프롬프트, 책쓰기, 강의와 워크숍을 한 도메인 안에서 연결하는 정적 GitHub Pages 사이트입니다.
+AI위드스쿨는 AI 웹사이트 구축, 프롬프트, 책쓰기, 강의와 워크숍을 한 도메인 안에서 연결하는 정적 GitHub Pages 사이트입니다.
 
 ## 운영 URL
 
@@ -10,7 +10,7 @@ AIWITH는 AI 웹사이트 구축, 프롬프트, 책쓰기, 강의와 워크숍�
 - AI 프롬프트랩: `/prompt/`
 - 책쓰기 스쿨: `/book-school/`
 - 강의·워크숍: `/workshops/`
-- AIWITH 컬럼: `/columns/`
+- AI위드스쿨 컬럼: `/columns/`
 - 공지사항: `/notices/`
 - 상담 신청: `/consultation/`
 - 통합 관리자 대시보드: `/admin/`

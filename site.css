@@ -63,3 +63,23 @@
 /* Shared footer contact details. */
 .global-footer>p .footer-contact{display:inline-block;margin-left:10px;color:#9fb0c4;white-space:nowrap}
 @media(max-width:560px){.global-footer>p .footer-contact{display:block;margin:6px 0 0;white-space:normal}}
+
+
+
+/* AI위드스쿨 supplied wordmark — shared header and footer. */
+.global-brand{min-width:180px}
+.global-brand img{display:block;width:180px;height:62px;object-fit:contain}
+.footer-brand{align-items:center}
+.footer-brand img{display:block;width:260px;max-width:100%;height:auto;padding:8px;border-radius:10px;background:#fff}
+@media(max-width:1180px){
+  .global-brand{min-width:170px}
+  .global-brand img{width:165px;height:58px}
+}
+@media(max-width:820px){
+  .global-brand{min-width:auto}
+  .global-brand img{width:150px;height:56px}
+}
+@media(max-width:560px){
+  .global-brand img{width:132px;height:50px}
+  .footer-brand img{width:220px}
+}
