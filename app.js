@@ -126,7 +126,7 @@ async function renderPdfSlide(number){
     canvas.setAttribute('aria-label', slideTitle(number));
     if (status) status.hidden = true;
   } catch (error) {
-    if (status) status.textContent = 'PDF 뷰어를 불러오지 못했습니다. 아래 원본 PDF를 열어 확인해 주세요.';
+    if (status) status.textContent = 'PDF 뷰어를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';
     console.error(error);
   }
 }
@@ -215,14 +215,6 @@ function toggleComplete(){
   if (!completed[id]) delete completed[id];
   localStorage.setItem(DONE_KEY,JSON.stringify(completed));
   renderAll();
-}
-function downloadPdf(){
-  const anchor = document.createElement('a');
-  anchor.href = PDF_PATH;
-  anchor.download = '0917_홈페이지_웹서비스_강의안_엠아이넥스트_김용한.pdf';
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
 }
 function openOverview(){ window.open('/slides.html','_blank','noopener,noreferrer'); }
 function toggleFullscreen(){

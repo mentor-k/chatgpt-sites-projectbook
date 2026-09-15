@@ -34,15 +34,15 @@
       { href: '/proposal-school/#government', label: '정부지원 사업계획서' }
     ]);
     const prompt = nav.querySelector('a[href="/prompt/"]');
-    if (prompt) { nav.insertBefore(content, prompt); nav.insertBefore(proposal, prompt); }
+    if (prompt && !nav.querySelector('a[href="/content-school/"]')) { nav.insertBefore(content, prompt); nav.insertBefore(proposal, prompt); }
     const path = location.pathname.replace(/\/index\.html$/, '/');
     nav.querySelectorAll('a').forEach((link) => { const href = link.getAttribute('href'); if (href && href.split('#')[0] !== '/' && path.startsWith(href.split('#')[0])) link.classList.add('active'); });
-    if (!path.startsWith('/admin/')) {
+    if (!path.startsWith('/admin/') && path !== '/website/' && !document.querySelector('.aiwith-float-cta')) {
       const cta = document.createElement('a');
       cta.className = 'aiwith-float-cta';
       cta.href = '/consultation/';
       cta.setAttribute('aria-label', '강의·워크숍 신청 상담 010-3338-7110');
-      cta.innerHTML = '<span>강의·워크숍<br><b>신청하기</b></span><strong>010-3338-7110</strong><i aria-hidden="true">→</i>';
+      cta.innerHTML = '<span>강의·워크숍<br><b>신청하기</b></span><strong>010-3338-<br>7110</strong><i aria-hidden="true">→</i>';
       document.body.appendChild(cta);
     }
   };
