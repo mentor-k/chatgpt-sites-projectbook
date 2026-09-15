@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const selector = '#slideView';
+  const selector = '#slideView, #deckScreen';
   const protect = () => {
     const root = document.querySelector(selector);
     if (!root) return;
