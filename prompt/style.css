@@ -184,3 +184,9 @@
 @media(max-width:1100px){.global-brand img{width:184px;height:61px}.global-brand{min-width:184px}.global-header{height:76px}}
 @media(max-width:820px){.global-brand img{width:168px;height:52px}.global-brand{min-width:auto}.global-header{height:68px}.global-nav{top:68px;height:calc(100vh - 68px)}}
 @media(max-width:560px){.global-brand img{width:144px;height:48px}.global-header{height:68px}.global-nav{top:68px;height:calc(100vh - 68px)}.footer-domain{font-size:.75rem}}
+
+
+
+/* Minimal footer: remove company row and reduce total block height. */
+.global-footer{padding:20px 14px 12px}.footer-main{gap:8px}.footer-nav{margin:10px auto 0;padding-top:10px}.global-footer .footer-legal-links{margin:8px auto 0;padding-top:8px}.global-footer>.footer-copyright{padding-top:8px}
+@media(max-width:820px){.global-footer{padding:18px 12px 10px}.footer-main{gap:6px}.footer-nav{margin-top:8px;padding-top:8px}.global-footer .footer-legal-links{margin-top:7px;padding-top:7px}.global-footer>.footer-copyright{padding-top:7px}}
