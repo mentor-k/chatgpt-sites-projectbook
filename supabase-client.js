@@ -21,13 +21,14 @@
   const ordered = (posts) => (posts || []).map((post) => ({
     ...post,
     summary: post.description || '',
+    seo_title: post.seo_title || '', seo_description: post.seo_description || '', aeo_summary: post.aeo_summary || '', geo_summary: post.geo_summary || '', keywords: post.keywords || [],
     cards: (post.cardnews_cards || []).sort((a, b) => a.card_index - b.card_index).map((card) => ({ ...card, url: toPublicUrl(card.image_path) }))
   }));
   const listPublished = async () => {
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data, error } = await api.from('cardnews_posts')
-      .select('id,title,description,slug,status,published_at,sort_order,created_by,created_at,updated_at,cardnews_cards(id,card_index,image_path,alt_text)')
+      .select('id,title,description,seo_title,seo_description,aeo_summary,geo_summary,keywords,slug,status,published_at,sort_order,created_by,created_at,updated_at,cardnews_cards(id,card_index,image_path,alt_text)')
       .eq('status', 'published')
       .order('sort_order', { ascending: true })
       .order('published_at', { ascending: false });
@@ -58,21 +59,22 @@
     const response = await fetch(dataUrl);
     return response.blob();
   };
-  const savePost = async ({ id = null, title, summary, files, existingCards = [] }) => {
+  const savePost = async ({ id = null, title, summary, seoTitle = '', seoDescription = '', aeoSummary = '', geoSummary = '', keywords = '', files, existingCards = [] }) => {
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data: authData } = await api.auth.getSession();
+    const keywordList = Array.isArray(keywords) ? keywords : String(keywords || '').split(',').map((item) => item.trim()).filter(Boolean).slice(0, 30);
     const user = authData?.session?.user;
     if (!user) throw new Error('AUTH_REQUIRED');
     let post;
     if (id) {
-      const { data, error } = await api.from('cardnews_posts').update({ title, description: summary, updated_at: new Date().toISOString(), status: 'published', published_at: new Date().toISOString() }).eq('id', id).select().single();
+      const { data, error } = await api.from('cardnews_posts').update({ title, description: summary, seo_title: seoTitle, seo_description: seoDescription, aeo_summary: aeoSummary, geo_summary: geoSummary, keywords: keywordList, updated_at: new Date().toISOString(), status: 'published', published_at: new Date().toISOString() }).eq('id', id).select().single();
       if (error) throw error;
       post = data;
     } else {
       const base = slugify(title);
       const slug = `${base}-${Date.now().toString(36)}`;
-      const { data, error } = await api.from('cardnews_posts').insert({ title, description: summary, slug, status: 'published', published_at: new Date().toISOString(), created_by: user.id }).select().single();
+      const { data, error } = await api.from('cardnews_posts').insert({ title, description: summary, seo_title: seoTitle, seo_description: seoDescription, aeo_summary: aeoSummary, geo_summary: geoSummary, keywords: keywordList, slug: status: 'published', published_at: new Date().toISOString(), created_by: user.id }).select().single();
       if (error) throw error;
       post = data;
     }
@@ -99,7 +101,7 @@
     if (cardError) throw cardError;
     const removed = old.map((card) => card.image_path).filter((path) => path && !next.some((card) => card.image_path === path) && !/^https?:/i.test(path));
     if (removed.length) await api.storage.from('cardnews').remove(removed);
-    return { ...post, description: summary, cards: next.map((card) => ({ ...card, url: toPublicUrl(card.image_path) })) };
+    return { ...post, description: summary, seo_title: seoTitle, seo_description: seoDescription, aeo_summary: aeoSummary, geo_summary: geoSummary, keywords: keywordList, cards: next.map((card) => ({ ...card, url: toPublicUrl(card.image_path) })) };
   };
   const deletePost = async (id) => {
     const api = getClient();
