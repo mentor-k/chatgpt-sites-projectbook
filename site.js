@@ -4,7 +4,6 @@
   const footer = document.querySelector('[data-site-footer]');
   const path = location.pathname.replace(/\/index\.html$/, '/');
   const active = (prefix) => prefix === '/' ? path === '/' : path.startsWith(prefix);
-  window.AIWITH_REQUEST_ADMIN_PASSWORD = requestAdminPassword;
   const requestAdminPassword = () => new Promise((resolve) => {
     const backdrop = document.createElement('div');
     backdrop.className = 'aiwith-password-backdrop';
@@ -18,6 +17,7 @@
     document.body.appendChild(backdrop);
     input.focus();
   });
+  window.AIWITH_REQUEST_ADMIN_PASSWORD = requestAdminPassword;
   if (header) {
     header.innerHTML = '<header class="global-header"><a class="global-brand" href="/" aria-label="AIWITH HOME"><img src="/assets/mentor-k-header-logo.png" alt="멘토K"><span><b>AIWITH</b><small>AI와 함께 만드는 실전 플랫폼</small></span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="globalNav"><span></span><span></span><span></span><em>메뉴</em></button><nav class="global-nav" id="globalNav" aria-label="주요 메뉴"><a data-nav="home" href="/">HOME</a><div class="nav-group"><button type="button" aria-expanded="false">웹사이트 스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/website/">웹사이트 구축 강의</a><a href="/website/benchmark/">웹사이트 벤치마킹</a></div></div><div class="nav-group"><button type="button" aria-expanded="false">콘텐츠스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/content-school/">콘텐츠스쿨 소개</a><a href="/content-school/#blog">AI 블로그 글쓰기</a><a href="/content-school/#visual">인포그래픽·포스터·카드뉴스</a><a href="/content-school/#shortform">숏폼 만들기·홍보마케팅</a></div></div><div class="nav-group"><button type="button" aria-expanded="false">기획서·사업계획서 스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/proposal-school/">스쿨 소개</a><a href="/proposal-school/#business">사업계획서·IR자료</a><a href="/proposal-school/#government">정부지원 사업계획서</a></div></div><a href="/prompt/">AI 프롬프트랩</a><a href="/book-school/">책쓰기 스쿨</a><a href="/workshops/">강의·워크숍</a><a href="/columns/">멘토K 컬럼</a><a href="/cardnews/">카드뉴스</a><a href="/notices/">공지사항</a><a class="nav-cta" href="/consultation/">상담 신청</a><a class="admin-link" data-admin-entry href="/admin/" aria-label="관리자 대시보드" title="관리자 대시보드"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5.1-3.4 8.9-8 10-4.6-1.1-8-4.9-8-10V6l8-3Z"/><path d="m8.8 12 2.1 2.1 4.5-4.7"/></svg><span>관리자</span></a></nav></header>';
     const nav = header.querySelector('.global-nav');

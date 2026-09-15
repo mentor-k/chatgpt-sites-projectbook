@@ -21,7 +21,7 @@
   const ordered = (posts) => (posts || []).map((post) => ({
     ...post,
     summary: post.description || '',
-    seo_title: post.seo_title || '', seo_description: post.seo_description || '', aeo_summary: post.aeo_summary || '', geo_summary: post.geo_summary || '', keywords: post.keywords || [],
+    seo_title: post.seo_title || '', seo_description: post.seo_description || '', aeo_summary: post.aeo_summary || '', geo_summary: post.geo_summary || '', keywords: post.keywords || [], optimization_summary: post.geo_summary || post.aeo_summary || post.seo_description || '',
     cards: (post.cardnews_cards || []).sort((a, b) => a.card_index - b.card_index).map((card) => ({ ...card, url: toPublicUrl(card.image_path) }))
   }));
   const listPublished = async () => {
@@ -59,7 +59,7 @@
     const response = await fetch(dataUrl);
     return response.blob();
   };
-  const savePost = async ({ id = null, title, summary, seoTitle = '', seoDescription = '', aeoSummary = '', geoSummary = '', keywords = '', files, existingCards = [] }) => {
+  const savePost = async ({ id = null, title, summary, seoTitle = '', seoDescription = '', aeoSummary = '', geoSummary = '', optimizationSummary = '', files, existingCards = [] }) => {
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data: authData } = await api.auth.getSession();
@@ -68,13 +68,13 @@
     if (!user) throw new Error('AUTH_REQUIRED');
     let post;
     if (id) {
-      const { data, error } = await api.from('cardnews_posts').update({ title, description: summary, seo_title: seoTitle, seo_description: seoDescription, aeo_summary: aeoSummary, geo_summary: geoSummary, keywords: keywordList, updated_at: new Date().toISOString(), status: 'published', published_at: new Date().toISOString() }).eq('id', id).select().single();
+      const { data, error } = await api.from('cardnews_posts').update({ title, description: summary, seo_title: seoTitle || title, seo_description: optimizationSummary || seoDescription, aeo_summary: optimizationSummary || aeoSummary, geo_summary: optimizationSummary || geoSummary, keywords: keywordList, updated_at: new Date().toISOString(), status: 'published', published_at: new Date().toISOString() }).eq('id', id).select().single();
       if (error) throw error;
       post = data;
     } else {
       const base = slugify(title);
       const slug = `${base}-${Date.now().toString(36)}`;
-      const { data, error } = await api.from('cardnews_posts').insert({ title, description: summary, seo_title: seoTitle, seo_description: seoDescription, aeo_summary: aeoSummary, geo_summary: geoSummary, keywords: keywordList, slug: status: 'published', published_at: new Date().toISOString(), created_by: user.id }).select().single();
+      const { data, error } = await api.from('cardnews_posts').insert({ title, description: summary, seo_title: seoTitle || title, seo_description: optimizationSummary || seoDescription, aeo_summary: optimizationSummary || aeoSummary, geo_summary: optimizationSummary || geoSummary, keywords: keywordList, slug: status: 'published', published_at: new Date().toISOString(), created_by: user.id }).select().single();
       if (error) throw error;
       post = data;
     }
@@ -101,7 +101,7 @@
     if (cardError) throw cardError;
     const removed = old.map((card) => card.image_path).filter((path) => path && !next.some((card) => card.image_path === path) && !/^https?:/i.test(path));
     if (removed.length) await api.storage.from('cardnews').remove(removed);
-    return { ...post, description: summary, seo_title: seoTitle, seo_description: seoDescription, aeo_summary: aeoSummary, geo_summary: geoSummary, keywords: keywordList, cards: next.map((card) => ({ ...card, url: toPublicUrl(card.image_path) })) };
+    return { ...post, description: summary, seo_title: seoTitle || title, seo_description: optimizationSummary || seoDescription, aeo_summary: optimizationSummary || aeoSummary, geo_summary: optimizationSummary || geoSummary, keywords: keywordList, optimization_summary: optimizationSummary, cards: next.map((card) => ({ ...card, url: toPublicUrl(card.image_path) })) };
   };
   const deletePost = async (id) => {
     const api = getClient();
