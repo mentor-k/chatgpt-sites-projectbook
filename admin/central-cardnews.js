@@ -1,0 +1,33 @@
+(() => {
+  'use strict';
+  const api = window.AIWITH_SUPABASE;
+  const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const fmt = (value) => { try { return new Intl.DateTimeFormat('ko-KR',{dateStyle:'medium',timeStyle:'short'}).format(new Date(value)); } catch (_) { return '-'; } };
+  const waitForAdmin = (tries = 0) => { if (document.querySelector('#cardnewsForm') && document.documentElement.style.visibility !== 'hidden') init(); else if (tries < 240) setTimeout(() => waitForAdmin(tries + 1), 50); };
+  const compress = (file) => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onerror = reject; reader.onload = () => { const image = new Image(); image.onerror = reject; image.onload = () => { const max = 1280; const scale = Math.min(1, max / image.width); const canvas = document.createElement('canvas'); canvas.width = Math.round(image.width * scale); canvas.height = Math.round(image.height * scale); canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height); resolve({name:file.name,dataUrl:canvas.toDataURL('image/webp',.82)}); }; image.src = reader.result; }; reader.readAsDataURL(file); });
+  function init() {
+    if (!api?.getClient?.()) return;
+    const form = document.querySelector('#cardnewsForm');
+    const authForm = document.querySelector('#supabaseAuthForm');
+    const status = document.querySelector('#supabaseStatus');
+    const userLabel = document.querySelector('#supabaseUserLabel');
+    const signOut = document.querySelector('#supabaseSignOut');
+    const list = document.querySelector('#cardnewsDraftList');
+    const inputs = ['card01','card02','card03','card04','card05'].map((name) => form.querySelector(`input[name="${name}"]`));
+    let user = null;
+    let posts = [];
+    let editingId = null;
+    let existingCards = [];
+    const setStatus = (session, note) => { user = session?.user || null; if (user) { status.textContent='Supabase 중앙 저장 연결됨'; userLabel.textContent=user.email || '관리자 계정'; authForm.hidden=true; signOut.hidden=false; } else { status.textContent=note || 'Supabase 프로젝트 연결됨 · 관리자 로그인 필요'; userLabel.textContent='로그인하면 카드뉴스가 중앙 저장됩니다.'; authForm.hidden=false; signOut.hidden=true; } };
+    const render = () => { list.innerHTML = posts.length ? '<p class="admin-note">Supabase 중앙 저장 목록 · 공개 페이지에 반영됨</p>'+posts.map((post) => { const owner = post.created_by === user?.id; return `<article class="cardnews-draft-item"><h3>${esc(post.title)} · ${post.cards.length}장</h3><p>${esc(fmt(post.updated_at||post.published_at||post.created_at))} · ${esc(post.summary)}</p><div class="cardnews-draft-cards">${post.cards.map((card,index)=>`<img src="${esc(card.url)}" alt="${index+1}장 미리보기">`).join('')}</div><div class="cardnews-draft-actions"><a class="button ghost" href="/cardnews/view/?slug=${encodeURIComponent(post.slug)}" target="_blank" rel="noreferrer">보기</a>${owner?`<button class="button ghost" data-central-edit="${esc(post.id)}">편집</button><button class="button ghost" data-central-delete="${esc(post.id)}">삭제</button>`:'<span class="admin-note">읽기 전용</span>'}</div></article>`; }).join('') : '<p class="cardnews-empty">Supabase에 등록된 카드뉴스가 없습니다.</p>'; };
+    const refresh = async () => { const client=api.getClient(); const {data:{session}}=await client.auth.getSession(); setStatus(session); if (!session) { posts=[]; return; } try { posts=await api.listOwned(); render(); } catch (error) { list.innerHTML='<p>중앙 목록을 불러오지 못했습니다. '+esc(error.message||'')+'</p>'; } };
+    const reset = () => { editingId=null; existingCards=[]; form.reset(); inputs.forEach((input)=>{input.required=true;}); form.querySelector('button[type="submit"]').textContent='카드뉴스 저장'; document.querySelector('#cardnewsUploadPreview').innerHTML=''; };
+    authForm?.addEventListener('submit', async (event) => { event.preventDefault(); const button=authForm.querySelector('button[type="submit"]'); button.disabled=true; try { const {error}=await api.getClient().auth.signInWithPassword({email:authForm.elements.email.value.trim(),password:authForm.elements.password.value}); if(error) throw error; authForm.reset(); await refresh(); } catch (_) { window.alert('Supabase 로그인에 실패했습니다. 이메일·비밀번호와 Auth 사용 설정을 확인해 주세요.'); } finally { button.disabled=false; } });
+    signOut?.addEventListener('click', async () => { await api.getClient().auth.signOut(); reset(); await refresh(); });
+    api.getClient().auth.onAuthStateChange((_event, session) => { setStatus(session); if (session) refresh(); });
+    form.addEventListener('submit', async (event) => { if (!user) return; event.preventDefault(); event.stopImmediatePropagation(); const files=inputs.map((input)=>input.files[0]); const submit=form.querySelector('button[type="submit"]'); submit.disabled=true; try { const compressed=await Promise.all(files.map((file)=>file?compress(file):Promise.resolve(null))); if(compressed.some((file,index)=>!file&&!existingCards[index])) { window.alert('카드 이미지 5장을 모두 선택해 주세요.'); return; } await api.savePost({id:editingId,title:form.elements.title.value.trim(),summary:form.elements.summary.value.trim(),files:compressed,existingCards}); reset(); await refresh(); window.alert('Supabase에 카드뉴스가 저장되어 공개 페이지에 반영되었습니다.'); } catch(error) { window.alert(error.message==='AUTH_REQUIRED'?'Supabase 관리자 로그인이 필요합니다.':'카드뉴스 저장 중 오류가 발생했습니다. '+(error.message||'')); } finally { submit.disabled=false; } }, true);
+    list.addEventListener('click', async (event) => { const edit=event.target.closest('[data-central-edit]'); if(edit){ const post=posts.find((item)=>item.id===edit.dataset.centralEdit); if(!post)return; editingId=post.id; existingCards=post.cards||[]; form.elements.title.value=post.title; form.elements.summary.value=post.summary; inputs.forEach((input)=>{input.required=false;}); form.querySelector('button[type="submit"]').textContent='카드뉴스 수정 저장'; document.querySelector('#cardnewsUploadPreview').innerHTML=existingCards.map((card,index)=>`<figure><img src="${esc(card.url)}" alt="${index+1}장 미리보기"><figcaption>기존 ${index+1}장 · 새 파일 선택 시 교체</figcaption></figure>`).join(''); form.scrollIntoView({behavior:'smooth',block:'start'}); return; } const remove=event.target.closest('[data-central-delete]'); if(!remove)return; if(!window.confirm('이 카드뉴스와 5장 이미지를 삭제하시겠습니까?'))return; try { await api.deletePost(remove.dataset.centralDelete); await refresh(); } catch(error) { window.alert('삭제하지 못했습니다. '+(error.message||'')); } });
+    refresh();
+  }
+  waitForAdmin();
+})();
