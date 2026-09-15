@@ -4,7 +4,7 @@
   const digest = async (value) => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)))).map((byte) => byte.toString(16).padStart(2, '0')).join('');
   const gate = async () => {
     if (sessionStorage.getItem('aiwith_admin_access') === 'granted') return true;
-    const password = window.prompt('관리자 대시보드 비밀번호를 입력하세요.');
+    const password = window.AIWITH_REQUEST_ADMIN_PASSWORD ? await window.AIWITH_REQUEST_ADMIN_PASSWORD() : window.prompt('관리자 대시보드 비밀번호를 입력하세요.');
     if (password && await digest(password) === ADMIN_HASH) { sessionStorage.setItem('aiwith_admin_access', 'granted'); return true; }
     if (password !== null) window.alert('비밀번호가 올바르지 않습니다.');
     return false;
