@@ -4,13 +4,18 @@
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
   const fmt = (value) => { try { return new Intl.DateTimeFormat('ko-KR', { dateStyle:'medium' }).format(new Date(value)); } catch (_) { return ''; } };
   const image = (card) => esc(card?.url || api()?.toPublicUrl(card?.image_path) || '');
-  const renderPreview = (post) => {
+  const renderPreview = (posts) => {
     const root = document.querySelector('[data-cardnews-preview]');
-    if (!root || !post || post.cards.length < 5) return;
-    const href = `/cardnews/view/?slug=${encodeURIComponent(post.slug)}`;
-    root.querySelector('.cardnews-preview-row').innerHTML = post.cards.slice(0, 5).map((card, index) => `<a class="cardnews-preview-card" href="${href}"><img src="${image(card)}" alt="${esc(post.title)} 카드뉴스 ${index + 1}장" loading="lazy"><span>${String(index + 1).padStart(2, '0')}</span></a>`).join('');
+    const latest = (posts || []).filter((post) => post?.cards?.length >= 5).slice(0, 4);
+    if (!root || !latest.length) return;
+    const row = root.querySelector('.cardnews-preview-row');
+    row.classList.add('cardnews-preview-topics');
+    row.innerHTML = latest.map((post) => {
+      const href = `/cardnews/view/?slug=${encodeURIComponent(post.slug)}`;
+      return `<article class="cardnews-preview-post"><a href="${href}"><div class="cardnews-preview-cover"><img src="${image(post.cards[0])}" alt="${esc(post.title)} 대표 카드" loading="lazy"><span>5장</span></div><div class="cardnews-preview-post-copy"><small>AIWITH · CARD NEWS</small><b>${esc(post.title)}</b><p>${esc(post.summary)}</p></div></a></article>`;
+    }).join('');
     const meta = root.querySelector('.cardnews-preview-meta');
-    if (meta) meta.innerHTML = `<div><b>${esc(post.title)}</b><span>${esc(post.summary)}</span></div><a class="text-link" href="${href}">상세보기 →</a>`;
+    if (meta) meta.innerHTML = `<div><b>최신 카드뉴스 ${latest.length}개</b><span>각 주제의 상세보기에서 5장 전체를 확인할 수 있습니다.</span></div><a class="text-link" href="/cardnews/">카드뉴스 전체보기 →</a>`;
   };
   const renderBoard = (posts) => {
     const root = document.querySelector('[data-cardnews-board]');
@@ -28,7 +33,7 @@
       const slug = new URLSearchParams(location.search).get('slug');
       if (slug && document.querySelector('[data-cardnews-detail]')) renderDetail(await api().getBySlug(slug));
       const posts = await api().listPublished();
-      renderPreview(posts[0]);
+      renderPreview(posts);
       renderBoard(posts);
     } catch (error) {
       console.warn('AIWITH 카드뉴스 중앙 콘텐츠를 불러오지 못했습니다.', error);
