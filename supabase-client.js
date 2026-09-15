@@ -74,7 +74,7 @@
     } else {
       const base = slugify(title);
       const slug = `${base}-${Date.now().toString(36)}`;
-      const { data, error } = await api.from('cardnews_posts').insert({ title, description: summary, seo_title: seoTitle || title, seo_description: optimizationSummary || seoDescription, aeo_summary: optimizationSummary || aeoSummary, geo_summary: optimizationSummary || geoSummary, keywords: keywordList, slug: status: 'published', published_at: new Date().toISOString(), created_by: user.id }).select().single();
+      const { data, error } = await api.from('cardnews_posts').insert({ title, description: summary, seo_title: seoTitle || title, seo_description: optimizationSummary || seoDescription, aeo_summary: optimizationSummary || aeoSummary, geo_summary: optimizationSummary || geoSummary, keywords: keywordList, slug, status: 'published', published_at: new Date().toISOString(), created_by: user.id }).select().single();
       if (error) throw error;
       post = data;
     }
