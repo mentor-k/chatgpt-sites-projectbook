@@ -134,3 +134,9 @@
 /* Match the shared header/footer wordmark sizing in the prompt workspace. */
 .global-footer .footer-brand img{width:182px}
 @media(max-width:560px){.global-footer .footer-brand img{width:154px}}
+
+
+
+/* Prompt workspace footer wordmark: 20% larger. */
+.global-footer .footer-brand img{width:218px}
+@media(max-width:560px){.global-footer .footer-brand img{width:185px}}

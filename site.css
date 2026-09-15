@@ -122,3 +122,9 @@
   .global-brand img{width:180px;height:60px}
   .global-nav{top:68px;height:calc(100vh - 68px)}
 }
+
+
+
+/* Footer wordmark: 20% larger while retaining the dark information block. */
+.footer-brand img{width:218px}
+@media(max-width:560px){.footer-brand img{width:185px}}
