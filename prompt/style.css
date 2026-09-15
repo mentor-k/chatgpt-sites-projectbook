@@ -153,3 +153,34 @@
 .global-footer .footer-company a{color:#c8dbf5}
 @media(max-width:820px){.global-footer .footer-main{grid-template-columns:1fr;gap:26px}.global-footer .footer-company{justify-self:start;min-width:0}}
 @media(max-width:560px){.global-footer .footer-brand img{width:185px}.global-footer .footer-company{font-size:.72rem}}
+
+
+
+/* Prompt workspace uses the same compact, centered footer as every AI위드스쿨 page. */
+.global-footer{padding:30px 18px 20px;text-align:center}
+.footer-main{grid-template-columns:1fr;gap:15px;justify-items:center;text-align:center}
+.footer-brand-block{justify-items:center}
+.footer-brand img{width:218px;padding:6px}
+.footer-company{justify-self:center;min-width:0;text-align:center;font-size:.74rem}
+.footer-company-kicker{margin-bottom:8px}.footer-company p{margin:4px 0}
+.footer-nav{justify-content:center;margin:18px auto 0;padding-top:14px;gap:7px 16px}
+.global-footer .footer-legal-links{justify-content:center;margin:14px auto 0;padding-top:11px}
+.global-footer>.footer-copyright{text-align:center;padding-top:12px;font-size:.62rem}
+@media(max-width:560px){.footer-brand img{width:185px}.footer-company{font-size:.7rem}}
+
+
+
+/* Transparent footer logo treatment shared with the main site. */
+.footer-brand{position:relative;display:block;width:min(218px,100%);padding-bottom:28px;overflow:hidden}
+.footer-brand img{display:block;width:100%;height:auto;padding:0;border-radius:0;background:transparent}
+.footer-brand:after{content:"AI와 함께 배우고, 만들고, 성장하다";position:absolute;left:0;right:0;bottom:0;height:27px;display:flex;align-items:flex-end;justify-content:center;background:#06101f;color:#fff;font-size:.64rem;font-weight:700;letter-spacing:-.035em;white-space:nowrap}
+@media(max-width:560px){.footer-brand{width:185px;padding-bottom:24px}.footer-brand:after{height:23px;font-size:.55rem}}
+
+
+
+/* Header wordmark reduced to 80%; footer domain emphasized by 130%. */
+.global-brand img{width:208px;height:66px}.global-brand{min-width:208px}.global-header{height:80px}
+.footer-domain{display:block;color:#a8b9ce;font-size:.83rem;font-weight:700;letter-spacing:.08em}
+@media(max-width:1100px){.global-brand img{width:184px;height:61px}.global-brand{min-width:184px}.global-header{height:76px}}
+@media(max-width:820px){.global-brand img{width:168px;height:52px}.global-brand{min-width:auto}.global-header{height:68px}.global-nav{top:68px;height:calc(100vh - 68px)}}
+@media(max-width:560px){.global-brand img{width:144px;height:48px}.global-header{height:68px}.global-nav{top:68px;height:calc(100vh - 68px)}.footer-domain{font-size:.75rem}}

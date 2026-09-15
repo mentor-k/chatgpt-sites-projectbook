@@ -164,3 +164,41 @@
 .footer-map-link{display:inline-flex!important;align-items:center;justify-content:center;padding:5px 9px;border:1px solid #456184;border-radius:4px;color:#fff!important;font-size:.64rem;font-weight:800;line-height:1.2;white-space:nowrap;transition:background .2s,border-color .2s}
 .footer-map-link:hover{background:#173b68;border-color:#78a2e2}
 @media(max-width:820px){.footer-brand-block{gap:13px}.footer-company-address{align-items:flex-start;flex-direction:column;gap:9px}}
+
+
+
+/* Compact centered footer information block. */
+.global-footer{padding:30px max(22px,calc((100vw - var(--max))/2)) 20px}
+.footer-main{grid-template-columns:1fr;gap:18px;justify-items:center;text-align:center}
+.footer-brand-block{justify-items:center}
+.footer-brand img{width:218px;padding:6px}
+.footer-company{justify-self:center;min-width:0;text-align:center;font-size:.74rem}
+.footer-company-kicker{margin-bottom:8px}
+.footer-company p{margin:4px 0}
+.footer-nav{justify-content:center;margin:20px auto 0;padding-top:16px;gap:7px 16px}
+.global-footer .footer-legal-links{justify-content:center;margin:16px auto 0;padding-top:12px}
+.global-footer>.footer-copyright{text-align:center;padding-top:14px;font-size:.62rem}
+.map-core .hero-brand-logo{display:block;width:132px;height:auto;max-height:82px;object-fit:contain}
+.map-core b:has(+ .hero-brand-logo){display:none}
+.aiwith-float-cta span{font-size:.83rem}.aiwith-float-cta span b{font-size:1.05rem}.aiwith-float-cta strong{font-size:.8rem}
+@media(max-width:820px){.global-footer{padding:28px 18px 18px}.footer-main{gap:15px}.footer-nav{margin-top:16px;padding-top:13px}.global-footer .footer-legal-links{margin-top:12px;padding-top:10px}.global-footer>.footer-copyright{padding-top:11px}.aiwith-float-cta span{font-size:.7rem}.aiwith-float-cta span b{font-size:.86rem}.aiwith-float-cta strong{font-size:.68rem}}
+@media(max-width:560px){.footer-brand img{width:185px}.footer-company{font-size:.7rem}.aiwith-float-cta span{font-size:.7rem}.aiwith-float-cta span b{font-size:.86rem}.aiwith-float-cta strong{font-size:.68rem}}
+
+
+
+/* Transparent footer logo treatment: retain the supplied green, blue and orange mark on navy. */
+.footer-brand{position:relative;display:block;width:min(218px,100%);padding-bottom:28px;overflow:hidden}
+.footer-brand img{display:block;width:100%;height:auto;padding:0;border-radius:0;background:transparent}
+.footer-brand:after{content:"AI와 함께 배우고, 만들고, 성장하다";position:absolute;left:0;right:0;bottom:0;height:27px;display:flex;align-items:flex-end;justify-content:center;background:#06101f;color:#fff;font-size:.64rem;font-weight:700;letter-spacing:-.035em;white-space:nowrap}
+@media(max-width:560px){.footer-brand{width:185px;padding-bottom:24px}.footer-brand:after{height:23px;font-size:.55rem}}
+
+
+
+/* Header wordmark reduced to 80%; footer domain emphasized by 130%. */
+.global-brand img{width:208px;height:66px}
+.global-brand{min-width:208px}
+.global-header{height:80px}
+.footer-domain{display:block;color:#a8b9ce;font-size:.83rem;font-weight:700;letter-spacing:.08em}
+@media(max-width:1100px){.global-brand img{width:184px;height:61px}.global-brand{min-width:184px}.global-header{height:76px}}
+@media(max-width:820px){.global-brand img{width:168px;height:52px}.global-brand{min-width:auto}.global-header{height:68px}.global-nav{top:68px;height:calc(100vh - 68px)}}
+@media(max-width:560px){.global-brand img{width:144px;height:48px}.global-header{height:68px}.global-nav{top:68px;height:calc(100vh - 68px)}.footer-domain{font-size:.75rem}}

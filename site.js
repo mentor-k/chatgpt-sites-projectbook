@@ -40,7 +40,7 @@
     document.addEventListener('click', (event) => { if (!event.target.closest('.nav-group')) header.querySelectorAll('.nav-group').forEach((g) => { g.classList.remove('open'); g.querySelector('button')?.setAttribute('aria-expanded', 'false'); }); if (!event.target.closest('.global-header') && nav.classList.contains('open')) closeMenu(); });
   }
   if (footer) {
-    footer.innerHTML = '<footer class="global-footer"><div class="footer-main"><div class="footer-brand-block"><a class="footer-brand" href="/"><img src="/assets/aiwith-school-logo.png" alt="AI위드스쿨 · AI와 함께 배우고, 만들고, 성장하다"></a><div class="footer-brand-copy"><strong>엠아이넥스트㈜</strong><span>AI와 함께 배우고, 만들고, 성장하다.</span></div></div><div class="footer-company"><p class="footer-company-kicker">COMPANY</p><p>엠아이넥스트㈜ · 대표 김용한</p><p><a href="tel:02-2168-3071">02)2168-3071</a> · <a href="mailto:misiceo@naver.com">misiceo@naver.com</a></p><p class="footer-company-address">경기도 김포시 태장로 789, 금광하이테크시티 305호 <a class="footer-map-link" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B9%80%ED%8F%AC%EC%8B%9C%20%ED%83%9C%EC%9E%A5%EB%A1%9C%20789%20%EA%B8%88%EA%B4%91%ED%95%98%EC%9D%B4%ED%85%8C%ED%81%AC%EC%8B%9C%ED%8B%B0" target="_blank" rel="noopener">네이버 지도 ↗</a></p></div></div><div class="footer-nav"><a href="/">HOME</a><a href="/website/">웹사이트 스쿨</a><a href="/content-school/">콘텐츠스쿨</a><a href="/proposal-school/">기획서·사업계획서 스쿨</a><a href="/prompt/">AI 프롬프트랩</a><a href="/book-school/">책쓰기 스쿨</a><a href="/workshops/">강의·워크숍</a><a href="/columns/">멘토K 컬럼</a><a href="/cardnews/">카드뉴스</a><a href="/notices/">공지사항</a><a href="/consultation/">상담 신청</a></div><div class="footer-legal-links" aria-label="법적 안내"><button type="button" data-legal="terms">이용약관</button><button type="button" data-legal="privacy">개인정보처리방침</button><button type="button" data-legal="copyright">소유·저작권 안내</button></div><p class="footer-copyright">© 2026 AI위드스쿨 · 엠아이넥스트㈜ · 김용한 박사(멘토K)</p></footer><div class="legal-modal" data-legal-modal hidden><div class="legal-modal-backdrop" data-legal-close></div><section class="legal-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle"><button type="button" class="legal-modal-close" data-legal-close aria-label="닫기">×</button><p class="kicker">AI위드스쿨 POLICY</p><h2 id="legalModalTitle"></h2><div class="legal-modal-body"></div></section></div>';
+    footer.innerHTML = '<footer class="global-footer"><div class="footer-main"><div class="footer-brand-block"><a class="footer-brand" href="/"><img src="/assets/aiwith-school-logo.png" alt="AI위드스쿨 · AI와 함께 배우고, 만들고, 성장하다"></a><span class="footer-domain">www.aiwith.kr</span></div><div class="footer-company"><p class="footer-company-kicker">COMPANY</p><p>엠아이넥스트㈜ · 대표 김용한</p><p><a href="tel:02-2168-3071">02)2168-3071</a> · <a href="mailto:misiceo@naver.com">misiceo@naver.com</a></p></div></div><div class="footer-nav"><a href="/">HOME</a><a href="/website/">웹사이트 스쿨</a><a href="/content-school/">콘텐츠스쿨</a><a href="/proposal-school/">기획서·사업계획서 스쿨</a><a href="/prompt/">AI 프롬프트랩</a><a href="/book-school/">책쓰기 스쿨</a><a href="/workshops/">강의·워크숍</a><a href="/columns/">멘토K 컬럼</a><a href="/cardnews/">카드뉴스</a><a href="/notices/">공지사항</a><a href="/consultation/">상담 신청</a></div><div class="footer-legal-links" aria-label="법적 안내"><button type="button" data-legal="terms">이용약관</button><button type="button" data-legal="privacy">개인정보처리방침</button><button type="button" data-legal="copyright">소유·저작권 안내</button></div><p class="footer-copyright">© 2026 AI위드스쿨 · 엠아이넥스트㈜ · 김용한 박사(멘토K)</p></footer><div class="legal-modal" data-legal-modal hidden><div class="legal-modal-backdrop" data-legal-close></div><section class="legal-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle"><button type="button" class="legal-modal-close" data-legal-close aria-label="닫기">×</button><p class="kicker">AI위드스쿨 POLICY</p><h2 id="legalModalTitle"></h2><div class="legal-modal-body"></div></section></div>';
     const legalModal = footer.querySelector('[data-legal-modal]');
     const legalTitle = footer.querySelector('#legalModalTitle');
     const legalBody = footer.querySelector('.legal-modal-body');
@@ -77,12 +77,40 @@
     localStorage.setItem(key, JSON.stringify(data));
   } catch (_) {}
   const form = document.getElementById('consultationForm');
-  if (form) form.addEventListener('submit', (event) => {
+  if (form) form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
-    const item = Object.fromEntries(new FormData(form).entries()); item.createdAt = new Date().toISOString(); item.status = 'draft';
-    const list = JSON.parse(localStorage.getItem('aiwith_consultations') || '[]'); list.unshift(item); localStorage.setItem('aiwith_consultations', JSON.stringify(list.slice(0, 100)));
-    const output = document.getElementById('formResult'); output.hidden = false; output.textContent = '상담 내용이 임시 저장되었습니다. 중앙 접수 시스템 연결 전에는 이 브라우저에만 보관됩니다.';
-    form.reset();
+    const item = Object.fromEntries(new FormData(form).entries());
+    item.createdAt = new Date().toISOString();
+    item.sourcePath = location.pathname;
+    const output = document.getElementById('formResult');
+    const submit = form.querySelector('button[type="submit"]');
+    if (submit) submit.disabled = true;
+    try {
+      const response = await fetch('https://ypowbfahoywmkyeaheph.supabase.co/functions/v1/consultation-notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...item, action: 'submit' })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.error || 'SUBMIT_FAILED');
+      item.status = 'submitted';
+      item.emailStatus = data.email_status || 'pending';
+      const list = JSON.parse(localStorage.getItem('aiwith_consultations') || '[]');
+      list.unshift(item);
+      localStorage.setItem('aiwith_consultations', JSON.stringify(list.slice(0, 100)));
+      output.hidden = false;
+      output.textContent = '상담 신청이 접수되었습니다. 담당자가 확인 후 연락드리겠습니다.';
+      form.reset();
+    } catch (_) {
+      item.status = 'local_pending';
+      const list = JSON.parse(localStorage.getItem('aiwith_consultations') || '[]');
+      list.unshift(item);
+      localStorage.setItem('aiwith_consultations', JSON.stringify(list.slice(0, 100)));
+      output.hidden = false;
+      output.textContent = '네트워크 연결이 지연되어 이 브라우저에 임시 저장했습니다. 잠시 후 다시 제출해 주세요.';
+    } finally {
+      if (submit) submit.disabled = false;
+    }
   });
 })();
