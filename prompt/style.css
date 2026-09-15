@@ -128,3 +128,9 @@
 .global-footer .footer-brand{align-items:center}
 .global-footer .footer-brand img{display:block;width:260px;max-width:100%;height:auto;padding:8px;border-radius:10px;background:#fff}
 @media(max-width:560px){.global-footer .footer-brand img{width:220px}}
+
+
+
+/* Match the shared header/footer wordmark sizing in the prompt workspace. */
+.global-footer .footer-brand img{width:182px}
+@media(max-width:560px){.global-footer .footer-brand img{width:154px}}

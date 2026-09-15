@@ -83,3 +83,28 @@
   .global-brand img{width:132px;height:50px}
   .footer-brand img{width:220px}
 }
+
+
+
+/* AI위드스쿨 logo sizing: larger domain wordmark in the header, compact transparent footer mark. */
+.global-header{height:88px}
+.global-brand{min-width:260px}
+.global-brand img{width:260px;height:82px;object-fit:contain}
+.footer-brand img{width:182px}
+@media(max-width:1100px){
+  .global-header{height:82px}
+  .global-brand{min-width:230px}
+  .global-brand img{width:230px;height:76px}
+}
+@media(max-width:820px){
+  .global-header{height:76px}
+  .global-brand{min-width:auto}
+  .global-brand img{width:210px;height:70px}
+  .global-nav{top:76px;height:calc(100vh - 76px)}
+}
+@media(max-width:560px){
+  .global-header{height:72px}
+  .global-brand img{width:180px;height:64px}
+  .global-nav{top:72px;height:calc(100vh - 72px)}
+  .footer-brand img{width:154px}
+}
