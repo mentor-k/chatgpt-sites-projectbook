@@ -111,5 +111,30 @@
     const { error } = await api.from('cardnews_posts').delete().eq('id', id);
     if (error) throw error;
   };
-  window.AIWITH_SUPABASE = { URL, getClient, toPublicUrl, listPublished, listOwned, getBySlug, savePost, deletePost };
+  const classifyDevice = (width = window.innerWidth) => width <= 640 ? 'mobile' : width <= 1024 ? 'tablet' : 'desktop';
+  const trackPageview = async ({ path = location.pathname, referrer = document.referrer, userAgent = navigator.userAgent, viewportWidth = window.innerWidth } = {}) => {
+    const api = getClient();
+    if (!api) return { skipped: true };
+    const cleanPath = String(path || '/').slice(0, 240);
+    const cleanReferrer = referrer ? String(referrer).slice(0, 500) : null;
+    const { error } = await api.from('page_views').insert({
+      path: cleanPath,
+      referrer: cleanReferrer,
+      user_agent: String(userAgent || '').slice(0, 500) || null,
+      device_type: classifyDevice(Number(viewportWidth) || window.innerWidth),
+      viewport_width: Math.max(1, Math.min(10000, Number(viewportWidth) || window.innerWidth))
+    });
+    if (error) throw error;
+    return { ok: true };
+  };
+  const listPageviews = async ({ since } = {}) => {
+    const api = getClient();
+    if (!api) throw new Error('Supabase client is unavailable');
+    let query = api.from('page_views').select('id,path,referrer,device_type,viewport_width,created_at').order('created_at', { ascending: false }).limit(10000);
+    if (since) query = query.gte('created_at', since);
+    const { data, error } = await query;
+    if (error) throw error;
+    return data || [];
+  };
+  window.AIWITH_SUPABASE = { URL, getClient, toPublicUrl, listPublished, listOwned, getBySlug, savePost, deletePost, trackPageview, listPageviews };
 })();
