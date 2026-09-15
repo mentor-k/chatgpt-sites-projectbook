@@ -220,3 +220,9 @@
 .map-core .hero-brand-logo{width:158px;max-width:none;max-height:none;height:auto;filter:none}
 .map-core small{display:none}
 @media(max-width:560px){.map-core{width:154px;height:154px;padding:15px}.map-core .hero-brand-logo{width:138px}}
+
+
+/* Halved footer logo-to-slogan spacing. */
+.footer-brand{padding-bottom:14px}
+.footer-brand:after{height:14px}
+@media(max-width:560px){.footer-brand{padding-bottom:12px}.footer-brand:after{height:12px}}
