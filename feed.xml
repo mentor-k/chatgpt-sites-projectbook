@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>AI위드스쿨 | 멘토K 실전 AI 교육</title>
+    <link>https://aiwith.kr/</link>
+    <description>AI 웹사이트·마케팅·프롬프트·콘텐츠·책쓰기·강의와 워크숍 안내</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <item><title>AI위드스쿨 통합 프로그램</title><link>https://aiwith.kr/</link><guid>https://aiwith.kr/</guid><description>AI를 웹사이트·콘텐츠·기획서·책쓰기 결과물로 연결하는 실전 교육 플랫폼</description></item>
+    <item><title>AI 홈페이지·웹서비스 구축 강의</title><link>https://aiwith.kr/website/</link><guid>https://aiwith.kr/website/</guid><description>Project·Work·Sites로 기획부터 공개까지 완성하는 4시간 실전 과정</description></item>
+    <item><title>AI마케팅스쿨</title><link>https://aiwith.kr/marketing-school/</link><guid>https://aiwith.kr/marketing-school/</guid><description>시장·고객·콘텐츠·채널을 매출로 연결하는 실전 마케팅 교육</description></item>
+    <item><title>AI 프롬프트랩</title><link>https://aiwith.kr/prompt/</link><guid>https://aiwith.kr/prompt/</guid><description>업무·기획·이미지·영상·웹·앱 제작용 한국어 프롬프트 허브</description></item>
+    <item><title>콘텐츠스쿨</title><link>https://aiwith.kr/content-school/</link><guid>https://aiwith.kr/content-school/</guid><description>AI 블로그·인포그래픽·카드뉴스·숏폼 제작과 홍보마케팅 실습</description></item>
+    <item><title>기획서·사업계획서 스쿨</title><link>https://aiwith.kr/proposal-school/</link><guid>https://aiwith.kr/proposal-school/</guid><description>사업계획서·IR자료·정부지원 사업계획서를 구조화하는 실전 교육</description></item>
+    <item><title>책쓰기 스쿨</title><link>https://aiwith.kr/book-school/</link><guid>https://aiwith.kr/book-school/</guid><description>경험을 책과 개인브랜드로 만드는 AI 집필 과정</description></item>
+    <item><title>강의·워크숍</title><link>https://aiwith.kr/workshops/</link><guid>https://aiwith.kr/workshops/</guid><description>기관·기업 맞춤 AI 강의와 실습형 워크숍</description></item>
+  </channel>
+</rss>
