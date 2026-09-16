@@ -2,4 +2,34 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /prompt/admin.html
+
+# 주요 검색·답변 수집기가 공개 콘텐츠를 읽을 수 있도록 허용
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+
+User-agent: Yeti
+Allow: /
+Disallow: /admin/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+
 Sitemap: https://aiwith.kr/sitemap.xml
