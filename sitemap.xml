@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aiwith.kr/</loc><priority>1.0</priority></url>
-  <url><loc>https://aiwith.kr/website/</loc><priority>0.9</priority></url>
-  <url><loc>https://aiwith.kr/website/benchmark/</loc><priority>0.7</priority></url>
-  <url><loc>https://aiwith.kr/marketing-school/</loc><priority>0.9</priority></url>
-  <url><loc>https://aiwith.kr/prompt/</loc><priority>0.9</priority></url>
-  <url><loc>https://aiwith.kr/book-school/</loc><priority>0.8</priority></url>
-  <url><loc>https://aiwith.kr/content-school/</loc><priority>0.8</priority></url>
-  <url><loc>https://aiwith.kr/proposal-school/</loc><priority>0.8</priority></url>
-  <url><loc>https://aiwith.kr/workshops/</loc><priority>0.8</priority></url>
-  <url><loc>https://aiwith.kr/columns/</loc><priority>0.7</priority></url>
-  <url><loc>https://aiwith.kr/cardnews/</loc><priority>0.8</priority></url>
-  <url><loc>https://aiwith.kr/cardnews/senior-branding/</loc><priority>0.7</priority></url>
-  <url><loc>https://aiwith.kr/notices/</loc><priority>0.6</priority></url>
-  <url><loc>https://aiwith.kr/consultation/</loc><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/</loc><lastmod>2026-09-16</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aiwith.kr/website/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aiwith.kr/website/benchmark/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aiwith.kr/marketing-school/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aiwith.kr/prompt/</loc><lastmod>2026-09-16</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aiwith.kr/book-school/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/content-school/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/proposal-school/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/workshops/</loc><lastmod>2026-09-16</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/columns/</loc><lastmod>2026-09-16</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aiwith.kr/cardnews/</loc><lastmod>2026-09-16</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aiwith.kr/cardnews/senior-branding/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aiwith.kr/notices/</loc><lastmod>2026-09-16</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://aiwith.kr/consultation/</loc><lastmod>2026-09-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
