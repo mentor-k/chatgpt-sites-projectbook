@@ -39,7 +39,7 @@
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data, error } = await api.from('cardnews_posts')
-      .select('id,title,description,slug,status,published_at,sort_order,created_by,created_at,updated_at,cardnews_cards(id,card_index,image_path,alt_text)')
+      .select('id,title,description,seo_title,seo_description,aeo_summary,geo_summary,keywords,slug,status,published_at,sort_order,created_by,created_at,updated_at,cardnews_cards(id,card_index,image_path,alt_text)')
       .order('updated_at', { ascending: false });
     if (error) throw error;
     return ordered(data);
@@ -48,7 +48,7 @@
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data, error } = await api.from('cardnews_posts')
-      .select('id,title,description,slug,status,published_at,sort_order,created_by,created_at,updated_at,cardnews_cards(id,card_index,image_path,alt_text)')
+      .select('id,title,description,seo_title,seo_description,aeo_summary,geo_summary,keywords,slug,status,published_at,sort_order,created_by,created_at,updated_at,cardnews_cards(id,card_index,image_path,alt_text)')
       .eq('slug', slug).eq('status', 'published').maybeSingle();
     if (error) throw error;
     return ordered(data ? [data] : [])[0] || null;
@@ -59,7 +59,7 @@
     const response = await fetch(dataUrl);
     return response.blob();
   };
-  const savePost = async ({ id = null, title, summary, seoTitle = '', seoDescription = '', aeoSummary = '', geoSummary = '', optimizationSummary = '', files, existingCards = [] }) => {
+  const savePost = async ({ id = null, title, summary, seoTitle = '', seoDescription = '', aeoSummary = '', geoSummary = '', optimizationSummary = '', keywords = [], files, existingCards = [] }) => {
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data: authData } = await api.auth.getSession();
