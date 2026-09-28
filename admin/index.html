@@ -23,6 +23,17 @@
         <section class="admin-view" id="admin-settings"><div class="admin-card"><h2>운영 연결 상태</h2><table class="route-table"><tbody><tr><th>콘텐츠 저장</th><td>브라우저 임시 저장</td><td>Supabase 연결 시 중앙 저장·발행 가능</td></tr><tr><th>접속 분석</th><td class="status-ok">Supabase page_views 중앙 집계</td><td>기간·페이지·기기·유입경로 차트 제공</td></tr><tr><th>수정이력</th><td class="status-ok">GitHub 자동 조회</td><td>최근 커밋 실시간 반영</td></tr><tr><th>배포</th><td class="status-ok">GitHub Pages</td><td>main 브랜치 반영</td></tr></tbody></table></div></section>
       </div>
     </div>
+    <section class="admin-card" aria-labelledby="seo-links-title">
+      <h2 id="seo-links-title">검색 노출 점검 바로가기</h2>
+      <p class="admin-note">페이지 게시 후 사이트맵을 확인하고 Google과 네이버에서 홈페이지 및 새 글 URL을 검사하세요. 각 서비스 로그인은 해당 사이트에서 직접 진행합니다.</p>
+      <div class="admin-actions">
+        <a class="button ghost" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Faiwith.kr%2F" target="_blank" rel="noopener noreferrer">Google Search Console 열기</a>
+        <a class="button ghost" href="https://searchadvisor.naver.com/console/site/list" target="_blank" rel="noopener noreferrer">네이버 서치어드바이저 열기</a>
+        <a class="button ghost" href="/sitemap.xml" target="_blank" rel="noopener noreferrer">사이트맵 확인</a>
+        <a class="button ghost" href="/robots.txt" target="_blank" rel="noopener noreferrer">robots.txt 확인</a>
+        <a class="button ghost" href="https://github.com/mentor-k/chatgpt-sites-projectbook" target="_blank" rel="noopener noreferrer">사이트 소스 열기</a>
+      </div>
+    </section>
   </main>
   <div data-site-footer></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
