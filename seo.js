@@ -1,6 +1,8 @@
 (() => {
   'use strict';
   const path = location.pathname.replace(/\/index\.html$/, '/') || '/';
+  // Published pages carry their metadata in the initial HTML for search and social crawlers.
+  if (document.head.querySelector('#aiwith-seo-jsonld')) return;
   const pages = {
     '/': ['AI위드스쿨 | AI와 함께 배우고, 만들고, 성장하다', 'AI위드스쿨은 김용한 박사(멘토K)의 실전 AI 교육 플랫폼입니다. AI 웹사이트 구축, AI마케팅, 프롬프트, 콘텐츠·기획서, 책쓰기, 강의와 워크숍을 실제 결과물로 연결합니다.', 'AI위드스쿨, 멘토K, 김용한 박사, AI 교육, AI 웹사이트 구축, AI마케팅, 프롬프트, 책쓰기, 강의, 워크숍'],
     '/website/': ['AI 홈페이지·웹서비스 구축 강의 | AI위드스쿨', '코딩 없이 Project·Work·Sites로 홈페이지와 웹서비스를 기획·개발·검수·공개하는 김용한 박사의 4시간 실전 과정입니다.', 'AI 홈페이지 구축, 웹서비스 구축 강의, 코딩 없는 웹개발, Project Work Sites'],
@@ -30,10 +32,11 @@
     const node = document.createElement('link'); node.rel = rel; node.href = href; if (type) node.type = type; if (titleText) node.title = titleText; document.head.appendChild(node);
   };
   document.title = title;
-  meta('name', 'description', description); meta('name', 'keywords', keywords); meta('name', 'author', '김용한 박사(멘토K) · 엠아이넥스트㈜'); meta('name', 'robots', path.startsWith('/cardnews/view/') ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'); meta('name', 'googlebot', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'); meta('name', 'naverbot', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
+  const directives = path.startsWith('/cardnews/view/') ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
+  meta('name', 'description', description); meta('name', 'keywords', keywords); meta('name', 'author', '김용한 박사(멘토K) · 엠아이넥스트㈜'); meta('name', 'robots', directives); meta('name', 'googlebot', directives); meta('name', 'naverbot', directives);
   meta('property', 'og:site_name', 'AI위드스쿨'); meta('property', 'og:type', 'website'); meta('property', 'og:locale', 'ko_KR'); meta('property', 'og:title', title); meta('property', 'og:description', description); meta('property', 'og:url', url); meta('property', 'og:image', image); meta('property', 'og:image:alt', `${title} 대표 이미지`); meta('name', 'twitter:card', 'summary_large_image'); meta('name', 'twitter:title', title); meta('name', 'twitter:description', description); meta('name', 'twitter:image', image); addLink('alternate', 'https://aiwith.kr/feed.xml', 'application/rss+xml', 'AI위드스쿨 RSS');
   const org = {'@type':'Organization','@id':'https://aiwith.kr/#organization',name:'AI위드스쿨',legalName:'엠아이넥스트㈜',url:'https://aiwith.kr/',logo:'https://aiwith.kr/assets/aiwith-school-logo-footer.png',founder:{'@type':'Person',name:'김용한',jobTitle:'경영학박사·경영지도사',brand:'멘토K'}};
-  const graph = [org, {'@type':'WebSite','@id':'https://aiwith.kr/#website',name:'AI위드스쿨',url:'https://aiwith.kr/',inLanguage:'ko-KR',publisher:{'@id':'https://aiwith.kr/#organization'}}, {'@type':'WebPage','@id':`${url}#webpage`,url,name:title,description,isPartOf:{'@id':'https://aiwith.kr/#website'},about:{'@id':'https://aiwith.kr/#organization'},inLanguage:'ko-KR',dateModified:'2026-09-16'}];
+  const graph = [org, {'@type':'WebSite','@id':'https://aiwith.kr/#website',name:'AI위드스쿨',url:'https://aiwith.kr/',inLanguage:'ko-KR',publisher:{'@id':'https://aiwith.kr/#organization'}}, {'@type':'WebPage','@id':`${url}#webpage`,url,name:title,description,isPartOf:{'@id':'https://aiwith.kr/#website'},about:{'@id':'https://aiwith.kr/#organization'},inLanguage:'ko-KR'}];
   const labels = {website:'웹사이트 스쿨',benchmark:'웹사이트 벤치마킹','marketing-school':'AI마케팅스쿨','content-school':'콘텐츠스쿨','proposal-school':'기획서·사업계획서 스쿨',prompt:'AI 프롬프트랩','book-school':'책쓰기 스쿨',workshops:'강의·워크숍',columns:'멘토K 컬럼',cardnews:'카드뉴스','senior-branding':'시니어 브랜딩',notices:'공지사항',consultation:'상담 신청'};
   if (path !== '/' && !path.startsWith('/cardnews/view/')) { const parts = path.split('/').filter(Boolean); const items = [{'@type':'ListItem',position:1,name:'AI위드스쿨',item:'https://aiwith.kr/'}]; parts.forEach((part,i)=>items.push({'@type':'ListItem',position:i+2,name:labels[part]||part,item:`https://aiwith.kr/${parts.slice(0,i+1).join('/')}/`})); graph.push({'@type':'BreadcrumbList','@id':`${url}#breadcrumb`,itemListElement:items}); }
   if (['/website/','/marketing-school/','/content-school/','/proposal-school/','/prompt/','/book-school/','/workshops/'].includes(path)) graph.push({'@type':'Course',name:title.replace(' | AI위드스쿨',''),description,provider:{'@id':'https://aiwith.kr/#organization'},inLanguage:'ko-KR',educationalLevel:'초급·실무'});
