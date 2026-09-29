@@ -42,6 +42,19 @@ URL: https://aiwith.kr/prompt/
 
 검색·글쓰기·보고서·강의자료·기획서·이미지·영상·웹·앱·쇼핑몰 제작용 한국어 프롬프트를 검색하고 조합하는 도구다. AI 작업 치트키는 공식 ChatGPT 명령어가 아닌 AI위드스쿨의 사용자 정의 프리셋이며, 민감정보·비밀키·결제정보를 입력하지 않는다.
 
+#### AI 작업 치트키 빠른 안내
+
+AI 작업 치트키는 초보자가 짧은 요청을 더 좋은 결과물로 바꾸도록 돕는 사용자 정의 프리셋이다. 카드에서 목적에 맞는 명령어를 선택하고, `확장 지침 복사`를 눌러 원래 요청 뒤에 붙여 사용한다.
+
+- 아이디어·목표·학습: `/generate`, `/roadmap`, `/teach`, `/brainstorm`
+- 비교·검토·개선: `/proscons`, `/review`, `/optimize`, `/prioritize`
+- 실행·연습·정리: `/plan`, `/interview`, `/checklist`, `/summarize`
+- 글·대화·회의: `/tone`, `/rewrite`, `/outline`, `/email`, `/meeting`, `/minutes`
+- 고객·검색·성과: `/persona`, `/customerjourney`, `/seo`, `/aeo`, `/geo`, `/kpi`
+- 예산·콘텐츠·프롬프트: `/budget`, `/script`, `/prompt`
+
+초보자 권장 순서는 `/generate` 또는 `/brainstorm`으로 아이디어를 넓히고, `/roadmap` 또는 `/plan`으로 실행을 정리한 다음, `/review` 또는 `/optimize`로 결과를 다듬는 것이다.
+
 ### 책쓰기 스쿨
 
 URL: https://aiwith.kr/book-school/

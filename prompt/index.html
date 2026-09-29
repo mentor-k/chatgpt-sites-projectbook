@@ -91,9 +91,9 @@
 
     <section class="workspace hidden" id="metaKeysView">
       <div class="section-head"><div><p class="eyebrow">AI WORK CHEAT KEYS</p><h2>AI 작업 치트키</h2><p>짧은 요청 뒤에 붙여 쓰거나 프로젝트 지침으로 저장하는 사용자 정의 프리셋입니다. 공식 ChatGPT 슬래시 명령어가 아니므로, 처음에는 확장 지침을 함께 복사해 사용하세요.</p></div><button id="copyMetaCombo" class="primary">선택 조합 복사 <span id="metaComboCount">0</span></button></div>
-      <div class="cheat-guide meta-key-guide" aria-label="AI 작업 치트키 사용방법"><div class="cheat-guide-title">치트키 사용방법</div><ol><li>짧은 요청을 먼저 적습니다.</li><li>카드를 눌러 검토·품질·실행 유형을 선택합니다.</li><li><b>확장 지침 복사</b> 또는 선택 조합을 붙여 넣습니다.</li></ol><p><b>권장 흐름</b> /autoprompt로 요청 보완 → /APX로 분석·계획·실행 → /REDTEAM으로 독립 검증</p></div>
+      <div class="cheat-guide meta-key-guide" aria-label="AI 작업 치트키 사용방법"><div class="cheat-guide-title">초보자도 이렇게 쓰세요</div><ol><li>하고 싶은 일을 한 문장으로 적습니다. 예: “전통시장 홍보 아이디어가 필요해”.</li><li>목적에 맞는 카드를 고릅니다. 아이디어는 <b>/generate</b>, 목표 정리는 <b>/roadmap</b>, 쉽게 배우기는 <b>/teach</b>를 사용합니다.</li><li><b>확장 지침 복사</b>를 눌러 요청 뒤에 붙이고, 결과를 사실·출처·개인정보 관점에서 확인합니다.</li></ol><p><b>추천 흐름</b> /generate로 발상 → /roadmap 또는 /plan으로 실행 → /review 또는 /optimize로 개선</p></div>
       <div class="prompt-start-guide" role="note"><div><p class="eyebrow">IMPORTANT</p><b>공식 명령어가 아닌 사용자 정의 프리셋</b></div><ol><li><span>1</span><b>코드만 붙이면 의미가 약할 수 있습니다.</b><small>확장 지침 복사를 우선 사용하세요.</small></li><li><span>2</span><b>프로젝트 지침에 저장할 수 있습니다.</b><small>반복 업무는 모델·프로젝트 지침에 등록합니다.</small></li><li><span>3</span><b>민감정보는 입력하지 마세요.</b><small>개인정보·비밀키·결제정보를 제외합니다.</small></li></ol></div>
-      <div class="controls"><label class="search"><span>⌕</span><input id="metaSearch" placeholder="치트키·검증·품질·보안·UX 검색"></label><div id="metaFilters" class="chips"></div></div>
+      <div class="controls"><label class="search"><span>⌕</span><input id="metaSearch" placeholder="치트키·목표·아이디어·검토·SEO 검색"></label><div id="metaFilters" class="chips"></div></div>
       <div id="metaComboBar" class="combo empty"><span>선택한 작업 치트키가 없습니다.</span><button id="clearMetaCombo">모두 지우기</button></div>
       <div class="result-line" id="metaResult"></div>
       <div id="metaGrid" class="meta-key-grid"></div>
@@ -190,7 +190,7 @@
   </main>
   <div id="toast" role="status">복사했습니다.</div>
   <div data-site-footer></div>
-  <script src="app.js?v=20260913-2"></script>
+  <script src="app.js?v=20260929-1"></script>
   <script src="/seo.js?v=20260916-1"></script><script src="/site.js?v=20260916-1"></script>
 </body>
 </html>
