@@ -108,3 +108,21 @@
 /* Neutralize the legacy element selector above; every prompt submenu then uses
    the shared site-information, main-menu and legal footer from /site.css. */
 .global-footer{display:block;justify-content:initial;gap:0;font-size:16px}
+
+/* Image cheat-key previews and prompt-only copy action */
+.key-card{display:flex;flex-direction:column;gap:10px;padding:0;overflow:hidden;min-height:0}
+.key-card.selected{padding:0;border-width:2px}
+.key-select{position:relative;display:block;width:100%;min-height:108px;padding:16px 17px 14px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.key-select:hover{background:#f8fbff}
+.key-select code{display:block;margin-bottom:7px;color:var(--blue);font-size:16px;font-weight:800}
+.key-select b{display:block;padding-right:22px;font-size:15px;line-height:1.35}
+.key-select small{display:block;margin-top:6px;color:var(--muted);font-size:12px}
+.key-select .check{position:absolute;right:13px;top:13px;display:none;color:var(--blue);font-weight:900}
+.key-card.selected .key-select .check{display:block}
+.key-example{display:flex;align-items:center;gap:10px;margin:0 12px;padding:8px;border-radius:10px;background:#f6f8fb;border:1px solid #e5ebf3}
+.image-cheat-preview{flex:0 0 64px;width:64px;height:64px;border-radius:8px;background-image:url('assets/image-cheatkey-grid.jpg');background-repeat:no-repeat;background-size:300% 300%;background-color:#dce7f4;box-shadow:inset 0 0 0 1px rgba(11,31,58,.08)}
+.image-cheat-preview[data-preview="angle"]{background-position:0 0}.image-cheat-preview[data-preview="weather"]{background-position:50% 0}.image-cheat-preview[data-preview="lighting"]{background-position:100% 0}.image-cheat-preview[data-preview="camera"]{background-position:0 50%}.image-cheat-preview[data-preview="style"]{background-position:50% 50%}.image-cheat-preview[data-preview="background"]{background-position:100% 50%}.image-cheat-preview[data-preview="theme"]{background-position:0 100%}.image-cheat-preview[data-preview="art"]{background-position:50% 100%}.image-cheat-preview[data-preview="effect"]{background-position:100% 100%}.image-cheat-preview[data-preview="texture"]{background-position:50% 50%}.image-cheat-preview[data-preview="portrait"]{background-position:0 50%}.image-cheat-preview[data-preview="composition"]{background-position:0 0}
+.key-example b,.key-example small{display:block}.key-example b{color:var(--navy);font-size:12px}.key-example small{margin-top:2px;color:var(--muted);font-size:11px;line-height:1.35}
+.prompt-copy{align-self:stretch;margin:0 12px 12px;text-align:center;background:#fff;color:var(--blue);border-color:#b9d2f2;font-weight:800}
+.prompt-copy:hover{background:#eef6ff}
+@media(max-width:680px){.key-select{min-height:96px}.image-cheat-preview{flex-basis:58px;width:58px;height:58px}}
