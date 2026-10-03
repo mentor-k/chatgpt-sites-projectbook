@@ -94,3 +94,7 @@ const feedPages = pages.filter(([route]) => !['/consultation/'].includes(route))
 const pubDate = new Date(`${updated}T00:00:00+09:00`).toUTCString();
 const rss = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>AI위드스쿨 | 멘토K 실전 AI 교육</title>\n    <link>${origin}/</link>\n    <description>AI위드스쿨의 공개 교육 프로그램·카드뉴스·컬럼·공지 안내</description>\n    <language>ko-KR</language>\n    <lastBuildDate>${pubDate}</lastBuildDate>\n${feedPages.map(([route, title, description]) => `    <item><title>${escapeHtml(title)}</title><link>${origin}${route}</link><guid isPermaLink="true">${origin}${route}</guid><description>${escapeHtml(description)}</description></item>`).join('\n')}\n  </channel>\n</rss>\n`;
 write('feed.xml', rss);
+
+// Preserve published column routes and their per-article metadata after a site-wide rebuild.
+const { renderColumns } = await import('./publish-columns.mjs');
+renderColumns(root);

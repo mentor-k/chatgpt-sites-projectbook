@@ -6,10 +6,12 @@
   <meta name="robots" content="noindex,nofollow">
   <title>통합 관리자 대시보드 | AI위드스쿨</title>
   <link rel="stylesheet" href="/site.css?v=20260916-1">
+  <link rel="stylesheet" href="/columns/columns.css?v=20261003-1">
 </head>
 <body>
   <div data-site-header></div>
   <main class="admin-shell">
+    <span id="metricDrafts" hidden>0</span>
     <header class="admin-head"><div><p class="kicker">AI위드스쿨 ADMIN</p><h1>통합 관리자 대시보드</h1><p>전체 메뉴, 접속 현황, 글 초안과 사이트 개발·수정이력을 한 화면에서 관리합니다.</p></div><div class="admin-actions"><button class="button ghost" id="refreshAdmin" type="button">새로고침</button><a class="button primary" href="/">사이트 보기</a></div></header>
     <div class="admin-layout">
       <nav class="admin-side"><button class="active" data-admin-tab="overview">요약·접속통계</button><button data-admin-tab="consultations">상담 신청 확인</button><button data-admin-tab="structure">전체 메뉴 관리</button><button data-admin-tab="cardnews">카드뉴스 등록</button><button data-admin-tab="writing">글쓰기·초안</button><button data-admin-tab="history">개발·수정이력</button><button data-admin-tab="settings">운영 설정</button></nav>
@@ -38,9 +40,10 @@
   <div data-site-footer></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/supabase-client.js?v=20260916-1"></script>
-  <script src="/site.js?v=20260916-1"></script>
+  <script src="/site.js?v=20261003-1"></script>
   <script src="/navigation-enhancements.js?v=20260915-1"></script>
-  <script src="/admin/admin.js?v=20260915-3"></script>
+  <script src="/admin/admin.js?v=20261003-1"></script>
+  <script src="/admin/column-queue.js?v=20261003-1"></script>
   <script src="/admin/central-cardnews.js?v=20260915-1"></script>
   <script src="/admin/cardnews-preview.js?v=20260915-1"></script>
   <script src="/admin/optimization.js?v=20260915-1"></script>
