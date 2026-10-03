@@ -55,7 +55,7 @@ export function makeHandler({db,userClient,sendMail}){
       const {data:inserted,error}=await db.from('consultation_requests').insert(row).select('id,created_at').single();
       if(error||!inserted)return json({error:'database_error'},503);
       let emailStatus='not_configured';
-      try{emailStatus=await sendMail(row)}catch{emailStatus='failed'}
+      try{emailStatus=await sendMail()}catch{emailStatus='failed'}
       await db.from('consultation_requests').update({email_status:emailStatus}).eq('id',inserted.id);
       return json({ok:true,id:inserted.id,email_sent:emailStatus==='sent',email_status:emailStatus});
     }catch(error){
