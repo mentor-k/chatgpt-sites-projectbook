@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://ypowbfahoywmkyeaheph.supabase.co wss://ypowbfahoywmkyeaheph.supabase.co https://api.github.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; worker-src 'self' blob: https://cdnjs.cloudflare.com; frame-src 'self' blob: https://www.youtube.com https://www.youtube-nocookie.com; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>통합 관리자 대시보드 | AI위드스쿨</title>
@@ -12,6 +14,7 @@
 <body>
   <div data-site-header></div>
   <main class="admin-shell">
+    <div class="admin-actions"><p class="admin-note">등록된 관리자만 접근 · 현재 탭의 세션 사용 · 30분 미활동 시 로그아웃</p><button id="secureAdminSignOut" type="button" class="button ghost">로그아웃</button></div>
     <span id="metricDrafts" hidden>0</span>
     <header class="admin-head"><div><p class="kicker">AI위드스쿨 ADMIN</p><h1>통합 관리자 대시보드</h1><p>전체 메뉴, 접속 현황, 글 초안과 사이트 개발·수정이력을 한 화면에서 관리합니다.</p></div><div class="admin-actions"><button class="button ghost" id="refreshAdmin" type="button">새로고침</button><a class="button primary" href="/">사이트 보기</a></div></header>
     <div class="admin-layout">
@@ -39,16 +42,17 @@
     </section>
   </main>
   <div data-site-footer></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/supabase-client.js?v=20260916-1"></script>
-  <script src="/site.js?v=20261003-1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
+  <script src="/supabase-client.js?v=20261003-security-1"></script>
+  <script src="/site.js?v=20261003-security-1"></script>
   <script src="/navigation-enhancements.js?v=20260915-1"></script>
-  <script src="/admin/admin.js?v=20261003-1"></script>
+  <script src="/admin/auth.js?v=20261003-security-1"></script>
+  <script src="/admin/admin.js?v=20261003-security-1"></script>
   <script src="/admin/column-queue.js?v=20261003-1"></script>
-  <script src="/admin/central-cardnews.js?v=20260915-1"></script>
+  <script src="/admin/central-cardnews.js?v=20261003-security-1"></script>
   <script src="/admin/cardnews-preview.js?v=20260915-1"></script>
   <script src="/admin/optimization.js?v=20260915-1"></script>
-  <script src="/admin/analytics.js?v=20260915-1"></script>
-  <script src="/analytics-tracker.js?v=20260915-1"></script>
+  <script src="/admin/analytics.js?v=20261003-security-1"></script>
+  <script src="/analytics-tracker.js?v=20261003-security-1"></script>
 </body>
 </html>

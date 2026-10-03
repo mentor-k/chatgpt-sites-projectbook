@@ -7,10 +7,6 @@
   const dateKey = (value) => { const date = new Date(value); return Number.isNaN(date.getTime()) ? '' : date.toISOString().slice(0,10); };
   const daysAgo = (days) => { const date = new Date(); date.setHours(0,0,0,0); date.setDate(date.getDate() - (days - 1)); return date.toISOString(); };
   const deviceLabel = { mobile:'모바일', tablet:'태블릿', desktop:'데스크톱' };
-  const waitForAdmin = (tries = 0) => {
-    if (document.querySelector('#pageviewTrend') && document.documentElement.style.visibility !== 'hidden') init();
-    else if (tries < 240) setTimeout(() => waitForAdmin(tries + 1), 50);
-  };
   const localFallback = () => {
     try {
       const raw = JSON.parse(localStorage.getItem('aiwith_pageviews') || '{}');
@@ -97,5 +93,5 @@
     legend.innerHTML=entries.length?entries.map(([key,value],i)=>'<div><i style="background:'+colors[i%colors.length]+'"></i><span>'+esc(deviceLabel[key]||key)+'</span><b>'+Math.round(value/total*100)+'%</b></div>').join(''):'<p>기록 없음</p>';
   }
   function drawRanks(values, root, limit) { const entries=Object.entries(values).sort((a,b)=>b[1]-a[1]).slice(0,limit); root.innerHTML=entries.length?entries.map(([label,value],i)=>'<div class="rank-row"><b>'+String(i+1).padStart(2,'0')+'</b><span>'+esc(label)+'</span><em>'+value.toLocaleString('ko-KR')+'회</em></div>').join(''):'<p>유입 경로 기록 없음</p>'; }
-  waitForAdmin();
+  window.AIWITH_ADMIN_READY.then(allowed=>{if(allowed)init()});
 })();

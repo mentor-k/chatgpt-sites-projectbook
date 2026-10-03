@@ -7,7 +7,7 @@
   const getClient = () => {
     if (!client && window.supabase?.createClient) {
       client = window.supabase.createClient(URL, KEY, {
-        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false, storage: window.sessionStorage }
       });
     }
     return client;
@@ -17,6 +17,26 @@
     if (/^(https?:|data:|blob:|\/)/i.test(path)) return path;
     const api = getClient();
     return api ? api.storage.from('cardnews').getPublicUrl(path).data.publicUrl : path;
+  };
+  const getAdminUser = async () => {
+    const api = getClient();
+    if (!api) throw new Error('AUTH_UNAVAILABLE');
+    const { data, error } = await api.auth.getUser();
+    if (error || !data?.user || data.user.is_anonymous) return null;
+    const { data: admin, error: roleError } = await api.rpc('aiwith_is_admin');
+    if (roleError || admin !== true) return null;
+    return data.user;
+  };
+  const requireAdmin = async () => {
+    const user = await getAdminUser();
+    if (!user) throw new Error('AUTH_REQUIRED');
+    return user;
+  };
+  const listConsultations = async () => {
+    await requireAdmin();
+    const { data, error } = await getClient().functions.invoke('consultation-notify', { body: { action: 'list' } });
+    if (error || !Array.isArray(data?.requests)) throw new Error('CONSULTATION_UNAVAILABLE');
+    return data.requests;
   };
   const ordered = (posts) => (posts || []).map((post) => ({
     ...post,
@@ -36,6 +56,7 @@
     return ordered(data);
   };
   const listOwned = async () => {
+    await requireAdmin();
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data, error } = await api.from('cardnews_posts')
@@ -56,10 +77,13 @@
   const slugify = (value) => String(value || 'cardnews').toLowerCase().trim()
     .replace(/[^a-z0-9가-힣\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 70) || 'cardnews';
   const dataUrlToBlob = async (dataUrl) => {
-    const response = await fetch(dataUrl);
-    return response.blob();
+    const match = /^data:image\/webp;base64,([A-Za-z0-9+/=]+)$/.exec(String(dataUrl || ''));
+    if (!match || match[1].length > 14 * 1024 * 1024) throw new Error('INVALID_CARD_IMAGE');
+    const binary = atob(match[1]);
+    return new Blob([Uint8Array.from(binary, char => char.charCodeAt(0))], {type:'image/webp'});
   };
   const savePost = async ({ id = null, title, summary, seoTitle = '', seoDescription = '', aeoSummary = '', geoSummary = '', optimizationSummary = '', keywords = [], files, existingCards = [] }) => {
+    await requireAdmin();
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data: authData } = await api.auth.getSession();
@@ -104,6 +128,7 @@
     return { ...post, description: summary, seo_title: seoTitle || title, seo_description: optimizationSummary || seoDescription, aeo_summary: optimizationSummary || aeoSummary, geo_summary: optimizationSummary || geoSummary, keywords: keywordList, optimization_summary: optimizationSummary, cards: next.map((card) => ({ ...card, url: toPublicUrl(card.image_path) })) };
   };
   const deletePost = async (id) => {
+    await requireAdmin();
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     const { data: cards, error: cardError } = await api.from('cardnews_cards').select('image_path').eq('post_id', id);
@@ -130,6 +155,7 @@
     return { ok: true };
   };
   const listPageviews = async ({ since } = {}) => {
+    await requireAdmin();
     const api = getClient();
     if (!api) throw new Error('Supabase client is unavailable');
     let query = api.from('page_views').select('id,path,referrer,device_type,viewport_width,created_at').order('created_at', { ascending: false }).limit(10000);
@@ -138,5 +164,5 @@
     if (error) throw error;
     return data || [];
   };
-  window.AIWITH_SUPABASE = { URL, getClient, toPublicUrl, listPublished, listOwned, getBySlug, savePost, deletePost, trackPageview, listPageviews };
+  window.AIWITH_SUPABASE = { URL, getClient, getAdminUser, listConsultations, toPublicUrl, listPublished, listOwned, getBySlug, savePost, deletePost, trackPageview, listPageviews };
 })();

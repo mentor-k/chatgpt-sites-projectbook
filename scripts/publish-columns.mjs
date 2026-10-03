@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {hardenSite} from './build-security.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const ORIGIN='https://aiwith.kr';
@@ -76,6 +77,7 @@ export function renderColumns(root=ROOT){
     const items=feed.match(/<item>[\s\S]*?<\/item>/g)||[];
     xml=xml.replace('</channel>',items.join('\n')+'\n</channel>');write('feed.xml',xml);
   }
+  hardenSite(root);
   return {published:posts.length,next:plan.topics.find(t=>!done.has(t.id))?.id||null};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){

@@ -6,6 +6,6 @@
   if (window.AIWITH_SUPABASE?.trackPageview) send();
   else {
     const load = (src, done) => { const script = document.createElement('script'); script.src = src; script.onload = done; script.onerror = () => {}; document.head.appendChild(script); };
-    load('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2', () => load('/supabase-client.js?v=20260915-4', send));
+    load('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2', () => load('/supabase-client.js?v=20261003-security-1', send));
   }
 })();

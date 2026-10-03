@@ -4,20 +4,6 @@
   const footer = document.querySelector('[data-site-footer]');
   const path = location.pathname.replace(/\/index\.html$/, '/');
   const active = (prefix) => prefix === '/' ? path === '/' : path.startsWith(prefix);
-  const requestAdminPassword = () => new Promise((resolve) => {
-    const backdrop = document.createElement('div');
-    backdrop.className = 'aiwith-password-backdrop';
-    backdrop.innerHTML = '<div class="aiwith-password-dialog" role="dialog" aria-modal="true" aria-labelledby="aiwithPasswordTitle"><p class="kicker">AI위드스쿨 ADMIN</p><h2 id="aiwithPasswordTitle">관리자 대시보드</h2><p>비밀번호를 입력하면 관리자 화면으로 이동합니다.</p><form><label for="aiwithAdminPassword">비밀번호</label><input id="aiwithAdminPassword" name="password" type="password" lang="en" inputmode="latin" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" required><div><button type="button" data-password-cancel>취소</button><button type="submit" class="primary">확인</button></div></form></div>';
-    const form = backdrop.querySelector('form');
-    const input = backdrop.querySelector('input');
-    const close = (value) => { backdrop.remove(); resolve(value); };
-    backdrop.addEventListener('click', (event) => { if (event.target === backdrop) close(null); });
-    backdrop.querySelector('[data-password-cancel]').addEventListener('click', () => close(null));
-    form.addEventListener('submit', (event) => { event.preventDefault(); close(input.value); });
-    document.body.appendChild(backdrop);
-    input.focus();
-  });
-  window.AIWITH_REQUEST_ADMIN_PASSWORD = requestAdminPassword;
   if (header) {
     header.innerHTML = '<header class="global-header"><a class="global-brand" href="/" aria-label="AI위드스쿨 HOME"><img src="/assets/aiwith-school-logo-domain.png" alt="AI위드스쿨 · AI와 함께 배우고, 만들고, 성장하다 · aiwith.kr"></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="globalNav"><span></span><span></span><span></span><em>메뉴</em></button><nav class="global-nav" id="globalNav" aria-label="주요 메뉴"><a data-nav="home" href="/">HOME</a><div class="nav-group"><button type="button" aria-expanded="false">웹사이트 스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/website/">웹사이트 구축 강의</a><a href="/website/benchmark/">웹사이트 벤치마킹</a></div></div><div class="nav-group"><button type="button" aria-expanded="false">콘텐츠스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/content-school/">콘텐츠스쿨 소개</a><a href="/content-school/#blog">AI 블로그 글쓰기</a><a href="/content-school/#visual">인포그래픽·포스터·카드뉴스</a><a href="/content-school/#shortform">숏폼 만들기·홍보마케팅</a></div></div><div class="nav-group"><button type="button" aria-expanded="false">기획서·사업계획서 스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/proposal-school/">스쿨 소개</a><a href="/proposal-school/#business">사업계획서·IR자료</a><a href="/proposal-school/#government">정부지원 사업계획서</a></div></div><a href="/marketing-school/">AI마케팅스쿨</a><a href="/prompt/">AI 프롬프트랩</a><a href="/book-school/">책쓰기 스쿨</a><a href="/workshops/">강의·워크숍</a><a href="/columns/">멘토K 컬럼</a><a href="/cardnews/">카드뉴스</a><a href="/notices/">공지사항</a><a class="nav-cta" href="/consultation/">상담 신청</a><a class="admin-link" data-admin-entry href="/admin/" aria-label="관리자 대시보드" title="관리자 대시보드"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5.1-3.4 8.9-8 10-4.6-1.1-8-4.9-8-10V6l8-3Z"/><path d="m8.8 12 2.1 2.1 4.5-4.7"/></svg><span>관리자</span></a></nav></header>';
     const nav = header.querySelector('.global-nav');
@@ -35,15 +21,6 @@
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
     header.querySelectorAll('.nav-group>button').forEach((button) => button.addEventListener('click', () => { const on = button.getAttribute('aria-expanded') !== 'true'; header.querySelectorAll('.nav-group>button').forEach((x) => { x.setAttribute('aria-expanded', 'false'); x.parentElement.classList.remove('open'); }); button.setAttribute('aria-expanded', String(on)); button.parentElement.classList.toggle('open', on); }));
     header.querySelectorAll('a').forEach((a) => { const href = a.getAttribute('href'); if (href && active(href) && href !== '/') a.classList.add('active'); if (href === '/' && path === '/') a.classList.add('active'); });
-    const adminHash = 'e45870b5e5716bad459290561eaedf47972c65c9cb3d4f50762f46bf45e8f898';
-    const digest = async (value) => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)))).map((byte) => byte.toString(16).padStart(2, '0')).join('');
-    header.querySelector('[data-admin-entry]')?.addEventListener('click', async (event) => {
-      event.preventDefault();
-      if (sessionStorage.getItem('aiwith_admin_access') === 'granted') { location.href = '/admin/'; return; }
-      const password = await requestAdminPassword();
-      if (password && await digest(password) === adminHash) { sessionStorage.setItem('aiwith_admin_access', 'granted'); location.href = '/admin/'; }
-      else if (password !== null) window.alert('비밀번호가 올바르지 않습니다.');
-    });
     document.addEventListener('click', (event) => { if (!event.target.closest('.nav-group')) header.querySelectorAll('.nav-group').forEach((g) => { g.classList.remove('open'); g.querySelector('button')?.setAttribute('aria-expanded', 'false'); }); if (!event.target.closest('.global-header') && nav.classList.contains('open')) closeMenu(); });
   }
   if (footer) {
@@ -84,40 +61,23 @@
     localStorage.setItem(key, JSON.stringify(data));
   } catch (_) {}
   const form = document.getElementById('consultationForm');
-  if (form) form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!form.reportValidity()) return;
-    const item = Object.fromEntries(new FormData(form).entries());
-    item.createdAt = new Date().toISOString();
-    item.sourcePath = location.pathname;
-    const output = document.getElementById('formResult');
-    const submit = form.querySelector('button[type="submit"]');
-    if (submit) submit.disabled = true;
-    try {
-      const response = await fetch('https://ypowbfahoywmkyeaheph.supabase.co/functions/v1/consultation-notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...item, action: 'submit' })
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.ok) throw new Error(data.error || 'SUBMIT_FAILED');
-      item.status = 'submitted';
-      item.emailStatus = data.email_status || 'pending';
-      const list = JSON.parse(localStorage.getItem('aiwith_consultations') || '[]');
-      list.unshift(item);
-      localStorage.setItem('aiwith_consultations', JSON.stringify(list.slice(0, 100)));
-      output.hidden = false;
-      output.textContent = '상담 신청이 접수되었습니다. 담당자가 확인 후 연락드리겠습니다.';
-      form.reset();
-    } catch (_) {
-      item.status = 'local_pending';
-      const list = JSON.parse(localStorage.getItem('aiwith_consultations') || '[]');
-      list.unshift(item);
-      localStorage.setItem('aiwith_consultations', JSON.stringify(list.slice(0, 100)));
-      output.hidden = false;
-      output.textContent = '네트워크 연결이 지연되어 이 브라우저에 임시 저장했습니다. 잠시 후 다시 제출해 주세요.';
-    } finally {
-      if (submit) submit.disabled = false;
-    }
-  });
+  if (form) {
+    for (const [name,max] of Object.entries({name:80,organization:160,phone:40,email:254,message:4000})) if(form.elements[name])form.elements[name].maxLength=max;
+    const trap=document.createElement('input');trap.name='website';trap.type='text';trap.hidden=true;trap.tabIndex=-1;trap.autocomplete='off';trap.setAttribute('aria-hidden','true');form.appendChild(trap);
+    form.addEventListener('submit', async event => {
+      event.preventDefault();if(!form.reportValidity())return;
+      const item=Object.fromEntries(new FormData(form).entries());item.sourcePath=location.pathname;
+      const output=document.getElementById('formResult'),submit=form.querySelector('button[type="submit"]');
+      if(submit)submit.disabled=true;
+      try {
+        const response=await fetch('https://ypowbfahoywmkyeaheph.supabase.co/functions/v1/consultation-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...item,action:'submit'}),signal:AbortSignal.timeout(15000)});
+        const data=await response.json().catch(()=>({}));
+        if(response.status===429)throw Error('RATE_LIMITED');
+        if(!response.ok||!data.ok)throw Error('SUBMIT_FAILED');
+        output.hidden=false;output.textContent='상담 신청이 접수되었습니다. 담당자가 확인 후 연락드리겠습니다.';form.reset();
+      } catch(error) {
+        output.hidden=false;output.textContent=error.message==='RATE_LIMITED'?'접수가 일시적으로 제한되었습니다. 잠시 후 다시 시도하거나 010-3338-7110으로 연락해 주세요.':'접수 완료를 확인하지 못했습니다. 입력 내용은 이 화면에만 남아 있습니다. 다시 시도하거나 010-3338-7110으로 연락해 주세요.';
+      } finally {if(submit)submit.disabled=false}
+    });
+  }
 })();
