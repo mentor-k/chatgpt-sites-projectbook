@@ -1,40 +1,797 @@
 {
-  "version": 1,
+  "version": 2,
   "timezone": "Asia/Seoul",
   "startDate": "2026-10-04",
   "localTime": "08:00",
   "author": "김용한 박사(멘토K)",
-  "bodyLength": [1800, 2300],
+  "bodyLength": [
+    1800,
+    2300
+  ],
   "topics": [
-    {"id":1,"slug":"ai-training-outcomes","category":"조직·AX 교육","title":"AI 교육, 도구 사용법보다 업무가 바뀌는 경험을 설계하라","audience":"기업·공공기관 교육담당자","focus":"업무 문제와 산출물을 먼저 정하는 교육 설계","program":"임직원 AI 업무혁신 워크숍"},
-    {"id":2,"slug":"ai-skill-diagnosis","category":"조직·AX 교육","title":"임직원 AI 역량 진단 없이 같은 교육을 반복하면 생기는 일","audience":"HRD·경영진","focus":"활용 수준·부서 과제에 따른 수준별 교육","program":"AX 진단 연계 맞춤형 교육"},
-    {"id":3,"slug":"executive-ai-decisions","category":"조직·AX 교육","title":"CEO의 AI 학습은 기능이 아니라 의사결정에서 시작해야 한다","audience":"CEO·임원·팀장","focus":"위임 범위와 검증 기준을 정하는 리더십","program":"경영진 AI 전략 특강"},
-    {"id":4,"slug":"public-sector-ai-writing","category":"조직·AX 교육","title":"공무원 AI 교육, 보고서 한 장을 실제로 완성하게 하라","audience":"지자체·공공기관","focus":"근거·개인정보·행정문서 검수","program":"공공기관 AI 보고서 실습"},
-    {"id":5,"slug":"team-ai-workflow","category":"조직·AX 교육","title":"AI를 잘 쓰는 직원 한 명보다 함께 쓰는 업무 흐름이 중요하다","audience":"부서장·실무팀","focus":"팀 템플릿·검수·인수인계","program":"팀 단위 AX 실행 워크숍"},
-    {"id":6,"slug":"ai-training-transfer","category":"조직·AX 교육","title":"교육이 끝난 뒤 30일, AI 활용이 멈추지 않게 만드는 방법","audience":"교육기획자·HRD","focus":"현업 적용 과제와 후속 피드백","program":"AI 교육 후속 코칭"},
-    {"id":7,"slug":"small-business-customer-content","category":"소상공인·마케팅","title":"소상공인 AI 교육, 콘텐츠 개수보다 고객의 구매 질문에 답하라","audience":"소상공인·지원기관","focus":"고객 질문과 구매 전환을 연결하는 콘텐츠","program":"소상공인 AI 홍보마케팅 실습"},
-    {"id":8,"slug":"market-ai-workshop","category":"소상공인·마케팅","title":"전통시장 상인교육에 AI를 넣을 때 먼저 바꿔야 할 세 가지","audience":"상인회·시장지원기관","focus":"점포 여건·쉬운 실습·공동 활용","program":"전통시장 AI 마케팅 워크숍"},
-    {"id":9,"slug":"product-page-persuasion","category":"소상공인·마케팅","title":"AI 상세페이지, 예쁜 문구보다 구매를 망설이는 이유를 해결하라","audience":"온라인 판매자·제조 소공인","focus":"니즈·근거·사용조건·구매 불안 해소","program":"AI 상세페이지 기획 실습"},
-    {"id":10,"slug":"ai-blog-search-answers","category":"소상공인·마케팅","title":"AI 블로그 글쓰기, 검색어와 고객 질문을 함께 설계하라","audience":"소상공인·마케팅 담당자","focus":"검색 목적·고유 경험·답변형 구조","program":"AI 블로그 콘텐츠 워크숍"},
-    {"id":11,"slug":"shortform-business-goal","category":"소상공인·마케팅","title":"숏폼을 만들기 전에 정할 것, 조회수 다음의 고객 행동","audience":"사업자·홍보 담당자","focus":"후킹·실제 정보·문의 행동","program":"AI 숏폼 기획·제작 실습"},
-    {"id":12,"slug":"seo-aeo-geo-training","category":"소상공인·마케팅","title":"SEO·AEO·GEO 교육, 용어 설명보다 우리 고객의 탐색을 보라","audience":"마케터·사업자·지원기관","focus":"검색·AI 답변·비교 상황별 정보 정리","program":"AI 검색·추천 대응 워크숍"},
-    {"id":13,"slug":"senior-ai-first-result","category":"시니어·개인브랜딩","title":"시니어 AI 교육, 첫 성공 경험은 작고 분명해야 한다","audience":"평생교육기관·시니어","focus":"쉬운 첫 산출물과 반복 학습","program":"시니어 AI 생활·업무 활용"},
-    {"id":14,"slug":"expertise-personal-brand","category":"시니어·개인브랜딩","title":"경험 많은 전문가의 AI 개인브랜딩, 내 일을 한 문장으로 정리하라","audience":"전문가·중장년","focus":"고객 문제와 전문성의 연결","program":"AI 개인브랜딩 워크숍"},
-    {"id":15,"slug":"second-career-assets","category":"시니어·개인브랜딩","title":"은퇴 후 인생 2막, AI로 경력을 고객에게 필요한 자산으로 바꾸는 법","audience":"은퇴 준비자·중장년 지원기관","focus":"경험 목록·대상 고객·작은 검증","program":"중장년 AI 경력 자산화"},
-    {"id":16,"slug":"accessible-ai-learning","category":"시니어·개인브랜딩","title":"누구나 따라오는 AI 실습, 속도보다 접근성을 먼저 설계하라","audience":"복지기관·평생교육 담당자","focus":"다양한 학습 조건과 보조 방식","program":"포용적 AI 리터러시 교육"},
-    {"id":17,"slug":"one-person-brand-system","category":"시니어·개인브랜딩","title":"1인 전문가의 홈페이지·블로그·SNS, 하나의 브랜드로 연결하라","audience":"강사·컨설턴트·프리랜서","focus":"일관된 전문성·근거·상담 흐름","program":"전문가 AI 브랜딩 실습"},
-    {"id":18,"slug":"portfolio-proof","category":"시니어·개인브랜딩","title":"자기소개보다 강한 포트폴리오, AI로 경험의 증거를 정리하라","audience":"구직자·전문가·창업 준비자","focus":"역할·산출물·확인 가능한 성과","program":"AI 포트폴리오 제작"},
-    {"id":19,"slug":"vibe-coding-problem-first","category":"웹·앱·콘텐츠 제작","title":"비개발자의 바이브코딩, 만들기 전에 문제와 완료 기준을 정하라","audience":"실무자·창업자","focus":"작은 문제·기능 범위·검수","program":"AI 웹·앱 제작 입문 워크숍"},
-    {"id":20,"slug":"website-inquiry-flow","category":"웹·앱·콘텐츠 제작","title":"AI 홈페이지 제작, 방문자가 문의하는 흐름부터 그려라","audience":"기업·기관·1인 사업자","focus":"대상·정보 위계·신뢰 근거·문의","program":"AI 홈페이지 구축 실습"},
-    {"id":21,"slug":"prompt-output-first","category":"웹·앱·콘텐츠 제작","title":"프롬프트를 길게 쓰기 전에 좋은 결과물의 기준을 정하라","audience":"AI 입문자·실무자","focus":"목표·입력자료·출력 형식·검수","program":"실무 프롬프트 설계 워크숍"},
-    {"id":22,"slug":"visual-content-accuracy","category":"웹·앱·콘텐츠 제작","title":"AI 인포그래픽과 카드뉴스, 보기 쉬운 만큼 사실도 정확해야 한다","audience":"교육·홍보 담당자","focus":"한 장의 핵심·정보 정확성·가독성","program":"AI 시각 콘텐츠 제작"},
-    {"id":23,"slug":"ai-book-author-view","category":"웹·앱·콘텐츠 제작","title":"AI 책쓰기, 대신 써주는 도구보다 저자의 관점을 선명하게 하라","audience":"전문가·강사·예비 저자","focus":"경험·독자 문제·차별적 목차","program":"AI 책쓰기·전문성 출판 워크숍"},
-    {"id":24,"slug":"reusable-content-workflow","category":"웹·앱·콘텐츠 제작","title":"강의자료 한 번 만들고 끝내지 말라, AI로 재사용 흐름을 설계하라","audience":"강사·교육기관·실무자","focus":"자료 구조·매체별 변환·권리 검수","program":"AI 교육 콘텐츠 제작 실습"},
-    {"id":25,"slug":"startup-ai-validation","category":"창업·지역·교육 설계","title":"스타트업 AI 교육, 아이디어의 멋보다 고객 검증의 속도를 높여라","audience":"창업자·창업지원기관","focus":"고객 가설·인터뷰·실험","program":"AI 창업 문제해결 워크숍"},
-    {"id":26,"slug":"tourism-ai-experience","category":"창업·지역·교육 설계","title":"관광기업의 AI 활용, 홍보 문구를 넘어 고객 경험을 설계하라","audience":"관광기업·지역관광기관","focus":"탐색·예약·현장·재방문 여정","program":"관광기업 AI 마케팅 워크숍"},
-    {"id":27,"slug":"local-data-ai-interpretation","category":"창업·지역·교육 설계","title":"상권조사에 AI를 쓰는 법, 데이터 요약보다 현장 해석을 강화하라","audience":"상권기획자·지자체·지원기관","focus":"데이터 한계·현장 확인·대안","program":"AI 상권조사·분석 워크숍"},
-    {"id":28,"slug":"proposal-ai-evidence","category":"창업·지역·교육 설계","title":"AI 사업계획서, 빈칸을 채우기보다 실행 근거를 연결하라","audience":"기업·기관 기획자","focus":"문제·활동·예산·성과 근거","program":"AI 기획서·사업계획서 실습"},
-    {"id":29,"slug":"ai-workshop-output-design","category":"창업·지역·교육 설계","title":"2시간 특강과 하루 워크숍, 목적에 맞는 AI 교육을 고르는 기준","audience":"기업·기관 교육담당자","focus":"인식 변화·실습 산출물·현업 적용","program":"맞춤형 AI 특강·워크숍"},
-    {"id":30,"slug":"ai-training-brief","category":"창업·지역·교육 설계","title":"AI 강의를 의뢰하기 전, 교육담당자가 준비해야 할 다섯 가지","audience":"기업·공공기관·평생교육기관","focus":"대상·현재 수준·문제·시간·완료 기준","program":"AI위드스쿨 맞춤 교육 상담"}
+    {
+      "id": 1,
+      "slug": "ai-training-outcomes",
+      "category": "조직·AX 교육",
+      "title": "기업·공공기관 AI 교육담당자, 현업 적용이 안 되는 교육은 실습 문서부터 바꿔라",
+      "audience": "기업·공공기관 교육담당자",
+      "focus": "업무 문제와 산출물을 먼저 정하는 교육 설계",
+      "program": "임직원 AI 업무혁신 워크숍",
+      "primaryKeyword": "AI 교육",
+      "targetKeywords": [
+        "AI 교육담당자",
+        "기업 AI 교육",
+        "공공기관 AI 교육"
+      ],
+      "problemKeywords": [
+        "현업 적용이 안 되는",
+        "보고서 반복 수정"
+      ],
+      "coverPose": "검수표를 가리키며 수정 문서를 들고 설명하기",
+      "deliverables": [
+        "업무 요청문",
+        "근거 대조표",
+        "수정 문서",
+        "현업 적용 계획"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "기업·공공기관 AI 교육담당자, 현업 적용이 안 되는 교육은 실습 문서부터 바꿔라"
+    },
+    {
+      "id": 2,
+      "slug": "ai-skill-diagnosis",
+      "category": "조직·AX 교육",
+      "title": "HRD 담당자의 임직원 AI 교육, 수준 차이로 실습이 막힐 때 진단할 것",
+      "audience": "HRD·경영진",
+      "focus": "활용 수준·부서 과제에 따른 수준별 교육",
+      "program": "AX 진단 연계 맞춤형 교육",
+      "primaryKeyword": "임직원 AI 교육",
+      "targetKeywords": [
+        "HRD 담당자",
+        "임직원 AI 교육"
+      ],
+      "problemKeywords": [
+        "수준 차이",
+        "실습이 막힐 때"
+      ],
+      "coverPose": "역량 진단표를 펼치고 참가자 수준을 비교하기",
+      "deliverables": [
+        "AI 활용 수준표",
+        "부서별 과제 목록",
+        "수준별 교육안"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "HRD 담당자의 임직원 AI 교육, 수준 차이로 실습이 막힐 때 진단할 것"
+    },
+    {
+      "id": 3,
+      "slug": "executive-ai-decisions",
+      "category": "조직·AX 교육",
+      "title": "CEO AI 교육, 의사결정 근거가 불확실할 때 정해야 할 검증 기준",
+      "audience": "CEO·임원·팀장",
+      "focus": "위임 범위와 검증 기준을 정하는 리더십",
+      "program": "경영진 AI 전략 특강",
+      "primaryKeyword": "CEO AI 교육",
+      "targetKeywords": [
+        "CEO AI 교육",
+        "경영진 AI 교육"
+      ],
+      "problemKeywords": [
+        "의사결정 근거가 불확실",
+        "AI 결과 검증"
+      ],
+      "coverPose": "두 의사결정 대안을 손으로 비교하며 토론하기",
+      "deliverables": [
+        "의사결정 질문표",
+        "AI 위임 범위표",
+        "근거 검증 기준"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "CEO AI 교육, 의사결정 근거가 불확실할 때 정해야 할 검증 기준"
+    },
+    {
+      "id": 4,
+      "slug": "public-sector-ai-writing",
+      "category": "조직·AX 교육",
+      "title": "공무원 AI 보고서 교육, 출처 누락과 반복 반려를 줄이는 실습 설계",
+      "audience": "지자체·공공기관",
+      "focus": "근거·개인정보·행정문서 검수",
+      "program": "공공기관 AI 보고서 실습",
+      "primaryKeyword": "AI 보고서 교육",
+      "targetKeywords": [
+        "공무원",
+        "공공기관"
+      ],
+      "problemKeywords": [
+        "출처 누락",
+        "반복 반려"
+      ],
+      "coverPose": "보고서 원자료와 초안을 나란히 대조하기",
+      "deliverables": [
+        "가상 행정문서 초안",
+        "출처 대조표",
+        "문서 검수표"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "공무원 AI 보고서 교육, 출처 누락과 반복 반려를 줄이는 실습 설계"
+    },
+    {
+      "id": 5,
+      "slug": "team-ai-workflow",
+      "category": "조직·AX 교육",
+      "title": "부서장 AI 업무혁신, 담당자 부재로 업무가 멈출 때 팀 흐름을 설계하라",
+      "audience": "부서장·실무팀",
+      "focus": "팀 템플릿·검수·인수인계",
+      "program": "팀 단위 AX 실행 워크숍",
+      "primaryKeyword": "AI 업무혁신",
+      "targetKeywords": [
+        "부서장",
+        "실무팀"
+      ],
+      "problemKeywords": [
+        "담당자 부재",
+        "업무가 멈출 때"
+      ],
+      "coverPose": "팀 업무 흐름 보드에 인수인계 카드를 붙이기",
+      "deliverables": [
+        "팀 업무 흐름도",
+        "공용 요청문",
+        "인수인계 체크리스트"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "부서장 AI 업무혁신, 담당자 부재로 업무가 멈출 때 팀 흐름을 설계하라"
+    },
+    {
+      "id": 6,
+      "slug": "ai-training-transfer",
+      "category": "조직·AX 교육",
+      "title": "HRD 담당자의 AI 교육 사후관리, 교육 후 활용이 멈추는 이유와 적용 과제",
+      "audience": "교육기획자·HRD",
+      "focus": "현업 적용 과제와 후속 피드백",
+      "program": "AI 교육 후속 코칭",
+      "primaryKeyword": "AI 교육 사후관리",
+      "targetKeywords": [
+        "HRD 담당자",
+        "교육기획자"
+      ],
+      "problemKeywords": [
+        "교육 후 활용이 멈추는",
+        "현업 적용 과제"
+      ],
+      "coverPose": "달력에 후속 과제를 표시하며 코칭하기",
+      "deliverables": [
+        "현업 적용 과제표",
+        "피드백 질문표",
+        "후속 점검 계획"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "HRD 담당자의 AI 교육 사후관리, 교육 후 활용이 멈추는 이유와 적용 과제"
+    },
+    {
+      "id": 7,
+      "slug": "small-business-customer-content",
+      "category": "소상공인·마케팅",
+      "title": "소상공인 AI 마케팅, 홍보글을 올려도 문의가 없는 이유부터 풀어라",
+      "audience": "소상공인·지원기관",
+      "focus": "고객 질문과 구매 전환을 연결하는 콘텐츠",
+      "program": "소상공인 AI 홍보마케팅 실습",
+      "primaryKeyword": "AI 마케팅",
+      "targetKeywords": [
+        "소상공인",
+        "소상공인 지원기관"
+      ],
+      "problemKeywords": [
+        "문의가 없는",
+        "구매 질문 누락"
+      ],
+      "coverPose": "고객 질문 카드를 들고 점포 홍보글을 설명하기",
+      "deliverables": [
+        "고객 구매 질문표",
+        "답변형 홍보글",
+        "문의 연결 문구"
+      ],
+      "programUrl": "/marketing-school/",
+      "searchQuestion": "소상공인 AI 마케팅, 홍보글을 올려도 문의가 없는 이유부터 풀어라"
+    },
+    {
+      "id": 8,
+      "slug": "market-ai-workshop",
+      "category": "소상공인·마케팅",
+      "title": "전통시장 상인 AI 교육, 스마트폰 실습이 어려운 참여자를 위한 과제 설계",
+      "audience": "상인회·시장지원기관",
+      "focus": "점포 여건·쉬운 실습·공동 활용",
+      "program": "전통시장 AI 마케팅 워크숍",
+      "primaryKeyword": "AI 교육",
+      "targetKeywords": [
+        "전통시장 상인",
+        "상인회"
+      ],
+      "problemKeywords": [
+        "스마트폰 실습이 어려운",
+        "점포별 활용 격차"
+      ],
+      "coverPose": "상인 옆에서 스마트폰을 함께 보며 실습 안내하기",
+      "deliverables": [
+        "점포 소개글",
+        "쉬운 실습 안내서",
+        "상인회 공동 활용안"
+      ],
+      "programUrl": "/marketing-school/",
+      "searchQuestion": "전통시장 상인 AI 교육, 스마트폰 실습이 어려운 참여자를 위한 과제 설계"
+    },
+    {
+      "id": 9,
+      "slug": "product-page-persuasion",
+      "category": "소상공인·마케팅",
+      "title": "온라인 판매자 AI 상세페이지, 구매를 망설이는 고객에게 제시할 근거",
+      "audience": "온라인 판매자·제조 소공인",
+      "focus": "니즈·근거·사용조건·구매 불안 해소",
+      "program": "AI 상세페이지 기획 실습",
+      "primaryKeyword": "AI 상세페이지",
+      "targetKeywords": [
+        "온라인 판매자",
+        "제조 소공인"
+      ],
+      "problemKeywords": [
+        "구매를 망설이는",
+        "제품 정보 부족"
+      ],
+      "coverPose": "제품 샘플과 상세페이지 초안을 함께 제시하기",
+      "deliverables": [
+        "구매 불안 목록",
+        "제품 근거표",
+        "상세페이지 구성안"
+      ],
+      "programUrl": "/marketing-school/",
+      "searchQuestion": "온라인 판매자 AI 상세페이지, 구매를 망설이는 고객에게 제시할 근거"
+    },
+    {
+      "id": 10,
+      "slug": "ai-blog-search-answers",
+      "category": "소상공인·마케팅",
+      "title": "소상공인 AI 블로그 글쓰기, 검색 유입이 없는 글의 질문 구조를 바꿔라",
+      "audience": "소상공인·마케팅 담당자",
+      "focus": "검색 목적·고유 경험·답변형 구조",
+      "program": "AI 블로그 콘텐츠 워크숍",
+      "primaryKeyword": "AI 블로그 글쓰기",
+      "targetKeywords": [
+        "소상공인",
+        "마케팅 담당자"
+      ],
+      "problemKeywords": [
+        "검색 유입이 없는",
+        "고객 질문 누락"
+      ],
+      "coverPose": "검색 질문 메모를 블로그 목차로 옮기기",
+      "deliverables": [
+        "고객 검색 질문표",
+        "답변형 글 목차",
+        "검수된 블로그 초안"
+      ],
+      "programUrl": "/content-school/",
+      "searchQuestion": "소상공인 AI 블로그 글쓰기, 검색 유입이 없는 글의 질문 구조를 바꿔라"
+    },
+    {
+      "id": 11,
+      "slug": "shortform-business-goal",
+      "category": "소상공인·마케팅",
+      "title": "홍보 담당자 AI 숏폼, 조회수는 있는데 문의가 없는 영상의 다음 행동",
+      "audience": "사업자·홍보 담당자",
+      "focus": "후킹·실제 정보·문의 행동",
+      "program": "AI 숏폼 기획·제작 실습",
+      "primaryKeyword": "AI 숏폼",
+      "targetKeywords": [
+        "홍보 담당자",
+        "사업자"
+      ],
+      "problemKeywords": [
+        "조회수는 있는데 문의가 없는",
+        "문의 동선 누락"
+      ],
+      "coverPose": "촬영 스토리보드를 들어 장면별 행동을 설명하기",
+      "deliverables": [
+        "숏폼 스토리보드",
+        "후킹 문장",
+        "문의 연결 장면"
+      ],
+      "programUrl": "/content-school/",
+      "searchQuestion": "홍보 담당자 AI 숏폼, 조회수는 있는데 문의가 없는 영상의 다음 행동"
+    },
+    {
+      "id": 12,
+      "slug": "seo-aeo-geo-training",
+      "category": "소상공인·마케팅",
+      "title": "마케터 SEO·AEO·GEO 교육, AI 검색에서 추천되지 않는 정보를 점검하라",
+      "audience": "마케터·사업자·지원기관",
+      "focus": "검색·AI 답변·비교 상황별 정보 정리",
+      "program": "AI 검색·추천 대응 워크숍",
+      "primaryKeyword": "SEO·AEO·GEO 교육",
+      "targetKeywords": [
+        "마케터",
+        "사업자"
+      ],
+      "problemKeywords": [
+        "AI 검색에서 추천되지 않는",
+        "비교 정보 부족"
+      ],
+      "coverPose": "검색·AI 답변·비교 보드의 정보를 연결하기",
+      "deliverables": [
+        "탐색 질문 지도",
+        "답변형 콘텐츠안",
+        "정보 근거 체크리스트"
+      ],
+      "programUrl": "/marketing-school/",
+      "searchQuestion": "마케터 SEO·AEO·GEO 교육, AI 검색에서 추천되지 않는 정보를 점검하라"
+    },
+    {
+      "id": 13,
+      "slug": "senior-ai-first-result",
+      "category": "시니어·개인브랜딩",
+      "title": "평생교육기관 시니어 AI 교육, 실습을 따라가기 어려울 때 첫 결과물부터 줄여라",
+      "audience": "평생교육기관·시니어",
+      "focus": "쉬운 첫 산출물과 반복 학습",
+      "program": "시니어 AI 생활·업무 활용",
+      "primaryKeyword": "시니어 AI 교육",
+      "targetKeywords": [
+        "평생교육기관",
+        "시니어"
+      ],
+      "problemKeywords": [
+        "실습을 따라가기 어려울 때",
+        "AI 학습 포기"
+      ],
+      "coverPose": "시니어 옆에 앉아 작은 첫 결과물을 확인하기",
+      "deliverables": [
+        "짧은 생활 요청문",
+        "첫 완성 결과물",
+        "반복 학습 안내서"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "평생교육기관 시니어 AI 교육, 실습을 따라가기 어려울 때 첫 결과물부터 줄여라"
+    },
+    {
+      "id": 14,
+      "slug": "expertise-personal-brand",
+      "category": "시니어·개인브랜딩",
+      "title": "중장년 전문가 AI 개인브랜딩, 전문성이 설명되지 않을 때 고객 문제를 담아라",
+      "audience": "전문가·중장년",
+      "focus": "고객 문제와 전문성의 연결",
+      "program": "AI 개인브랜딩 워크숍",
+      "primaryKeyword": "AI 개인브랜딩",
+      "targetKeywords": [
+        "중장년 전문가",
+        "전문가"
+      ],
+      "problemKeywords": [
+        "전문성이 설명되지 않을 때",
+        "고객 대상 불명확"
+      ],
+      "coverPose": "전문가 소개 한 문장을 보드에 쓰기",
+      "deliverables": [
+        "전문성 한 문장",
+        "고객 문제 목록",
+        "브랜드 소개글"
+      ],
+      "programUrl": "/book-school/",
+      "searchQuestion": "중장년 전문가 AI 개인브랜딩, 전문성이 설명되지 않을 때 고객 문제를 담아라"
+    },
+    {
+      "id": 15,
+      "slug": "second-career-assets",
+      "category": "시니어·개인브랜딩",
+      "title": "은퇴 준비자 AI 경력 자산화, 경험은 많지만 고객이 없을 때 검증할 것",
+      "audience": "은퇴 준비자·중장년 지원기관",
+      "focus": "경험 목록·대상 고객·작은 검증",
+      "program": "중장년 AI 경력 자산화",
+      "primaryKeyword": "AI 경력 자산화",
+      "targetKeywords": [
+        "은퇴 준비자",
+        "중장년"
+      ],
+      "problemKeywords": [
+        "고객이 없을 때",
+        "경험 상품화 고민"
+      ],
+      "coverPose": "경력 포트폴리오를 펼쳐 고객별 활용을 짚기",
+      "deliverables": [
+        "경험 자산 목록",
+        "고객 가설표",
+        "작은 검증 계획"
+      ],
+      "programUrl": "/book-school/",
+      "searchQuestion": "은퇴 준비자 AI 경력 자산화, 경험은 많지만 고객이 없을 때 검증할 것"
+    },
+    {
+      "id": 16,
+      "slug": "accessible-ai-learning",
+      "category": "시니어·개인브랜딩",
+      "title": "복지기관 AI 실습 교육, 접근성 문제로 참여가 어려운 학습자를 위한 설계",
+      "audience": "복지기관·평생교육 담당자",
+      "focus": "다양한 학습 조건과 보조 방식",
+      "program": "포용적 AI 리터러시 교육",
+      "primaryKeyword": "AI 실습 교육",
+      "targetKeywords": [
+        "복지기관",
+        "평생교육 담당자"
+      ],
+      "problemKeywords": [
+        "접근성 문제",
+        "참여가 어려운"
+      ],
+      "coverPose": "큰 글자 안내서를 들고 다양한 학습자를 안내하기",
+      "deliverables": [
+        "접근성 점검표",
+        "단계별 실습 안내",
+        "보조 학습 계획"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "복지기관 AI 실습 교육, 접근성 문제로 참여가 어려운 학습자를 위한 설계"
+    },
+    {
+      "id": 17,
+      "slug": "one-person-brand-system",
+      "category": "시니어·개인브랜딩",
+      "title": "1인 전문가 AI 브랜딩, 채널마다 소개가 달라 상담이 없는 이유",
+      "audience": "강사·컨설턴트·프리랜서",
+      "focus": "일관된 전문성·근거·상담 흐름",
+      "program": "전문가 AI 브랜딩 실습",
+      "primaryKeyword": "AI 브랜딩",
+      "targetKeywords": [
+        "1인 전문가",
+        "강사",
+        "컨설턴트"
+      ],
+      "problemKeywords": [
+        "채널마다 소개가 달라",
+        "상담이 없는"
+      ],
+      "coverPose": "홈페이지·블로그·SNS 소개 카드를 한 줄로 맞추기",
+      "deliverables": [
+        "공통 브랜드 소개",
+        "채널 역할표",
+        "상담 연결 동선"
+      ],
+      "programUrl": "/website/",
+      "searchQuestion": "1인 전문가 AI 브랜딩, 채널마다 소개가 달라 상담이 없는 이유"
+    },
+    {
+      "id": 18,
+      "slug": "portfolio-proof",
+      "category": "시니어·개인브랜딩",
+      "title": "구직자 AI 포트폴리오, 경험의 증거가 부족할 때 역할과 산출물을 정리하라",
+      "audience": "구직자·전문가·창업 준비자",
+      "focus": "역할·산출물·확인 가능한 성과",
+      "program": "AI 포트폴리오 제작",
+      "primaryKeyword": "AI 포트폴리오",
+      "targetKeywords": [
+        "구직자",
+        "창업 준비자"
+      ],
+      "problemKeywords": [
+        "경험의 증거가 부족",
+        "성과 설명 어려움"
+      ],
+      "coverPose": "포트폴리오 보드에 역할과 산출물 자료를 배치하기",
+      "deliverables": [
+        "역할·산출물 목록",
+        "근거가 있는 성과 설명",
+        "포트폴리오 초안"
+      ],
+      "programUrl": "/content-school/",
+      "searchQuestion": "구직자 AI 포트폴리오, 경험의 증거가 부족할 때 역할과 산출물을 정리하라"
+    },
+    {
+      "id": 19,
+      "slug": "vibe-coding-problem-first",
+      "category": "웹·앱·콘텐츠 제작",
+      "title": "비개발자 바이브코딩 교육, 기능 오류가 반복될 때 완료 기준을 정하라",
+      "audience": "실무자·창업자",
+      "focus": "작은 문제·기능 범위·검수",
+      "program": "AI 웹·앱 제작 입문 워크숍",
+      "primaryKeyword": "바이브코딩 교육",
+      "targetKeywords": [
+        "비개발자",
+        "창업자"
+      ],
+      "problemKeywords": [
+        "기능 오류가 반복될 때",
+        "개발 범위 확대"
+      ],
+      "coverPose": "노트북 옆 검수표를 들어 기능 완료를 확인하기",
+      "deliverables": [
+        "작은 기능 기획서",
+        "완료 기준표",
+        "웹·앱 검수 기록"
+      ],
+      "programUrl": "/website/",
+      "searchQuestion": "비개발자 바이브코딩 교육, 기능 오류가 반복될 때 완료 기준을 정하라"
+    },
+    {
+      "id": 20,
+      "slug": "website-inquiry-flow",
+      "category": "웹·앱·콘텐츠 제작",
+      "title": "1인 사업자 AI 홈페이지 제작, 방문자는 있지만 문의가 없는 동선을 바꿔라",
+      "audience": "기업·기관·1인 사업자",
+      "focus": "대상·정보 위계·신뢰 근거·문의",
+      "program": "AI 홈페이지 구축 실습",
+      "primaryKeyword": "AI 홈페이지 제작",
+      "targetKeywords": [
+        "1인 사업자",
+        "기업 담당자"
+      ],
+      "problemKeywords": [
+        "문의가 없는",
+        "방문자는 있지만"
+      ],
+      "coverPose": "사이트 동선 보드에서 문의 지점으로 길을 짚기",
+      "deliverables": [
+        "사이트 정보 구조",
+        "신뢰 근거 목록",
+        "문의 동선 설계"
+      ],
+      "programUrl": "/website/",
+      "searchQuestion": "1인 사업자 AI 홈페이지 제작, 방문자는 있지만 문의가 없는 동선을 바꿔라"
+    },
+    {
+      "id": 21,
+      "slug": "prompt-output-first",
+      "category": "웹·앱·콘텐츠 제작",
+      "title": "AI 입문자 프롬프트 교육, 원하는 답변이 안 나올 때 결과물 기준부터 정하라",
+      "audience": "AI 입문자·실무자",
+      "focus": "목표·입력자료·출력 형식·검수",
+      "program": "실무 프롬프트 설계 워크숍",
+      "primaryKeyword": "프롬프트 교육",
+      "targetKeywords": [
+        "AI 입문자",
+        "실무자"
+      ],
+      "problemKeywords": [
+        "원하는 답변이 안 나올 때",
+        "출력 형식 불일치"
+      ],
+      "coverPose": "좋은 결과물과 요청문 두 장을 비교해 보여주기",
+      "deliverables": [
+        "업무별 요청문",
+        "출력 형식 예시",
+        "결과 검수 기준"
+      ],
+      "programUrl": "/prompt/",
+      "searchQuestion": "AI 입문자 프롬프트 교육, 원하는 답변이 안 나올 때 결과물 기준부터 정하라"
+    },
+    {
+      "id": 22,
+      "slug": "visual-content-accuracy",
+      "category": "웹·앱·콘텐츠 제작",
+      "title": "홍보 담당자 AI 카드뉴스 제작, 사실 오류와 작은 글자를 함께 검수하라",
+      "audience": "교육·홍보 담당자",
+      "focus": "한 장의 핵심·정보 정확성·가독성",
+      "program": "AI 시각 콘텐츠 제작",
+      "primaryKeyword": "AI 카드뉴스 제작",
+      "targetKeywords": [
+        "홍보 담당자",
+        "교육 담당자"
+      ],
+      "problemKeywords": [
+        "사실 오류",
+        "작은 글자"
+      ],
+      "coverPose": "카드뉴스 인쇄물을 들고 가독성과 출처를 점검하기",
+      "deliverables": [
+        "한 장 핵심 메시지",
+        "카드뉴스 초안",
+        "사실·가독성 검수표"
+      ],
+      "programUrl": "/content-school/",
+      "searchQuestion": "홍보 담당자 AI 카드뉴스 제작, 사실 오류와 작은 글자를 함께 검수하라"
+    },
+    {
+      "id": 23,
+      "slug": "ai-book-author-view",
+      "category": "웹·앱·콘텐츠 제작",
+      "title": "예비 저자 AI 책쓰기, 비슷한 원고만 나올 때 저자의 관점을 세워라",
+      "audience": "전문가·강사·예비 저자",
+      "focus": "경험·독자 문제·차별적 목차",
+      "program": "AI 책쓰기·전문성 출판 워크숍",
+      "primaryKeyword": "AI 책쓰기",
+      "targetKeywords": [
+        "예비 저자",
+        "전문가",
+        "강사"
+      ],
+      "problemKeywords": [
+        "비슷한 원고만 나올 때",
+        "저자 관점 부족"
+      ],
+      "coverPose": "열린 원고와 독자 질문표를 책상에서 함께 검토하기",
+      "deliverables": [
+        "독자 문제 정의",
+        "차별적 목차",
+        "저자 관점 문단"
+      ],
+      "programUrl": "/book-school/",
+      "searchQuestion": "예비 저자 AI 책쓰기, 비슷한 원고만 나올 때 저자의 관점을 세워라"
+    },
+    {
+      "id": 24,
+      "slug": "reusable-content-workflow",
+      "category": "웹·앱·콘텐츠 제작",
+      "title": "강사 AI 교육 콘텐츠 제작, 자료 재사용이 어려울 때 원본 구조를 정리하라",
+      "audience": "강사·교육기관·실무자",
+      "focus": "자료 구조·매체별 변환·권리 검수",
+      "program": "AI 교육 콘텐츠 제작 실습",
+      "primaryKeyword": "AI 교육 콘텐츠 제작",
+      "targetKeywords": [
+        "강사",
+        "교육기관"
+      ],
+      "problemKeywords": [
+        "자료 재사용이 어려울 때",
+        "매체별 수정 반복"
+      ],
+      "coverPose": "슬라이드 원본에서 여러 콘텐츠로 확장할 카드를 펼치기",
+      "deliverables": [
+        "원본 자료 구조",
+        "매체별 변환안",
+        "이용권리 검수표"
+      ],
+      "programUrl": "/content-school/",
+      "searchQuestion": "강사 AI 교육 콘텐츠 제작, 자료 재사용이 어려울 때 원본 구조를 정리하라"
+    },
+    {
+      "id": 25,
+      "slug": "startup-ai-validation",
+      "category": "창업·지역·교육 설계",
+      "title": "창업지원기관 스타트업 AI 교육, 고객 검증이 막힐 때 가설을 질문으로 바꿔라",
+      "audience": "창업자·창업지원기관",
+      "focus": "고객 가설·인터뷰·실험",
+      "program": "AI 창업 문제해결 워크숍",
+      "primaryKeyword": "스타트업 AI 교육",
+      "targetKeywords": [
+        "창업지원기관",
+        "창업자"
+      ],
+      "problemKeywords": [
+        "고객 검증이 막힐 때",
+        "고객 가설 불명확"
+      ],
+      "coverPose": "고객 인터뷰 질문지를 들어 창업팀과 토론하기",
+      "deliverables": [
+        "고객 가설표",
+        "인터뷰 질문지",
+        "검증 실험 계획"
+      ],
+      "programUrl": "/proposal-school/",
+      "searchQuestion": "창업지원기관 스타트업 AI 교육, 고객 검증이 막힐 때 가설을 질문으로 바꿔라"
+    },
+    {
+      "id": 26,
+      "slug": "tourism-ai-experience",
+      "category": "창업·지역·교육 설계",
+      "title": "관광기업 AI 마케팅, 예약 전환이 낮을 때 고객 여정의 막힘을 찾아라",
+      "audience": "관광기업·지역관광기관",
+      "focus": "탐색·예약·현장·재방문 여정",
+      "program": "관광기업 AI 마케팅 워크숍",
+      "primaryKeyword": "AI 마케팅",
+      "targetKeywords": [
+        "관광기업",
+        "지역관광기관"
+      ],
+      "problemKeywords": [
+        "예약 전환이 낮을 때",
+        "재방문 연결 부족"
+      ],
+      "coverPose": "여행 동선 지도를 펴고 예약 접점을 표시하기",
+      "deliverables": [
+        "탐색·예약 여정표",
+        "고객 안내 문구",
+        "재방문 연결안"
+      ],
+      "programUrl": "/marketing-school/",
+      "searchQuestion": "관광기업 AI 마케팅, 예약 전환이 낮을 때 고객 여정의 막힘을 찾아라"
+    },
+    {
+      "id": 27,
+      "slug": "local-data-ai-interpretation",
+      "category": "창업·지역·교육 설계",
+      "title": "상권기획자 AI 상권분석, 데이터와 현장이 다를 때 확인할 질문",
+      "audience": "상권기획자·지자체·지원기관",
+      "focus": "데이터 한계·현장 확인·대안",
+      "program": "AI 상권조사·분석 워크숍",
+      "primaryKeyword": "AI 상권분석",
+      "targetKeywords": [
+        "상권기획자",
+        "지자체 담당자"
+      ],
+      "problemKeywords": [
+        "데이터와 현장이 다를 때",
+        "현장 해석 부족"
+      ],
+      "coverPose": "상권 지도와 현장 조사 메모를 대조하기",
+      "deliverables": [
+        "데이터 한계표",
+        "현장 조사 질문",
+        "활성화 대안 초안"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "상권기획자 AI 상권분석, 데이터와 현장이 다를 때 확인할 질문"
+    },
+    {
+      "id": 28,
+      "slug": "proposal-ai-evidence",
+      "category": "창업·지역·교육 설계",
+      "title": "기업 기획자 AI 사업계획서, 실행 근거가 부족할 때 문제·예산·성과를 연결하라",
+      "audience": "기업·기관 기획자",
+      "focus": "문제·활동·예산·성과 근거",
+      "program": "AI 기획서·사업계획서 실습",
+      "primaryKeyword": "AI 사업계획서",
+      "targetKeywords": [
+        "기업 기획자",
+        "기관 기획자"
+      ],
+      "problemKeywords": [
+        "실행 근거가 부족",
+        "예산·성과 연결 누락"
+      ],
+      "coverPose": "사업계획 보드에서 문제와 예산 항목을 연결하기",
+      "deliverables": [
+        "문제·활동 연결표",
+        "예산 근거표",
+        "성과 검증 기준"
+      ],
+      "programUrl": "/proposal-school/",
+      "searchQuestion": "기업 기획자 AI 사업계획서, 실행 근거가 부족할 때 문제·예산·성과를 연결하라"
+    },
+    {
+      "id": 29,
+      "slug": "ai-workshop-output-design",
+      "category": "창업·지역·교육 설계",
+      "title": "기업 교육담당자 AI 워크숍, 교육 시간 선택이 어려울 때 산출물로 비교하라",
+      "audience": "기업·기관 교육담당자",
+      "focus": "인식 변화·실습 산출물·현업 적용",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 워크숍",
+      "targetKeywords": [
+        "기업 교육담당자",
+        "기관 교육담당자"
+      ],
+      "problemKeywords": [
+        "교육 시간 선택이 어려울 때",
+        "강의·실습 목적 혼재"
+      ],
+      "coverPose": "특강과 워크숍 일정표를 양손에 들어 비교하기",
+      "deliverables": [
+        "교육 목적 비교표",
+        "시간별 실습안",
+        "산출물 범위표"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "기업 교육담당자 AI 워크숍, 교육 시간 선택이 어려울 때 산출물로 비교하라"
+    },
+    {
+      "id": 30,
+      "slug": "ai-training-brief",
+      "category": "창업·지역·교육 설계",
+      "title": "공공기관 교육담당자 AI 강의 의뢰, 교육 요청이 막연할 때 준비할 다섯 가지",
+      "audience": "기업·공공기관·평생교육기관",
+      "focus": "대상·현재 수준·문제·시간·완료 기준",
+      "program": "AI위드스쿨 맞춤 교육 상담",
+      "primaryKeyword": "AI 강의 의뢰",
+      "targetKeywords": [
+        "공공기관 교육담당자",
+        "기업 교육담당자"
+      ],
+      "problemKeywords": [
+        "교육 요청이 막연할 때",
+        "요청서 정보 부족"
+      ],
+      "coverPose": "교육 의뢰 체크리스트 다섯 항목을 확인하며 안내하기",
+      "deliverables": [
+        "교육 의뢰서",
+        "대상·수준 정리표",
+        "실습 완료 기준"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "공공기관 교육담당자 AI 강의 의뢰, 교육 요청이 막연할 때 준비할 다섯 가지"
+    }
   ]
 }

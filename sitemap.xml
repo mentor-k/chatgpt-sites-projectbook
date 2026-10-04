@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://aiwith.kr/</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://aiwith.kr/website/</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://aiwith.kr/website/benchmark/</loc><lastmod>2026-09-28</lastmod></url>
@@ -15,5 +15,5 @@
   <url><loc>https://aiwith.kr/consultation/</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://aiwith.kr/columns/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://aiwith.kr/columns/plan/</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://aiwith.kr/columns/ai-training-outcomes/</loc><lastmod>2026-10-04</lastmod></url>
+  <url><loc>https://aiwith.kr/columns/ai-training-outcomes/</loc><lastmod>2026-10-04</lastmod><image:image><image:loc>https://aiwith.kr/assets/columns/ai-training-outcomes.webp</image:loc></image:image></url>
 </urlset>

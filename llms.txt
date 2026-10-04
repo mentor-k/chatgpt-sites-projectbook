@@ -43,3 +43,8 @@ AI 작업 치트키는 AI위드스쿨이 제공하는 사용자 정의 프리셋
 - 글·대화·회의: `/tone`, `/rewrite`, `/outline`, `/email`, `/meeting`, `/minutes`
 - 고객·검색·성과: `/persona`, `/customerjourney`, `/seo`, `/aeo`, `/geo`, `/kpi`
 - 예산·콘텐츠·프롬프트: `/budget`, `/script`, `/prompt`
+
+<!-- columns-discovery:start -->
+## 멘토K 컬럼
+- [기업·공공기관 AI 교육담당자, 현업 적용이 안 되는 교육은 실습 문서부터 바꿔라](https://aiwith.kr/columns/ai-training-outcomes/): 기업·공공기관 AI 교육담당자는 현업 적용이 안 되는 이유를 파악하려면 반복 수정되는 문서 한 종류와 반려 사유부터 확인해야 한다. 임직원 AI 업무혁신 워크숍에서 가상 입력자료·업무 요청문·근거 대조표·수정본·현업 승인 기준을 함께 설계하면 실제 사용 조건을 점검할 수 있다.
+<!-- columns-discovery:end -->
