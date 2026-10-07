@@ -48,7 +48,9 @@
     const duration=Number($('motionDuration').value), ratio=$('motionRatio').value;
     const dims={'9:16':'1080×1920','16:9':'1920×1080','1:1':'1080×1080'}[ratio];
     const cuts=[0,.15,.4,.75,1].map(n=>+(n*duration).toFixed(2));
-    const timeline=item.beats.map((b,i)=>`${cuts[i]}~${cuts[i+1]}초: ${b}`).join('\n');
+    const timeline=item.category==='효과 프롬프트'
+      ? `${cuts[0]}~${cuts[1]}초: 주제와 핵심 문장을 정적인 화면으로 소개한다.\n${cuts[1]}~${cuts[2]}초: 구간 시작에 선택한 효과를 아래 움직임 설계의 짧은 지속시간으로 한 번 적용하고, 남은 시간은 결과 화면을 유지한다.\n${cuts[2]}~${cuts[3]}초: 효과가 끝난 선명한 상태에서 핵심 메시지와 근거를 읽을 시간을 준다.\n${cuts[3]}~${cuts[4]}초: 마지막 행동 문구를 정적으로 보여준다.\n효과의 세부 적용 순서: ${item.beats.join(' → ')}\n효과 자체의 지속시간과 전체 영상 길이는 구분한다. 예를 들어 0.65초 효과를 장면 구간 전체에 늘려 적용하지 않는다.`
+      : item.beats.map((b,i)=>`${cuts[i]}~${cuts[i+1]}초: ${b}`).join('\n');
     const mode=$('motionMode').value;
     const deliverable=mode==='code'
       ? '실행 가능한 모션그래픽 코드와 편집 가능한 소스를 제공하세요. 현재 환경에서 지원하는 구현 도구를 선택하고 설치·실행·렌더링 명령을 적으세요. 프레임 번호로 시간과 움직임을 계산하고 임의 난수는 고정 시드를 사용하세요. 실제 렌더링이 가능하면 MP4(H.264)를 출력하고 해상도·길이·프레임률을 확인하세요. 렌더링할 수 없다면 완료했다고 말하지 말고 코드·실행 절차와 제약을 제공하세요.'
