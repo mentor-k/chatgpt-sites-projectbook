@@ -294,7 +294,7 @@ el('commandSearch').oninput=renderCommands;el('workSearch').oninput=()=>renderLi
 el('commandGrid').onclick=e=>{const copy=e.target.closest('[data-prompt-copy]');if(copy){const x=commands.find(item=>item.command===copy.dataset.promptCopy);if(x)copyText(imagePrompt(x));return}const b=e.target.closest('.key-select');if(!b)return;selected.has(b.dataset.command)?selected.delete(b.dataset.command):selected.add(b.dataset.command);renderCommands()};el('metaGrid').onclick=e=>{const b=e.target.closest('.meta-key-card');if(!b)return;const command=b.querySelector('code')?.textContent||'';if(metaSelected.has(command))metaSelected.delete(command);else metaSelected.add(command);renderMetaKeys()};
 el('clearCombo').onclick=()=>{selected.clear();renderCommands()};el('copyCombo').onclick=()=>selected.size&&copyText([...selected].join(' '));el('clearMetaCombo').onclick=()=>{metaSelected.clear();renderMetaKeys()};el('copyMetaCombo').onclick=()=>metaSelected.size&&copyText([...metaSelected].join(' '));
 document.body.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b)copyText(b.dataset.copy)});
-const viewTitles={home:"AI위드스쿨 프롬프트랩",commands:"이미지 치트키",metaKeys:"AI 작업 치트키",work:"업무 프롬프트",planning:"기획 프롬프트",recipes:"이미지 활용",imageGuide:"GPT Image 2.5",astra:"Astra 활용",website:"웹사이트",app:"앱 구축",shop:"쇼핑몰·자사몰",builder:"프롬프트 설계",guide:"초보자 가이드"};
+const viewTitles={home:"AI위드스쿨 프롬프트랩",commands:"이미지 치트키",metaKeys:"AI 작업 치트키",work:"업무 프롬프트",planning:"기획 프롬프트",recipes:"이미지 활용",motion:"모션그래픽 프롬프트",imageGuide:"GPT Image 2.5",astra:"Astra 활용",website:"웹사이트",app:"앱 구축",shop:"쇼핑몰·자사몰",builder:"프롬프트 설계",guide:"초보자 가이드"};
 function activateView(name,scrollTop){
   const target=el(name==="home"?"homeView":name+"View");
   if(!target)return;
