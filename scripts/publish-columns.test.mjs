@@ -41,7 +41,10 @@ test('목록·상세·CTA·사이트맵·RSS 생성 및 재실행 중복 방지'
   const graph=JSON.parse(article.match(/id="aiwith-seo-jsonld" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(graph['@graph'][0]['@type'],'BlogPosting');assert.equal(graph['@graph'][0].image.width,1536);
   assert.match(article,/이 주제의 질문과 답변/);
-  assert.match(fs.readFileSync(path.join(temp,'columns/index.html'),'utf8'),/ai-training-outcomes/);
+  const listing=fs.readFileSync(path.join(temp,'columns/index.html'),'utf8');
+  assert.match(listing,/ai-training-outcomes/);
+  assert.doesNotMatch(listing,/강의·워크숍 의뢰|컬럼 글쓰기|30개 컬럼 발행 계획|column-toolbar/);
+  assert.match(fs.readFileSync(path.join(temp,'columns/plan/index.html'),'utf8'),/컬럼 글쓰기/);
   const sitemap=fs.readFileSync(path.join(temp,'sitemap.xml'),'utf8');
   assert.match(sitemap,/workshops/);assert.equal(sitemap.split('<loc>https://aiwith.kr/columns/ai-training-outcomes/</loc>').length-1,1);
   assert.match(sitemap,/<image:loc>https:\/\/aiwith.kr\/assets\/columns\/ai-training-outcomes.webp<\/image:loc>/);
