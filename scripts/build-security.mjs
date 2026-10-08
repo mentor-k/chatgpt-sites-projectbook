@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const VERSION='20261003-security-1';
+const SITE_VERSION='20261008-menu-1';
 export function cspForHtml(html){
   const hashes=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
     .filter(match=>! /\bsrc\s*=/i.test(match[1])&&match[2].trim())
@@ -23,7 +24,7 @@ export function hardenHtml(html){
     .replace(/<meta\b[^>]*name=["']referrer["'][^>]*>\s*/gi,'');
   result=result.replace(/(<head\b[^>]*>)\s*/i,'$1');
   result=result.replace(/@supabase\/supabase-js@2(?=["'\s<])/g,'@supabase/supabase-js@2.117.2');
-  result=result.replace(/\/(site|supabase-client|analytics-tracker)\.js\?v=[^"'\s<]+/g,(_,name)=>'/'+name+'.js?v='+VERSION);
+  result=result.replace(/\/(site|supabase-client|analytics-tracker)\.js\?v=[^"'\s<]+/g,(_,name)=>'/'+name+'.js?v='+(name==='site'?SITE_VERSION:VERSION));
   result=result.replace(/\/admin\/(admin|auth|central-cardnews|analytics)\.js\?v=[^"'\s<]+/g,(_,name)=>'/admin/'+name+'.js?v='+VERSION);
   const policy=cspForHtml(result).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
   return result.replace(/<head\b[^>]*>/i,match=>match+'\n<meta http-equiv="Content-Security-Policy" content="'+policy+'">\n<meta name="referrer" content="strict-origin-when-cross-origin">\n');
