@@ -1,0 +1,21 @@
+/* Local, reusable article sharing controls. No social SDKs or tracking pixels. */
+.aiwith-sharebar{box-sizing:border-box;margin:32px 0 0;padding:24px 0 4px;border-top:1px solid #dce3ee;font:inherit;color:#24324b;text-align:left}
+.aiwith-sharebar .aiwith-sharebar__label{display:block;margin:0 0 12px;font-size:15px;font-weight:750;line-height:1.5}
+.aiwith-sharebar__actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.aiwith-sharebar .aiwith-sharebar__button{box-sizing:border-box;display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:10px 16px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#24324b;font:inherit;font-size:14px;font-weight:700;line-height:1.5;text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s}
+.aiwith-sharebar .aiwith-sharebar__button:hover{background:#eff4ff;border-color:#2e6cf6;color:#16356d;text-decoration:none}
+.aiwith-sharebar .aiwith-sharebar__button:focus-visible,.aiwith-sharebar__manual input:focus-visible{outline:3px solid #2e6cf6;outline-offset:3px}
+.aiwith-sharebar .aiwith-sharebar__button:disabled{opacity:.6;cursor:wait}
+.aiwith-sharebar__icon{display:block;flex:none;width:18px;height:18px;fill:currentColor}
+.aiwith-sharebar__status{min-height:1.5em;margin:10px 0 0!important;font-size:13px!important;line-height:1.5!important;color:#334155!important;overflow-wrap:anywhere}
+.aiwith-sharebar__manual{margin:8px 0 0;font-size:13px;line-height:1.6}
+.aiwith-sharebar__manual[hidden]{display:none!important}
+.aiwith-sharebar__manual input{box-sizing:border-box;display:block;width:100%;min-height:44px;margin-top:6px;padding:10px;border:1px solid #94a3b8;border-radius:8px;background:#fff;color:#172033;font:inherit}
+.aiwith-sharebar__copy-buffer{position:fixed;left:-9999px;top:0;opacity:0}
+.notice-grid .content-card[id]{display:flex;flex-direction:column;scroll-margin-top:120px}
+.notice-grid .content-card>a{height:auto;flex:1}
+.notice-grid .content-card .aiwith-sharebar p{display:block;overflow:visible;-webkit-line-clamp:unset}
+.notice-grid .content-card>.aiwith-sharebar{margin:0 20px;padding:18px 0 8px}
+.notice-grid .content-card>.aiwith-sharebar .aiwith-sharebar__button{padding:10px 12px}
+@media(prefers-reduced-motion:reduce){.aiwith-sharebar .aiwith-sharebar__button{transition:none}}
+@media(max-width:480px){.aiwith-sharebar{padding-top:20px}.aiwith-sharebar .aiwith-sharebar__button{padding:10px 13px}.notice-grid .content-card>.aiwith-sharebar{margin-right:16px;margin-left:16px}}

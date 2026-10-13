@@ -41,6 +41,8 @@ test('목록·상세·CTA·사이트맵·RSS 생성 및 재실행 중복 방지'
   const graph=JSON.parse(article.match(/id="aiwith-seo-jsonld" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(graph['@graph'][0]['@type'],'BlogPosting');assert.equal(graph['@graph'][0].image.width,1536);
   assert.match(article,/이 주제의 질문과 답변/);
+  // Generated posts retain the shared controls loader after the security build.
+  assert.match(article,/\/site\.js\?v=20261013-share-1/);
   const listing=fs.readFileSync(path.join(temp,'columns/index.html'),'utf8');
   assert.match(listing,/ai-training-outcomes/);
   assert.doesNotMatch(listing,/강의·워크숍 의뢰|컬럼 글쓰기|30개 컬럼 발행 계획|column-toolbar/);
@@ -51,3 +53,4 @@ test('목록·상세·CTA·사이트맵·RSS 생성 및 재실행 중복 방지'
   assert.equal(fs.readFileSync(path.join(temp,'feed.xml'),'utf8').split('<item>').length-1,1);
   assert.match(fs.readFileSync(path.join(temp,'feed.xml'),'utf8'),/enclosure.*image\/webp/);
 });
+

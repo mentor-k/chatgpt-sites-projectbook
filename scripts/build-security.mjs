@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const VERSION='20261003-security-1';
-const SITE_VERSION='20261008-menu-1';
+const SITE_VERSION='20261013-share-1';
 export function cspForHtml(html){
   const hashes=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
     .filter(match=>! /\bsrc\s*=/i.test(match[1])&&match[2].trim())
@@ -45,3 +45,4 @@ export function hardenSite(root=ROOT){
   visit(root);return {updated};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))console.log(hardenSite());
+
