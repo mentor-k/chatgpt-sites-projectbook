@@ -1,0 +1,22 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const data=fs.readFileSync(new URL('../prompt/effects-data.js',import.meta.url),'utf8');
+const code=fs.readFileSync(new URL('../prompt/effects.js',import.meta.url),'utf8');
+const html=fs.readFileSync(new URL('../prompt/index.html',import.meta.url),'utf8');
+function setup(failCopy=false){
+  const elements={}, clipboard=[];
+  for(const id of html.matchAll(/id="([^"]+)"/g))elements[id[1]]={value:'',textContent:'',innerHTML:'',hidden:false,children:[],events:{},addEventListener(event,fn){this.events[event]=fn},scrollIntoView(){},focus(){this.focused=true},select(){this.selected=true},reset(){for(const key of ['effectsSite','effectsTarget','effectsStack','effectsBrand','effectsPreserve'])elements[key].value='';elements.effectsIntensity.value='subtle'}};
+  elements.effectsIntensity.value='subtle';
+  const ctx=vm.createContext({document:{getElementById:id=>elements[id]},navigator:{clipboard:{async writeText(s){if(failCopy)throw Error('blocked');clipboard.push(s)}}},matchMedia:()=>({matches:true})});
+  vm.runInContext(data+'\nglobalThis.catalog=websiteEffects;',ctx);vm.runInContext(code,ctx);
+  return {elements,clipboard,catalog:ctx.catalog};
+}
+test('36 unique, substantive effect templates in 7 categories',()=>{const {catalog}=setup();assert.equal(catalog.length,36);assert.equal(new Set(catalog.map(x=>x.id)).size,36);assert.equal(new Set(catalog.map(x=>x.title)).size,36);assert.equal(new Set(catalog.map(x=>x.category)).size,7);for(const x of catalog)assert.ok(x.instruction.length>=65)});
+test('hash navigation and all original prompt sections remain',()=>{for(const id of ['home','commands','metaKeys','work','planning','recipes','motion','imageGuide','astra','website','app','shop','builder','guide','effects']){assert.ok(html.includes(`id="${id}View"`));assert.ok(html.includes(`data-view="${id}"`));}const app=fs.readFileSync(new URL('../prompt/app.js',import.meta.url),'utf8');assert.ok(app.includes('effects:"웹사이트 효과"'));const ids=[...html.matchAll(/id="([^"]+)"/g)].map(x=>x[1]);assert.equal(new Set(ids).size,ids.length)});
+test('initial output includes editable placeholders and safeguards',()=>{const {elements:e}=setup();assert.equal((e.effectsGrid.innerHTML.match(/data-effect-id=/g)||[]).length,36);for(const term of ['[사이트·페이지]','prefers-reduced-motion','360px','200%','JavaScript 실패','requestAnimationFrame','미확인'])assert.ok(e.effectsOutput.value.includes(term));});
+test('search supports English spacing and empty results',()=>{const {elements:e}=setup();e.effectsSearch.value='count up';e.effectsSearch.events.input();assert.equal((e.effectsGrid.innerHTML.match(/data-effect-id=/g)||[]).length,1);assert.ok(e.effectsGrid.innerHTML.includes('카운트업'));e.effectsSearch.value='unmatchable';e.effectsSearch.events.input();assert.equal(e.effectsEmpty.hidden,false);e.effectsSearch.value='';e.effectsSearch.events.input();assert.equal(e.effectsEmpty.hidden,true)});
+test('category filter, selection and every generated output work',()=>{const {elements:e,catalog}=setup();e.effectsFilters.events.click({target:{closest:()=>({dataset:{effectCategory:'스크롤'}})}});assert.equal((e.effectsGrid.innerHTML.match(/data-effect-id=/g)||[]).length,6);for(const item of catalog){e.effectsGrid.events.click({target:{closest:()=>({dataset:{effectId:item.id}})}});assert.equal(e.effectsSelected.textContent,item.title);assert.ok(e.effectsOutput.value.includes(item.instruction));assert.ok(e.effectsOutput.value.length>1000)}});
+test('customization is text-only, reset restores placeholders',()=>{const {elements:e}=setup();e.effectsSite.value='<img src=x onerror=alert(1)>';e.effectsInputs.events.input();assert.ok(e.effectsOutput.value.includes('<img src=x onerror=alert(1)>'));assert.ok(!e.effectsGrid.innerHTML.includes('onerror'));e.effectsReset.events.click();assert.ok(e.effectsOutput.value.includes('[사이트·페이지]'))});
+test('copy sends complete edited text and failure offers manual copy',async()=>{const {elements:e,clipboard}=setup();e.effectsOutput.value+='\n사용자 편집';await e.effectsCopy.events.click();assert.equal(clipboard[0],e.effectsOutput.value);assert.ok(e.effectsCopyStatus.textContent.includes('복사했습니다'));const {elements:f}=setup(true);await f.effectsCopy.events.click();assert.ok(f.effectsOutput.selected);assert.ok(f.effectsCopyStatus.textContent.includes('Ctrl+C'))});
