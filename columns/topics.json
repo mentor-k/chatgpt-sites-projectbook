@@ -792,6 +792,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "공공기관 교육담당자 AI 강의 의뢰, 교육 요청이 막연할 때 준비할 다섯 가지"
+    },
+    {
+      "id": 31,
+      "slug": "survey-ai-missing-responses",
+      "category": "조직·AX 교육",
+      "title": "교육담당자 AI 설문 분석, 무응답과 부정 응답이 섞일 때 빈칸의 뜻부터 분리하라",
+      "audience": "기업·기관 교육담당자와 HRD 담당자",
+      "focus": "교육 설문에서 문항별 응답 상태·집계 범위·해석 한계를 구분하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 설문 분석",
+      "targetKeywords": [
+        "교육담당자",
+        "HRD 담당자"
+      ],
+      "problemKeywords": [
+        "무응답과 부정 응답이 섞일 때",
+        "문항별 응답 수 차이"
+      ],
+      "coverPose": "빈 응답 카드를 들어 확인 대기 분류함에 넣기",
+      "deliverables": [
+        "응답 상태 분류표",
+        "문항별 집계 검수표",
+        "해석 범위 메모"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "교육 설문에서 무응답을 불만족으로 처리하지 않고 AI로 분석하려면 무엇을 확인해야 하는가?"
     }
   ]
 }
