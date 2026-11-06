@@ -6,7 +6,7 @@
 ## 매 실행 순서
 
 1. GitHub 연결 도구로 최신 main과 이 규약, `columns/topics.json`, `columns/posts.json`, `scripts/publish-columns.mjs`, `scripts/build-security.mjs`를 읽고 최신 소스를 작업공간에 받는다. 이전 실행의 파일·SHA를 재사용하지 않는다.
-2. 기록된 최신 글의 공개 URL·대표이미지와 해당 커밋의 GitHub Pages 배포 성공을 먼저 확인한다. 미공개면 새 주제로 넘어가지 않는다. 오늘(Asia/Seoul) 게시된 글이 있으면 중복 게시하지 않는다. posts에 없는 가장 작은 topicId 한 개를 선택한다. 검수 실패 시 그 주제를 다음 실행에 재시도한다. 30편 완료 시 이 일일 컬럼 예약만 일시정지하고 다른 예약은 유지한다.
+2. 기록된 최신 글의 공개 URL·대표이미지와 해당 커밋의 GitHub Pages 배포 성공을 먼저 확인한다. 미공개면 새 주제로 넘어가지 않는다. 오늘(Asia/Seoul) 게시된 글이 있으면 중복 게시하지 않는다. posts에 없는 가장 작은 topicId 한 개를 선택한다. 검수 실패 시 그 주제를 다음 실행에 재시도한다. 첫 30편은 최초 편집계획이며 종료 조건이 아니다. 미게시 주제가 없으면 아래 정식 확장 절차로 다음 고유 순번의 주제 한 개를 등록하고 같은 정규 회차의 한 편을 작성한다. 종료일 없이 매일 한 편을 이어가며 예약 ID·Asia/Seoul 오전 8시·활성 상태는 유지한다. 누락분 몰아쓰기·소급게시·즉시 추가 실행은 하지 않는다.
 3. topics의 audience·primaryKeyword·targetKeywords·problemKeywords·focus·program·programUrl·deliverables를 읽고 글의 독자와 구매 검토 질문을 정한다. 제목에는 타겟 키워드, 구체적인 문제상황 키워드, 핵심어를 자연스럽게 포함한다. 부제·2문장 핵심 답변·본문에도 독자의 같은 문제를 명확히 설명한다. 키워드 나열·기계적 반복·밀도 목표·확인되지 않은 검색량이나 순위 주장을 사용하지 않는다. 계획 제목은 집필 방향이며 같은 타겟·문제·핵심어를 유지하는 범위에서 더 명확하게 쓸 수 있다.
 4. 김용한 박사(멘토K)의 전문적인 한국어 평서체로 본문 1,800~2,300자, 소제목 2~4개, 문제 원인→실행 기준→적용·검수 순서로 독립 집필한다. 실제 독자 질문·답변 2~4개와 실행 제안을 추가한다. 답변은 첫 문장에서 직접 답하고 이후 조건·방법·한계를 설명한다. 질문답변은 본문 글자수와 별도다. 기존 글을 재사용하지 않는다.
 5. 개인 경험·강의 실적·고객 사례·성과 수치·기관 추천을 지어내지 않는다. 가상 예시는 가상이라고 표시한다. 최신 정책·통계·제품 기능은 공식 원문과 확인일을 검증해 실제 링크를 sources에 넣는다. 확인되지 않으면 삭제하거나 게시를 보류한다. 저작권·개인정보·과장 광고를 검수한다. 검색순위·AI 추천·교육효과·매출 상승을 보장하지 않는다.
@@ -14,9 +14,18 @@
 7. 아래 대표이미지 규약에 맞춰 해당 글의 이미지를 반드시 제작하고 실제 파일과 cover 정보를 준비한다. 이미지 제작·검수가 실패하면 원고를 비공개 작업 파일로 보존하고 공개 posts 추가를 보류한다. 로고·다른 글 이미지·이미지 URL만으로 대신하지 않는다.
 8. CTA는 해당 대상의 문제, 관심 프로그램, 협의할 실습 산출물을 구체적으로 제시한다. 가격·무료 상담·예약 가능 일정·산출물 보장 등을 임의로 만들지 않는다. `cta.program`, `audience`, `programUrl`, `deliverables`는 topics를 기본으로 하며 text는 주제별로 작성한다. 문의는 `/consultation/?column=<slug>`, 관련 프로그램은 topics의 실제 내부 URL, 전화는 `010-3338-7110`을 사용한다. 생성기가 컬럼·프로그램을 문의 내용에 연결한다.
 9. 검수 통과한 한 편만 아래 스키마로 posts에 추가한다. 정규 일일 발행에서는 기존 글을 수정·삭제하지 않는다. 사용자 요청으로 기존 글을 고칠 때만 원래 slug·topicId·publishedAt을 유지하고 updatedAt과 수정 검수 기록을 갱신한다.
-10. `node scripts/publish-columns.mjs --check`, `node scripts/publish-columns.mjs`, `node --test scripts/publish-columns.test.mjs`를 실행한다. 이미지 파일 존재·실제 크기·타겟/문제 키워드·날짜·중복·CTA·질문답변 검증을 통과해야 한다. 원고 데이터·신규 이미지·생성된 상세/목록/홈페이지/계획표·사이트맵·RSS·기존 llms 문서의 컬럼 항목만 변경한다. 기존 생성기와 인증·보안·다른 기능을 임의로 수정하지 않는다.
+10. `node scripts/publish-columns.mjs --check`, `node scripts/publish-columns.mjs`, `node --test scripts/publish-columns.test.mjs`를 실행한다. 이미지 파일 존재·실제 크기·타겟/문제 키워드·날짜·중복·CTA·질문답변 검증을 통과해야 한다. 원고 데이터·정식 확장 절차로 추가한 주제 데이터·신규 이미지·생성된 상세/목록/홈페이지/계획표·사이트맵·RSS·기존 llms 문서의 컬럼 항목만 변경한다. 기존 생성기와 인증·보안·다른 기능을 임의로 수정하지 않는다.
 11. GitHub 연결 도구의 blob/tree/commit/ref로 변경 파일만 한 커밋에 저장한다. 이미지 바이너리는 실제 파일의 base64로 create_blob(encoding=base64)에 저장한다. 최신 main을 부모로 삼고 force=false를 유지한다. 경합하면 최신 main과 posts를 다시 읽고 중복을 확인한다. 기존 관리자 인증 파일을 수정·재업로드하거나 인증정보를 추출해 로그인에 쓰지 않는다. 권한·보호 워크플로가 막히면 우회하지 않는다.
-12. 원고·이미지 저장본을 재조회하고 GitHub Pages 성공 및 실제 공개 목록·상세·이미지·문의 링크를 확인한다. 메타 제목/설명/canonical, 글 이미지에 맞는 OG/X 및 BlogPosting 저자·날짜·이미지, 이미지 사이트맵과 RSS를 확인한다. 확인 전 성공으로 보고하지 않는다. 오류이면 다음 글로 넘어가지 않고 원고를 보존한다. 주제 번호·제목·공개 URL·검증 결과·남은 편수만 간단히 보고한다.
+12. 원고·이미지 저장본을 재조회하고 GitHub Pages 성공 및 실제 공개 목록·상세·이미지·문의 링크를 확인한다. 메타 제목/설명/canonical, 글 이미지에 맞는 OG/X 및 BlogPosting 저자·날짜·이미지, 이미지 사이트맵과 RSS를 확인한다. 확인 전 성공으로 보고하지 않는다. 오류이면 다음 글로 넘어가지 않고 원고를 보존한다. 주제 번호·제목·공개 URL·검증 결과·누적 편수와 상시 연재 상태만 간단히 보고한다.
+
+## 상시 연재의 정식 주제 확장
+
+- 기존 `topics.json`의 첫 30개와 후속 등록 항목, `posts.json`의 ID·제목·본문·URL·게시시각·검수 기록은 그대로 보존한다. 순번을 초기화하거나 기존 주제를 덮어쓰지 않는다.
+- 다음 정규 회차에서 최신 main과 전체 공개 기록을 확인한 뒤, 미게시 주제가 없을 때만 사이트의 기존 교육 대상·전문분야·강의 목적에 맞는 새 주제 한 개를 선정한다. 다음 30개 묶음의 별도 승인을 요구하지 않는다. 기존 글과 다른 운영 사이트의 제목·논지·사례 반복을 확인하고 최신 공식 근거와 기존 검수 조건을 유지한다.
+- 다음 주제를 비공개 작업 파일에 JSON 객체로 준비한다. 기존 주제와 같은 필드(id, slug, category, title, audience, focus, program, primaryKeyword, targetKeywords, problemKeywords, coverPose, deliverables, programUrl, searchQuestion)를 갖추며 `id`는 `max(topics.id, posts.topicId)+1`, slug·제목·이미지 동작은 기존과 달라야 한다.
+- `node scripts/extend-column-plan.mjs /absolute/path/new-topic.json --check`로 먼저 검증하고, 같은 명령에서 `--check`를 빼면 `columns/topics.json` 끝에 한 항목만 추가된다. 이 도구는 이전 항목·posts·예약·공개 페이지를 수정하지 않는다. 미게시 주제가 남아 있거나 기존 항목과 중복되거나 순번·필수 정보가 잘못되면 쓰지 않고 거부한다.
+- 주제 등록만으로 공개하지 않는다. 해당 회차 원고·신규 이미지·유사성·사실 검수가 모두 통과해야 posts에 한 편을 추가하고 기존 생성·테스트·저장·공개 검증을 수행한다. 검수 실패 시 공개 커밋을 만들지 않고 준비한 주제와 원고를 비공개 초안으로 보존한다.
+- 생성 결과의 `next:null`, `needsTopicRegistration:true`는 다음 주제 등록이 필요하다는 뜻이며 연재 종료가 아니다. `nextTopicId`를 확인하고 위 절차를 사용한다. 도구 권한·로그인·보안 차단은 우회하지 않고 정확한 미게시 상태를 보고하되, 30편 완료만으로 예약을 중단하지 않는다.
 
 ## 대표이미지 규약
 
@@ -32,7 +41,7 @@
 
 `posts.json`은 `{version:2,posts:[...]}` 구조다.
 
-- `topicId`(1~30), `slug`(topics와 동일), `status`="published"
+- `topicId`(1부터 증가하는 고유 정수, 상한 없음), `slug`(topics와 동일), `status`="published"
 - `title`, `subtitle`, `summary`(직접 답하는 두 문장)
 - `primaryKeyword`(topics와 동일), `targetKeywords`·`problemKeywords`(각 1~5개; topics 기준)
 - `sections=[{heading,paragraphs:[문단 문자열]}]`, `takeaway`(선택)

@@ -29,7 +29,8 @@ export function validateCovers(data,root=ROOT){
   }
 }
 export function validate(plan,data,now=new Date()){
-  if(plan.topics.length!==30||new Set(plan.topics.map(t=>t.id)).size!==30)throw new Error('30개 고유 주제가 필요합니다.');
+  if(!Array.isArray(plan.topics)||plan.topics.length<30||plan.topics.some((t,index)=>!Number.isSafeInteger(t.id)||t.id!==index+1))throw new Error('첫 30개 주제를 보존하고 1부터 연속된 고유 순번이 필요합니다.');
+  if(plan.topics.some(t=>typeof t.slug!=='string'||!/^[-a-z0-9]+$/.test(t.slug))||new Set(plan.topics.map(t=>t.slug)).size!==plan.topics.length)throw new Error('주제별 고유 slug가 필요합니다.');
   for(const t of plan.topics){if(!keywordList(t.targetKeywords)||!keywordList(t.problemKeywords)||!t.primaryKeyword||!t.coverPose||!safeProgram(t.programUrl)||!Array.isArray(t.deliverables)||t.deliverables.length<2)throw new Error('주제별 키워드·대표이미지 동작·프로그램 계획 누락');if(!containsAny(t.title,t.targetKeywords)||!containsAny(t.title,t.problemKeywords)||!t.title.includes(t.primaryKeyword))throw new Error('주제 제목에 타겟·문제·핵심어 필요: '+t.id)}
   if(new Set(data.posts.map(p=>p.topicId)).size!==data.posts.length||new Set(data.posts.map(p=>p.slug)).size!==data.posts.length)throw new Error('중복 주제');
   const ids=new Set(),slugs=new Set(),dates=new Set(),poses=new Set();
@@ -80,7 +81,7 @@ export function renderColumns(root=ROOT){
   const plan=JSON.parse(read('columns/topics.json')),data=JSON.parse(read('columns/posts.json'));
   validate(plan,data);validateCovers(data,root);
   const posts=[...data.posts].sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
-  const listing=posts.length?'<div class="column-archive-grid">'+posts.map(card).join('')+'</div>':'<div class="column-empty"><p>AI 교육과 현장 실행을 연결하는 30편의 컬럼을 준비하고 있습니다. 첫 발행은 2026년 10월 4일 오전 8시 작성 작업 이후입니다.</p><a href="/columns/plan/">30개 주제와 교육 대상 보기</a></div>';
+  const listing=posts.length?'<div class="column-archive-grid">'+posts.map(card).join('')+'</div>':'<div class="column-empty"><p>AI 교육과 현장 실행을 연결하는 상시 일일 컬럼을 준비하고 있습니다. 한국시간 오전 8시에 작성 작업을 시작하며 검수와 배포 완료 후 공개합니다.</p><a href="/columns/plan/">주제와 교육 대상 보기</a></div>';
   let template=read('columns/index.template').replace(/<!-- columns-published:start -->[\s\S]*?<!-- columns-published:end -->/,'<!-- columns-published:start -->'+listing+'<!-- columns-published:end -->');
   template=template.replace('/site.js?v=20260916-1','/site.js?v=20261013-share-1');
   template=template.replace('</head>','<link rel="alternate" type="application/rss+xml" title="멘토K 컬럼 RSS" href="https://aiwith.kr/columns/feed.xml"></head>');
@@ -96,10 +97,10 @@ export function renderColumns(root=ROOT){
   }
   const done=new Set(posts.map(p=>p.topicId));
   const table='<div class="column-plan-wrap"><table class="column-plan"><thead><tr><th>순서</th><th>컬럼 제목</th><th>교육 대상</th><th>다루는 문제</th><th>연결 프로그램</th><th>상태</th></tr></thead><tbody>'+plan.topics.map(t=>{const published=posts.find(p=>p.topicId===t.id);return `<tr><td>${t.id}</td><td>${published?'<a href="/columns/'+published.slug+'/">'+esc(published.title)+'</a>':esc(t.title)}</td><td>${esc(t.audience)}</td><td>${esc(t.problemKeywords.join(' · '))}</td><td><a href="${esc(t.programUrl)}">${esc(t.program)}</a></td><td>${done.has(t.id)?'게시 완료':'대기'}</td></tr>`}).join('')+'</tbody></table></div>';
-  write('columns/plan/index.html',shell('멘토K 컬럼 30개 발행 계획','AI 강의·워크숍과 연결되는 30개 컬럼 주제와 교육 대상을 확인하세요.',ORIGIN+'/columns/plan/',`<section class="page-section"><p class="kicker">COLUMN PLAN</p><h1>멘토K 컬럼 30개 발행 계획</h1><p>조직·AX, 소상공인 마케팅, 시니어·개인브랜딩, 웹·콘텐츠, 창업·지역의 교육 과제를 다룹니다.</p><p>${done.size} / 30편 게시 완료 · 2026년 10월 4일부터 한국시간 오전 8시 작성 작업 시작</p><div class="column-toolbar"><a class="button primary" href="/columns/">컬럼 전체 보기</a><a class="button ghost" href="/admin/#writing">컬럼 글쓰기</a></div>${table}</section>`,{'@type':'CollectionPage',name:'멘토K 컬럼 발행 계획',url:ORIGIN+'/columns/plan/'}));
+  write('columns/plan/index.html',shell('멘토K 컬럼 상시 발행 계획','AI 강의·워크숍과 연결되는 상시 일일 컬럼 주제와 교육 대상을 확인하세요.',ORIGIN+'/columns/plan/',`<section class="page-section"><p class="kicker">COLUMN PLAN</p><h1>멘토K 컬럼 상시 발행 계획</h1><p>조직·AX, 소상공인 마케팅, 시니어·개인브랜딩, 웹·콘텐츠, 창업·지역의 교육 과제를 다룹니다.</p><p>누적 ${done.size}편 게시 · 등록 주제 ${plan.topics.length}개 · 한국시간 매일 오전 8시 작성 작업 시작</p><p>첫 30편 이후에도 새 주제로 하루 한 편씩 이어갑니다. 검수·배포가 완료된 실제 시각에 공개합니다.</p><div class="column-toolbar"><a class="button primary" href="/columns/">컬럼 전체 보기</a><a class="button ghost" href="/admin/#writing">컬럼 글쓰기</a></div>${table}</section>`,{'@type':'CollectionPage',name:'멘토K 컬럼 발행 계획',url:ORIGIN+'/columns/plan/'}));
   if(fs.existsSync(path.join(root,'index.html'))){
     const home=read('index.html');
-    const tiles=posts.length?'<div class="content-card-grid">'+posts.slice(0,4).map(p=>`<article class="content-card"><a href="/columns/${p.slug}/">${coverImage(p)}<div><small>${esc(day(p.publishedAt))}</small><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></div></a></article>`).join('')+'</div>':'<p>현장의 AI 활용을 돕는 전문 컬럼 30편을 준비하고 있습니다. <a href="/columns/plan/">발행 주제와 교육 대상 보기</a></p>';
+    const tiles=posts.length?'<div class="content-card-grid">'+posts.slice(0,4).map(p=>`<article class="content-card"><a href="/columns/${p.slug}/">${coverImage(p)}<div><small>${esc(day(p.publishedAt))}</small><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p></div></a></article>`).join('')+'</div>':'<p>현장의 AI 활용을 돕는 상시 일일 컬럼을 준비하고 있습니다. <a href="/columns/plan/">발행 주제와 교육 대상 보기</a></p>';
     write('index.html',home.replace(/<!-- columns-home:start -->[\s\S]*?<!-- columns-home:end -->/,'<!-- columns-home:start -->'+tiles+'<!-- columns-home:end -->'));
   }
   if(fs.existsSync(path.join(root,'sitemap.xml'))){
@@ -123,7 +124,7 @@ export function renderColumns(root=ROOT){
     write(name,text.trimEnd()+'\n\n<!-- columns-discovery:start -->\n## 멘토K 컬럼\n'+entries+'\n<!-- columns-discovery:end -->\n');
   }
   for(const name of ['index.html','columns/index.html','columns/plan/index.html',...posts.map(p=>'columns/'+p.slug+'/index.html')])if(fs.existsSync(path.join(root,name)))write(name,hardenHtml(read(name)));
-  return {published:posts.length,next:plan.topics.find(t=>!done.has(t.id))?.id||null};
+  return {published:posts.length,next:plan.topics.find(t=>!done.has(t.id))?.id||null,needsTopicRegistration:done.size===plan.topics.length,nextTopicId:plan.topics.length+1};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const plan=JSON.parse(fs.readFileSync(path.join(ROOT,'columns/topics.json'),'utf8'));
