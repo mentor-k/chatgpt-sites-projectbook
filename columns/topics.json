@@ -818,6 +818,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "교육 설문에서 무응답을 불만족으로 처리하지 않고 AI로 분석하려면 무엇을 확인해야 하는가?"
+    },
+    {
+      "id": 32,
+      "slug": "excel-ai-product-code-integrity",
+      "category": "조직·AX 교육",
+      "title": "실무자 AI 엑셀 정리, 상품코드의 앞자리 0이 사라질 때 식별자와 계산값을 나눠라",
+      "audience": "영업지원·구매·재고관리 실무자와 교육담당자",
+      "focus": "상품코드 원본 보존과 자료 병합 전 식별자 검수 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 엑셀 정리",
+      "targetKeywords": [
+        "실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "상품코드의 앞자리 0이 사라질 때",
+        "서로 다른 상품의 잘못된 병합"
+      ],
+      "coverPose": "돋보기로 상품코드 카드의 맨 앞 0을 확대해 살피기",
+      "deliverables": [
+        "상품코드 처리 규칙표",
+        "원본 대조표",
+        "병합 보류 목록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI로 엑셀 상품 목록을 정리할 때 앞자리 0 손실과 잘못된 병합을 어떻게 확인해야 하는가?"
     }
   ]
 }
