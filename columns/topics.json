@@ -844,6 +844,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI로 엑셀 상품 목록을 정리할 때 앞자리 0 손실과 잘못된 병합을 어떻게 확인해야 하는가?"
+    },
+    {
+      "id": 33,
+      "slug": "ai-translation-term-context",
+      "category": "조직·AX 교육",
+      "title": "수출 실무자 AI 번역, 같은 부품명이 다르게 번역될 때 용어의 사용 조건을 맞춰라",
+      "audience": "수출·해외영업 실무자와 기술문서 교육담당자",
+      "focus": "부품 개념과 문맥을 구분한 용어표 및 번역 수정 범위 검수 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 번역",
+      "targetKeywords": [
+        "수출 실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "같은 부품명이 다르게 번역될 때",
+        "문맥을 무시한 일괄 치환"
+      ],
+      "coverPose": "펼친 용어집의 두 문맥 칸 사이에 색인 탭을 끼워 구분하기",
+      "deliverables": [
+        "문맥별 용어표",
+        "번역 판단 메모",
+        "수정 범위 점검표"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI 번역에서 부품명은 통일하되 다른 뜻의 단어까지 잘못 치환하지 않으려면 무엇을 준비해야 하는가?"
     }
   ]
 }
