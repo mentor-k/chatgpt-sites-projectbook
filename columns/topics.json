@@ -870,6 +870,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI 번역에서 부품명은 통일하되 다른 뜻의 단어까지 잘못 치환하지 않으려면 무엇을 준비해야 하는가?"
+    },
+    {
+      "id": 34,
+      "slug": "ai-quiz-single-answer-conditions",
+      "category": "조직·AX 교육",
+      "title": "강사 AI 퀴즈 출제, 정답이 둘로 갈릴 때 보기보다 판단 조건을 고쳐라",
+      "audience": "사내 강사·직무교육 강사와 교육담당자",
+      "focus": "문항의 판단 조건과 정답 근거를 맞추고 복수 정답 가능성을 동료 검토하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 퀴즈 출제",
+      "targetKeywords": [
+        "강사",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "정답이 둘로 갈릴 때",
+        "판단 조건 누락"
+      ],
+      "coverPose": "서로 맞물리지 않는 두 퍼즐 조각을 책상 위에서 회전시켜 맞춰 보기",
+      "deliverables": [
+        "판단 조건 문항지",
+        "선택지별 근거표",
+        "동료 검토 수정 기록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI가 만든 직무교육 퀴즈에서 정답이 둘 이상으로 읽히면 무엇부터 수정해야 하는가?"
     }
   ]
 }
