@@ -896,6 +896,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI가 만든 직무교육 퀴즈에서 정답이 둘 이상으로 읽히면 무엇부터 수정해야 하는가?"
+    },
+    {
+      "id": 35,
+      "slug": "ai-table-extraction-context",
+      "category": "조직·AX 교육",
+      "title": "실무자 AI 문서 추출, 표의 단위가 빠질 때 숫자보다 머리말과 각주를 묶어라",
+      "audience": "보고·자료정리 실무자와 기업·공공기관 교육담당자",
+      "focus": "표에서 추출한 값에 행·열 머리말과 단위·각주를 연결하고 원문 위치로 검수하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 문서 추출",
+      "targetKeywords": [
+        "실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "표의 단위가 빠질 때",
+        "각주와 숫자의 분리"
+      ],
+      "coverPose": "문서 위에 투명 격자판을 내려 표의 열 경계를 맞추기",
+      "deliverables": [
+        "표 맥락 추출 명세",
+        "값·근거 연결표",
+        "추출 보류 기록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI가 문서의 표를 추출할 때 단위나 각주가 빠진 숫자를 그대로 보고서에 쓰지 않으려면 무엇을 확인해야 하는가?"
     }
   ]
 }
