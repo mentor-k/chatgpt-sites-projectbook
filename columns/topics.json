@@ -948,6 +948,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI 문서 비교에서 검토본과 실제 적용본을 어떻게 구별하는가?"
+    },
+    {
+      "id": 37,
+      "slug": "ai-transcription-speaker-attribution",
+      "category": "웹·콘텐츠",
+      "title": "강사 AI 음성 전사, 질문과 답변이 뒤섞일 때 화자 표지를 검수하라",
+      "audience": "강의 녹음을 교육 자료로 정리하는 강사와 교육담당자",
+      "focus": "질문·답변의 화자 귀속과 원음 위치를 확인하고 불명확한 구간을 남기는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 음성 전사",
+      "targetKeywords": [
+        "강사",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "질문과 답변이 뒤섞일 때",
+        "화자 오인"
+      ],
+      "coverPose": "헤드폰의 한쪽 이어컵을 귀에 대고 다른 손으로 재생 위치 슬라이더를 조절하기",
+      "deliverables": [
+        "화자 표기 기준표",
+        "발언·원음 연결 전사본",
+        "화자 확인 보류 기록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI 음성 전사에서 질문자와 답변자가 잘못 붙었는지 어떻게 검수하는가?"
     }
   ]
 }
