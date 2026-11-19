@@ -974,6 +974,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI 음성 전사에서 질문자와 답변자가 잘못 붙었는지 어떻게 검수하는가?"
+    },
+    {
+      "id": 38,
+      "slug": "ai-automation-retry-processing-history",
+      "category": "업무·생산성",
+      "title": "실무자 AI 업무 자동화, 재실행 때 중복 저장이 생기면 처리 이력부터 설계하라",
+      "audience": "반복 업무를 자동화하는 실무자와 교육담당자",
+      "focus": "재실행 전 처리 결과 확인과 요청 식별, 미확인 상태의 보류 기준을 설계하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 업무 자동화",
+      "targetKeywords": [
+        "실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "중복 저장",
+        "재실행"
+      ],
+      "coverPose": "책상에 옆으로 앉아 한 손에 접수증을 들고 다른 손을 마우스에 둔 채 모니터의 두 처리 기록을 비교하기",
+      "deliverables": [
+        "요청 식별 기준표",
+        "처리 이력표",
+        "재실행 검수 시나리오"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI 업무 자동화를 재실행할 때 같은 자료가 두 번 저장되는 문제를 어떻게 막는가?"
     }
   ]
 }
