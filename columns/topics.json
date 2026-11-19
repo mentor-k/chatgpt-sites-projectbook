@@ -1000,6 +1000,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI 업무 자동화를 재실행할 때 같은 자료가 두 번 저장되는 문제를 어떻게 막는가?"
+    },
+    {
+      "id": 39,
+      "slug": "ai-excel-formula-boundary-tests",
+      "category": "업무·생산성",
+      "title": "실무자 AI 엑셀 수식, 경계값에서 오분류가 날 때 정답 행을 먼저 만들어라",
+      "audience": "조건별 분류 수식을 사용하는 실무자와 교육담당자",
+      "focus": "규칙에서 독립적으로 만든 정답 행과 일부러 심은 경계·참조 오류로 시험표의 검출 능력을 확인하는 짝 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 엑셀 수식",
+      "targetKeywords": [
+        "실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "경계값에서 오분류",
+        "수식 복사"
+      ],
+      "coverPose": "한 손으로 탁상 계산기 버튼을 누르고 다른 손으로 경계값 시험표가 있는 클립보드를 세워 검산하기",
+      "deliverables": [
+        "조건·경계값 명세",
+        "기대 결과 시험표",
+        "수식 복사 검수 기록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI가 만든 엑셀 수식이 경계값에서 잘못 분류하거나 복사 뒤 다른 값을 참조할 때 어떻게 검수하는가?"
     }
   ]
 }
