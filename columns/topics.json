@@ -1026,6 +1026,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI가 만든 엑셀 수식이 경계값에서 잘못 분류하거나 복사 뒤 다른 값을 참조할 때 어떻게 검수하는가?"
+    },
+    {
+      "id": 40,
+      "slug": "ai-teaching-material-color-independent-check",
+      "category": "강의·콘텐츠",
+      "title": "강사 AI 강의자료, 색만으로 구분한 도표는 흑백 사본에서 다시 검수하라",
+      "audience": "도표와 실습지를 만드는 강사와 교육담당자",
+      "focus": "색을 제거한 배포본에서도 분류·상태·다음 행동이 유지되는지 검수하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 강의자료",
+      "targetKeywords": [
+        "강사",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "색만으로 구분",
+        "흑백 사본"
+      ],
+      "coverPose": "한 손으로 스탠드의 집게에 흑백 인쇄물을 걸고 다른 손으로 종이 아래쪽을 받쳐 읽기",
+      "deliverables": [
+        "색상 의미 목록",
+        "비색상 단서 적용본",
+        "배포 조건별 검수 기록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI로 만든 강의 도표에서 색을 빼면 상태와 분류가 구별되지 않을 때 어떻게 고치는가?"
     }
   ]
 }
