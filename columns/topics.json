@@ -1078,6 +1078,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI로 업무 이메일을 작성했지만 상대가 무엇을 답해야 할지 모를 때 요청을 어떻게 설계하는가?"
+    },
+    {
+      "id": 42,
+      "slug": "ai-presentation-script-cut-priority",
+      "category": "업무·생산성",
+      "title": "실무자 AI 발표 원고, 발표시간을 넘길 때 문장보다 설명의 역할을 덜어라",
+      "audience": "업무 발표를 준비하는 실무자와 교육담당자",
+      "focus": "발표의 필수 판단과 보조 설명을 구별하고 실제 발화 시간을 측정해 생략 가능한 구간을 검수하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 발표 원고",
+      "targetKeywords": [
+        "실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "발표시간을 넘길 때",
+        "설명의 역할"
+      ],
+      "coverPose": "한 손으로 초시계를 들고 다른 손으로 발표 원고의 보조 설명에 사선을 긋기",
+      "deliverables": [
+        "설명 역할 분류표",
+        "생략 구간 표시 원고",
+        "발화 시간 검수 기록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI가 작성한 업무 발표 원고가 발표시간을 넘길 때 어떤 설명을 남기고 무엇을 덜어야 하는가?"
     }
   ]
 }
