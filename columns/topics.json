@@ -1104,6 +1104,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI가 작성한 업무 발표 원고가 발표시간을 넘길 때 어떤 설명을 남기고 무엇을 덜어야 하는가?"
+    },
+    {
+      "id": 43,
+      "slug": "ai-schedule-date-interpretation",
+      "category": "업무·생산성",
+      "title": "실무자 AI 일정 정리, 월·일이 뒤바뀔 때 원본 표기와 확정 날짜를 나눠라",
+      "audience": "여러 자료의 일정을 취합하는 실무자와 교육담당자",
+      "focus": "날짜의 원본 표기·해석 규칙·확정 근거를 분리하고 모호한 날짜가 일정표에 섞이지 않는지 검수하는 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 일정 정리",
+      "targetKeywords": [
+        "실무자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "월·일이 뒤바뀔 때",
+        "확정 날짜"
+      ],
+      "coverPose": "책상 위 두 개의 월별 달력 사이에 날짜 카드를 내려놓으며 다른 손으로 확인 보류 받침대를 끌어오기",
+      "deliverables": [
+        "날짜 해석 명세",
+        "확정 일정 대조표",
+        "모호한 날짜 확인 목록"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI로 여러 자료의 날짜를 모을 때 월과 일이 바뀌는 오류를 어떻게 확인하고 확정 일정과 구분하는가?"
     }
   ]
 }
