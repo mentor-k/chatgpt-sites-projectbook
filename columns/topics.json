@@ -1130,6 +1130,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI로 여러 자료의 날짜를 모을 때 월과 일이 바뀌는 오류를 어떻게 확인하고 확정 일정과 구분하는가?"
+    },
+    {
+      "id": 44,
+      "slug": "ai-image-edit-region-preservation",
+      "category": "웹·콘텐츠",
+      "title": "홍보 담당자 AI 이미지 수정, 주인공까지 바뀔 때 수정 구역마다 기준 원본을 연결하라",
+      "audience": "홍보 이미지를 제작·검수하는 홍보 담당자와 교육담당자",
+      "focus": "연속 이미지 수정에서 기준 원본과 구역별 수정본의 계보를 남기고 개별 수정 통과와 결합본 채택을 구분하는 실습",
+      "program": "AI 시각 콘텐츠 제작 실습",
+      "primaryKeyword": "AI 이미지 수정",
+      "targetKeywords": [
+        "홍보 담당자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "주인공까지 바뀔 때",
+        "수정 구역"
+      ],
+      "coverPose": "한 손에 마스킹테이프 롤을 들고 다른 손으로 홍보 그림의 배경 소품 주위에 테이프를 붙이기",
+      "deliverables": [
+        "수정 구역별 원본 연결표",
+        "개별 수정 비교본",
+        "결합본 재검수 기록"
+      ],
+      "programUrl": "/content-school/",
+      "searchQuestion": "홍보용 AI 이미지에서 배경만 수정하려는데 주인공까지 바뀔 때 무엇을 지정하고 어떻게 검수해야 하는가?"
     }
   ]
 }
