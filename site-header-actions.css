@@ -50,3 +50,6 @@
   .aiwith-header-action-pair>a{font-size:.69rem;min-height:28px;padding-inline:7px}
   .has-workshop-action .global-brand{padding-inline:3px}
 }
+
+/* Suppress the former widget if a visitor still has the old enhancer script cached. */
+body:has(.has-workshop-action) > .aiwith-float-cta{display:none!important}
