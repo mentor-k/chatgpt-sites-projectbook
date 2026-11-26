@@ -72,7 +72,7 @@
       event.preventDefault();
       trigger = a;
       standalone.href = a.href;
-      if (frame.src !== a.href) frame.src = a.href;
+      frame.src = a.href;
       dialog.showModal();
       document.documentElement.classList.add("gf-scroll-lock");
       close.focus();
