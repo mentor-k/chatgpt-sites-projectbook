@@ -22,7 +22,7 @@
     if (isPublic && shared && consultation) {
       const style = document.createElement('link');
       style.rel = 'stylesheet';
-      style.href = '/site-header-actions.css?v=20261126-1';
+      style.href = '/site-header-actions.css?v=20261126-2';
       document.head.appendChild(style);
       actions = document.createElement('div');
       actions.className = 'aiwith-header-actions';
@@ -32,9 +32,13 @@
       apply.className = 'aiwith-header-workshop';
       apply.href = consultation.getAttribute('href');
       apply.textContent = '강의·워크숍 신청하기';
-      apply.title = '강의·워크숍 신청 상담 010-3338-7110';
+      const phone = document.createElement('a');
+      phone.className = 'aiwith-header-phone';
+      phone.href = 'tel:+821033387110';
+      phone.textContent = '010-3338-7110';
+      phone.setAttribute('aria-label', '강의·워크숍 전화 문의 010-3338-7110');
       consultation.classList.add('aiwith-header-consultation');
-      pair.append(consultation, apply);
+      pair.append(consultation, apply, phone);
       actions.append(toggle, pair);
       shared.appendChild(actions);
       shared.classList.add('has-workshop-action');
