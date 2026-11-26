@@ -15,9 +15,34 @@
     header.innerHTML = '<header class="global-header"><a class="global-brand" href="/" aria-label="AI위드스쿨 HOME"><img src="/assets/aiwith-school-logo-domain.png" alt="AI위드스쿨 · AI와 함께 배우고, 만들고, 성장하다 · aiwith.kr"></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="globalNav"><span></span><span></span><span></span><em>메뉴</em></button><nav class="global-nav" id="globalNav" aria-label="주요 메뉴"><a data-nav="home" href="/">HOME</a><div class="nav-group"><button type="button" aria-expanded="false">웹사이트 스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/website/">웹사이트 구축 강의</a><a href="/website/benchmark/">웹사이트 벤치마킹</a></div></div><div class="nav-group"><button type="button" aria-expanded="false">콘텐츠스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/content-school/">콘텐츠스쿨 소개</a><a href="/content-school/#blog">AI 블로그 글쓰기</a><a href="/content-school/#visual">인포그래픽·포스터·카드뉴스</a><a href="/content-school/#shortform">숏폼 만들기·홍보마케팅</a></div></div><div class="nav-group"><button type="button" aria-expanded="false">기획서·사업계획서 스쿨 <i>⌄</i></button><div class="nav-sub"><a href="/proposal-school/">스쿨 소개</a><a href="/proposal-school/#business">사업계획서·IR자료</a><a href="/proposal-school/#government">정부지원 사업계획서</a></div></div><a href="/marketing-school/">AI마케팅스쿨</a><a href="/prompt/">AI 프롬프트랩</a><a href="/book-school/">책쓰기 스쿨</a><a href="/workshops/">강의·워크숍</a><a href="/columns/">멘토K 컬럼</a><a href="/cardnews/">카드뉴스</a><a href="/notices/">공지사항</a><a class="nav-cta" href="/consultation/">상담 신청</a><a class="admin-link" data-admin-entry href="/admin/" aria-label="관리자 대시보드" title="관리자 대시보드"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5.1-3.4 8.9-8 10-4.6-1.1-8-4.9-8-10V6l8-3Z"/><path d="m8.8 12 2.1 2.1 4.5-4.7"/></svg><span>관리자</span></a></nav></header>';
     const nav = header.querySelector('.global-nav');
     const toggle = header.querySelector('.menu-toggle');
+    const isPublic = path !== '/admin' && !path.startsWith('/admin/');
+    const shared = header.querySelector('.global-header');
+    const consultation = nav.querySelector('.nav-cta');
+    let actions = null;
+    if (isPublic && shared && consultation) {
+      const style = document.createElement('link');
+      style.rel = 'stylesheet';
+      style.href = '/site-header-actions.css?v=20261126-1';
+      document.head.appendChild(style);
+      actions = document.createElement('div');
+      actions.className = 'aiwith-header-actions';
+      const pair = document.createElement('div');
+      pair.className = 'aiwith-header-action-pair';
+      const apply = document.createElement('a');
+      apply.className = 'aiwith-header-workshop';
+      apply.href = consultation.getAttribute('href');
+      apply.textContent = '강의·워크숍 신청하기';
+      apply.title = '강의·워크숍 신청 상담 010-3338-7110';
+      consultation.classList.add('aiwith-header-consultation');
+      pair.append(consultation, apply);
+      actions.append(toggle, pair);
+      shared.appendChild(actions);
+      shared.classList.add('has-workshop-action');
+    }
     const closeMenu = () => { toggle.setAttribute('aria-expanded', 'false'); nav.classList.remove('open'); document.body.classList.remove('menu-open'); };
     toggle.addEventListener('click', () => { const on = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(on)); nav.classList.toggle('open', on); document.body.classList.toggle('menu-open', on); });
     nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    actions?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
     header.querySelectorAll('.nav-group>button').forEach((button) => button.addEventListener('click', () => { const on = button.getAttribute('aria-expanded') !== 'true'; header.querySelectorAll('.nav-group>button').forEach((x) => { x.setAttribute('aria-expanded', 'false'); x.parentElement.classList.remove('open'); }); button.setAttribute('aria-expanded', String(on)); button.parentElement.classList.toggle('open', on); }));
     header.querySelectorAll('a').forEach((a) => { const href = a.getAttribute('href'); if (href && active(href) && href !== '/') a.classList.add('active'); if (href === '/' && path === '/') a.classList.add('active'); });
@@ -45,14 +70,6 @@
     }));
     legalModal.addEventListener('click', (event) => { if (event.target.closest('[data-legal-close]')) legalClose(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !legalModal.hidden) legalClose(); });
-  }
-  if (path !== '/website/' && !path.startsWith('/admin/') && !document.querySelector('.aiwith-float-cta')) {
-    const cta = document.createElement('a');
-    cta.className = 'aiwith-float-cta';
-    cta.href = '/consultation/';
-    cta.setAttribute('aria-label', '강의·워크숍 신청 상담 010-3338-7110');
-    cta.innerHTML = '<span>강의·워크숍<br><b>신청하기</b></span><strong>010-3338-<br>7110</strong><i aria-hidden="true">→</i>';
-    document.body.appendChild(cta);
   }
   try {
     const key = 'aiwith_pageviews';
