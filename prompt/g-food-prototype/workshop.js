@@ -56,3 +56,35 @@
     });
   });
 })();
+
+(() => {
+  "use strict";
+  const dialog = document.getElementById("gf-form-dialog");
+  const frame = document.getElementById("gf-form-frame");
+  const standalone = document.getElementById("gf-form-standalone");
+  const close = document.getElementById("gf-form-close");
+  if (!dialog || typeof dialog.showModal !== "function" || !frame || !standalone || !close) return;
+  let trigger;
+  for (const a of document.querySelectorAll("a[data-gf-preview]")) {
+    a.setAttribute("aria-haspopup", "dialog");
+    a.addEventListener("click", event => {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+      event.preventDefault();
+      trigger = a;
+      standalone.href = a.href;
+      if (frame.src !== a.href) frame.src = a.href;
+      dialog.showModal();
+      document.documentElement.classList.add("gf-scroll-lock");
+      close.focus();
+    });
+  }
+  close.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => {
+    document.documentElement.classList.remove("gf-scroll-lock");
+    trigger?.focus();
+  });
+  window.addEventListener("message", event => {
+    if (event.origin === location.origin && event.source === frame.contentWindow &&
+        event.data === "gfood-preview-close" && dialog.open) dialog.close();
+  });
+})();
