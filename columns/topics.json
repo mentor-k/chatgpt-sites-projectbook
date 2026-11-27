@@ -1208,6 +1208,32 @@
       ],
       "programUrl": "/workshops/",
       "searchQuestion": "AI 회의 요약에서 조건부 찬성이 전체 동의로 바뀌거나 반대 의견이 사라질 때 무엇을 대조해야 하는가?"
+    },
+    {
+      "id": 47,
+      "slug": "ai-customer-response-confirmation-state",
+      "category": "업무·생산성",
+      "title": "고객응대 담당자 AI 답변, 확인 전 약속이 나갈 때 안내와 처리 상태를 분리하라",
+      "audience": "고객응대 담당자와 교육담당자",
+      "focus": "운영 안내와 개별 요청의 접수·확정 상태를 구분하고 확인되지 않은 약속을 사람에게 넘기는 응답 실습",
+      "program": "맞춤형 AI 특강·워크숍",
+      "primaryKeyword": "AI 답변",
+      "targetKeywords": [
+        "고객응대 담당자",
+        "교육담당자"
+      ],
+      "problemKeywords": [
+        "확인 전 약속",
+        "처리 상태"
+      ],
+      "coverPose": "한 손으로 접수·확정 두 칸의 책상용 슬라이드 표지 손잡이를 잡고 다른 손으로 미확인 요청 카드를 받쳐 멈추기",
+      "deliverables": [
+        "안내·처리 상태 구분표",
+        "상태별 고객응답 초안",
+        "담당자 인계 메모"
+      ],
+      "programUrl": "/workshops/",
+      "searchQuestion": "AI 고객응답이 운영 안내만 보고 개별 요청까지 확정했다고 말할 때 어떻게 검수해야 하는가?"
     }
   ]
 }
